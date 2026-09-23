@@ -1,0 +1,623 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: fr\n"
+
+msgid "Error loading datasets"
+msgstr "Erreur lors du chargement des ensembles de données"
+
+msgid "Error loading data element groups"
+msgstr "Erreur lors du chargement des groupes d'éléments de données"
+
+msgid "Dataset data elements to Data Element Groups"
+msgstr "Éléments de données des ensembles de données vers les groupes d'éléments de données"
+
+msgid "Manage"
+msgstr "Gérer"
+
+msgid "Datasets"
+msgstr "Ensembles de données"
+
+msgid "Data Element Groups"
+msgstr "Groupes d'éléments de données"
+
+msgid "Mappings"
+msgstr "Correspondances"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Only superusers can change settings"
+msgstr "Seuls les superutilisateurs peuvent modifier les paramètres"
+
+msgid "Superuser"
+msgstr "Superutilisateur"
+
+msgid "Standard user"
+msgstr "Utilisateur standard"
+
+msgid "Bulk sync summary"
+msgstr "Résumé de la synchronisation groupée"
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Updated"
+msgstr "Mis à jour"
+
+msgid "Up to date"
+msgstr "À jour"
+
+msgid "Errors"
+msgstr "Erreurs"
+
+msgid "Failures"
+msgstr "Échecs"
+
+msgid "Dataset"
+msgstr "Ensemble de données"
+
+msgid "Reason"
+msgstr "Raison"
+
+msgid "All selected datasets synced successfully."
+msgstr "Tous les ensembles de données sélectionnés ont été synchronisés avec succès."
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Mapping — {{value}}"
+msgstr "Correspondance — {{value}}"
+
+msgid "none — link in the Mappings view"
+msgstr "aucune — associez-la dans la vue Correspondances"
+
+msgid "Mapping key ({{field}}) — {{value}}"
+msgstr "Clé de correspondance ({{field}}) — {{value}}"
+
+msgid "dataset code"
+msgstr "code de l'ensemble de données"
+
+msgid "dataset UID"
+msgstr "UID de l'ensemble de données"
+
+msgid "none"
+msgstr "aucun"
+
+msgid ""
+"This dataset has no manual mapping yet. Open the Mappings view to link it "
+"to an existing group."
+msgstr ""
+"Cet ensemble de données n'a pas encore de correspondance manuelle. Ouvrez "
+"la vue Correspondances pour l'associer à un groupe existant."
+
+msgid ""
+"Switch the mapping key in Settings, or assign this dataset a code, before "
+"syncing it."
+msgstr ""
+"Changez la clé de correspondance dans les Paramètres, ou attribuez un code "
+"à cet ensemble de données, avant de le synchroniser."
+
+msgid ""
+"Cannot sync — the name/short name \"{{targetName}}\" is already used by a "
+"different group, {{conflictName}} ({{conflictId}}). Adjust the name "
+"prefix/suffix in Settings, or resolve the conflict manually."
+msgstr ""
+"Synchronisation impossible — le nom/nom court « {{targetName}} » est déjà "
+"utilisé par un autre groupe, {{conflictName}} ({{conflictId}}). Ajustez le "
+"préfixe/suffixe du nom dans les Paramètres, ou résolvez le conflit "
+"manuellement."
+
+msgid "This dataset has no data elements."
+msgstr "Cet ensemble de données ne contient aucun élément de données."
+
+msgid "(missing from group)"
+msgstr "(absent du groupe)"
+
+msgid "Group"
+msgstr "Groupe"
+
+msgid "Group (target \"{{targetName}}\")"
+msgstr "Groupe (cible « {{targetName}} »)"
+
+msgid "Not mapped to a group yet."
+msgstr "Pas encore associé à un groupe."
+
+msgid ""
+"No data element group exists yet for this dataset. Syncing will create one "
+"named \"{{targetName}}\"."
+msgstr ""
+"Aucun groupe d'éléments de données n'existe encore pour cet ensemble de "
+"données. La synchronisation en créera un nommé « {{targetName}} »."
+
+msgid "Consistent"
+msgstr "Cohérent"
+
+msgid "Inconsistent"
+msgstr "Incohérent"
+
+msgid "Group name will update to \"{{targetName}}\" on next sync."
+msgstr ""
+"Le nom du groupe sera mis à jour vers « {{targetName}} » lors de la "
+"prochaine synchronisation."
+
+msgid "This group has no data elements."
+msgstr "Ce groupe ne contient aucun élément de données."
+
+msgid "(not in dataset)"
+msgstr "(absent de l'ensemble de données)"
+
+msgid ""
+"This dataset has no manual mapping yet. Link it to a group in the Mappings "
+"view."
+msgstr ""
+"Cet ensemble de données n'a pas encore de correspondance manuelle. "
+"Associez-le à un groupe dans la vue Correspondances."
+
+msgid "This dataset has no {{field}} to use as the mapping key."
+msgstr "Cet ensemble de données n'a pas de {{field}} à utiliser comme clé de correspondance."
+
+msgid "code"
+msgstr "code"
+
+msgid "UID"
+msgstr "UID"
+
+msgid ""
+"Cannot sync — another Data Element Group already uses this name or short "
+"name (\"{{name}}\", {{id}}). Adjust the name prefix/suffix in Settings, or "
+"resolve the conflict manually."
+msgstr ""
+"Synchronisation impossible — un autre groupe d'éléments de données utilise "
+"déjà ce nom ou ce nom court (« {{name}} », {{id}}). Ajustez le préfixe/"
+"suffixe du nom dans les Paramètres, ou résolvez le conflit manuellement."
+
+msgid "Unknown error"
+msgstr "Erreur inconnue"
+
+msgid "Processing {{done}} / {{total}} datasets…"
+msgstr "Traitement de {{done}} / {{total}} ensembles de données…"
+
+msgid "Filter datasets"
+msgstr "Filtrer les ensembles de données"
+
+msgid "Search by name or code…"
+msgstr "Rechercher par nom ou code…"
+
+msgid "Select Needs Sync"
+msgstr "Sélectionner à synchroniser"
+
+msgid "Clear Selection"
+msgstr "Effacer la sélection"
+
+msgid "Processing… ({{done}}/{{total}})"
+msgstr "Traitement… ({{done}}/{{total}})"
+
+msgid "No datasets match the current search/filter."
+msgstr "Aucun ensemble de données ne correspond à la recherche/au filtre actuel."
+
+msgid "Dataset Name"
+msgstr "Nom de l'ensemble de données"
+
+msgid "Target Group"
+msgstr "Groupe cible"
+
+msgid "Sync Status"
+msgstr "État de synchronisation"
+
+msgid "Data Elements"
+msgstr "Éléments de données"
+
+msgid "Bulk Run Status"
+msgstr "État de l'exécution groupée"
+
+msgid "No manual mapping"
+msgstr "Aucune correspondance manuelle"
+
+msgid "No code available"
+msgstr "Aucun code disponible"
+
+msgid "No UID available"
+msgstr "Aucun UID disponible"
+
+msgid "Already used by \"{{name}}\" ({{id}})"
+msgstr "Déjà utilisé par « {{name}} » ({{id}})"
+
+msgid "View details"
+msgstr "Voir les détails"
+
+msgid "Delete \"{{name}}\"?"
+msgstr "Supprimer « {{name}} » ?"
+
+msgid "Could not delete this group"
+msgstr "Impossible de supprimer ce groupe"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Deleting…"
+msgstr "Suppression…"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Code {{code}} · UID {{id}}"
+msgstr "Code {{code}} · UID {{id}}"
+
+msgid "Sharing settings"
+msgstr "Paramètres de partage"
+
+msgid "Linked dataset"
+msgstr "Ensemble de données associé"
+
+msgid "Not linked to any dataset — pair it in the Mappings view."
+msgstr "Non associé à un ensemble de données — associez-le dans la vue Correspondances."
+
+msgid "Not linked to any dataset via the current mapping key ({{field}})."
+msgstr ""
+"Non associé à un ensemble de données via la clé de correspondance actuelle "
+"({{field}})."
+
+msgid "(not in linked dataset)"
+msgstr "(absent de l'ensemble de données associé)"
+
+msgid "Missing from this group"
+msgstr "Absent de ce groupe"
+
+msgid ""
+"All Data Element Groups on this instance. \"Linked dataset\" is worked out "
+"from the current mapping key setting, not stored on the group itself."
+msgstr ""
+"Tous les groupes d'éléments de données de cette instance. « Ensemble de "
+"données associé » est déterminé à partir du paramètre de clé de "
+"correspondance actuel, et non stocké sur le groupe lui-même."
+
+msgid "Filter groups"
+msgstr "Filtrer les groupes"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "# Data Elements"
+msgstr "Nb d'éléments de données"
+
+msgid "Linked Dataset"
+msgstr "Ensemble de données associé"
+
+msgid "Unlinked"
+msgstr "Non associé"
+
+msgid "View"
+msgstr "Voir"
+
+msgid "No data element groups match the current search/filter."
+msgstr ""
+"Aucun groupe d'éléments de données ne correspond à la recherche/au filtre "
+"actuel."
+
+msgid "Manual mapping isn't active"
+msgstr "La correspondance manuelle n'est pas active"
+
+msgid ""
+"These pairings are saved, but datasets are currently linked using "
+"{{field}}. Switch \"Map groups to datasets using\" to Manual in Settings "
+"for them to take effect."
+msgstr ""
+"Ces associations sont enregistrées, mais les ensembles de données sont "
+"actuellement liés via {{field}}. Basculez « Associer les groupes aux "
+"ensembles de données via » sur Manuel dans les Paramètres pour qu'elles "
+"prennent effet."
+
+msgid "Dataset code"
+msgstr "Code de l'ensemble de données"
+
+msgid "Dataset UID"
+msgstr "UID de l'ensemble de données"
+
+msgid ""
+"Pair a dataset with an existing Data Element Group by hand. Only used when "
+"the mapping mode in Settings is set to Manual — a dataset can be synced "
+"(data elements and name kept in sync) once paired, but this view never "
+"creates a new group."
+msgstr ""
+"Associez manuellement un ensemble de données à un groupe d'éléments de "
+"données existant. Utilisé uniquement lorsque le mode de correspondance "
+"dans les Paramètres est réglé sur Manuel — un ensemble de données peut "
+"être synchronisé (éléments de données et nom tenus à jour) une fois "
+"associé, mais cette vue ne crée jamais de nouveau groupe."
+
+msgid "Add a mapping"
+msgstr "Ajouter une correspondance"
+
+msgid "Select a dataset…"
+msgstr "Sélectionner un ensemble de données…"
+
+msgid "No matching datasets"
+msgstr "Aucun ensemble de données correspondant"
+
+msgid "Data Element Group"
+msgstr "Groupe d'éléments de données"
+
+msgid "Select a group…"
+msgstr "Sélectionner un groupe…"
+
+msgid "No matching groups"
+msgstr "Aucun groupe correspondant"
+
+msgid "Linking…"
+msgstr "Association…"
+
+msgid "Link"
+msgstr "Associer"
+
+msgid "Could not save mapping"
+msgstr "Impossible d'enregistrer la correspondance"
+
+msgid "Current mappings"
+msgstr "Correspondances actuelles"
+
+msgid "Filter mappings"
+msgstr "Filtrer les correspondances"
+
+msgid "Search by dataset or group name…"
+msgstr "Rechercher par nom d'ensemble de données ou de groupe…"
+
+msgid "Unknown dataset ({{id}})"
+msgstr "Ensemble de données inconnu ({{id}})"
+
+msgid "Unknown group ({{id}})"
+msgstr "Groupe inconnu ({{id}})"
+
+msgid "Unlink"
+msgstr "Dissocier"
+
+msgid "No mappings yet."
+msgstr "Aucune correspondance pour le moment."
+
+msgid "No mappings match \"{{search}}\"."
+msgstr "Aucune correspondance ne correspond à « {{search}} »."
+
+msgid "Will create"
+msgstr "Sera créé"
+
+msgid "Will update"
+msgstr "Sera mis à jour"
+
+msgid "No change"
+msgstr "Aucun changement"
+
+msgid "Will fail"
+msgstr "Échouera"
+
+msgid "name change"
+msgstr "changement de nom"
+
+msgid "Update group."
+msgstr "Mettre à jour le groupe."
+
+msgid "Already in sync."
+msgstr "Déjà synchronisé."
+
+msgid "Name/short name already used by \"{{name}}\" ({{id}})."
+msgstr "Nom/nom court déjà utilisé par « {{name}} » ({{id}})."
+
+msgid "No mapping key value on this dataset."
+msgstr "Aucune valeur de clé de correspondance sur cet ensemble de données."
+
+msgid ""
+"Nothing has been changed yet. This is what running the sync now would do, "
+"based on the current settings."
+msgstr ""
+"Rien n'a encore été modifié. Voici ce que ferait la synchronisation si "
+"elle était exécutée maintenant, selon les paramètres actuels."
+
+msgid "Create"
+msgstr "Créer"
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Run Sync Now"
+msgstr "Exécuter la synchronisation maintenant"
+
+msgid "More actions"
+msgstr "Plus d'actions"
+
+msgid "Manual"
+msgstr "Manuel"
+
+msgid "View only"
+msgstr "Lecture seule"
+
+msgid "View and edit"
+msgstr "Lecture et modification"
+
+msgid "No public access"
+msgstr "Aucun accès public"
+
+msgid "Same as dataset"
+msgstr "Identique à l'ensemble de données"
+
+msgid "Custom"
+msgstr "Personnalisé"
+
+msgid "Dataset name"
+msgstr "Nom de l'ensemble de données"
+
+msgid "Sync settings"
+msgstr "Paramètres de synchronisation"
+
+msgid "Map groups to datasets using"
+msgstr "Associer les groupes aux ensembles de données via"
+
+msgid ""
+"Linkage comes from explicit dataset↔group pairings made in the Mappings "
+"view instead of a value written to the group's Code field. Bulk sync will "
+"never create a new group in this mode — pair a dataset with an existing "
+"group first."
+msgstr ""
+"L'association provient des correspondances explicites ensemble de "
+"données↔groupe créées dans la vue Correspondances, plutôt que d'une "
+"valeur inscrite dans le champ Code du groupe. La synchronisation groupée "
+"ne créera jamais de nouveau groupe dans ce mode — associez d'abord un "
+"ensemble de données à un groupe existant."
+
+msgid ""
+"This value is written to each group's Code field and used to link it back "
+"to its dataset. Changing it after groups already exist may create "
+"duplicates for datasets processed under the old setting."
+msgstr ""
+"Cette valeur est inscrite dans le champ Code de chaque groupe et sert à le "
+"relier à son ensemble de données. La modifier après que des groupes "
+"existent déjà peut créer des doublons pour les ensembles de données "
+"traités sous l'ancien paramètre."
+
+msgid "Group naming"
+msgstr "Nom des groupes"
+
+msgid "Name prefix"
+msgstr "Préfixe du nom"
+
+msgid "e.g. DEG - "
+msgstr "ex. DEG - "
+
+msgid "Name suffix"
+msgstr "Suffixe du nom"
+
+msgid "e.g.  (auto)"
+msgstr "ex.  (auto)"
+
+msgid "Preview"
+msgstr "Aperçu"
+
+msgid "Also update Short Name when syncing"
+msgstr "Mettre aussi à jour le nom court lors de la synchronisation"
+
+msgid ""
+"New groups always get a Short Name (it's required). Turn this off to leave "
+"an existing group's Short Name as-is on later syncs, e.g. if it's been "
+"hand-tuned to a different abbreviation."
+msgstr ""
+"Les nouveaux groupes reçoivent toujours un nom court (il est obligatoire). "
+"Désactivez cette option pour laisser le nom court d'un groupe existant "
+"inchangé lors des synchronisations suivantes, par exemple s'il a été "
+"ajusté manuellement avec une abréviation différente."
+
+msgid "Default sharing for new groups"
+msgstr "Partage par défaut pour les nouveaux groupes"
+
+msgid "Apply sharing settings when a group is first created"
+msgstr "Appliquer les paramètres de partage lors de la première création d'un groupe"
+
+msgid "Sharing source"
+msgstr "Source du partage"
+
+msgid ""
+"The new group copies its source dataset's own sharing (public access and "
+"user groups) at creation time. If a dataset has no sharing configured, the "
+"server's own default sharing is used instead."
+msgstr ""
+"Le nouveau groupe reprend le partage de son ensemble de données source "
+"(accès public et groupes d'utilisateurs) au moment de la création. Si un "
+"ensemble de données n'a aucun partage configuré, le partage par défaut du "
+"serveur est utilisé à la place."
+
+msgid "Public access"
+msgstr "Accès public"
+
+msgid ""
+"Also share with specific user groups (combines with public access above — "
+"e.g. \"no public access, but these groups can edit\" is fine)"
+msgstr ""
+"Partager également avec des groupes d'utilisateurs spécifiques (se combine "
+"avec l'accès public ci-dessus — par exemple « aucun accès public, mais ces "
+"groupes peuvent modifier » est possible)"
+
+msgid "No matching user groups"
+msgstr "Aucun groupe d'utilisateurs correspondant"
+
+msgid "Loading user groups…"
+msgstr "Chargement des groupes d'utilisateurs…"
+
+msgid "Add a user group…"
+msgstr "Ajouter un groupe d'utilisateurs…"
+
+msgid "Remove"
+msgstr "Retirer"
+
+msgid ""
+"Only applies at creation time — existing groups' sharing is never changed "
+"by a sync. Use the Sharing action on a group to change it later. Leave "
+"unchecked to use this server's own default."
+msgstr ""
+"S'applique uniquement au moment de la création — le partage des groupes "
+"existants n'est jamais modifié par une synchronisation. Utilisez l'action "
+"Partage sur un groupe pour le modifier ultérieurement. Laissez décoché "
+"pour utiliser le paramètre par défaut de ce serveur."
+
+msgid "Could not save settings"
+msgstr "Impossible d'enregistrer les paramètres"
+
+msgid "Saving…"
+msgstr "Enregistrement…"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Unmappable"
+msgstr "Non associable"
+
+msgid "Name conflict"
+msgstr "Conflit de nom"
+
+msgid "Needs update"
+msgstr "Mise à jour nécessaire"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "Pending"
+msgstr "En attente"
+
+msgid "Processing…"
+msgstr "Traitement…"
+
+msgid "Created ✓"
+msgstr "Créé ✓"
+
+msgid "Updated ✓"
+msgstr "Mis à jour ✓"
+
+msgid "Up to date ✓"
+msgstr "À jour ✓"
+
+msgid "Error ✗"
+msgstr "Erreur ✗"
+
+msgid "Skipped"
+msgstr "Ignoré"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "DEG Manager"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
+"Gérez les groupes d'éléments de données dérivés des éléments de données "
+"des ensembles de données : création/mise à jour/suppression groupées, "
+"partage, et correspondance/nommage configurables, avec un rapport "
+"d'erreurs clair lors des exécutions groupées."

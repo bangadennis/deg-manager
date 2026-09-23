@@ -1,0 +1,607 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2026-09-23T05:34:50.843Z\n"
+"PO-Revision-Date: 2026-09-23T05:34:50.844Z\n"
+
+msgid "Error loading datasets"
+msgstr "Error loading datasets"
+
+msgid "Error loading data element groups"
+msgstr "Error loading data element groups"
+
+msgid "Dataset data elements to Data Element Groups"
+msgstr "Dataset data elements to Data Element Groups"
+
+msgid "Manage"
+msgstr "Manage"
+
+msgid "Datasets"
+msgstr "Datasets"
+
+msgid "Data Element Groups"
+msgstr "Data Element Groups"
+
+msgid "Mappings"
+msgstr "Mappings"
+
+msgid "Only superusers can change settings"
+msgstr "Only superusers can change settings"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Superuser"
+msgstr "Superuser"
+
+msgid "Standard user"
+msgstr "Standard user"
+
+msgid "Bulk sync summary"
+msgstr "Bulk sync summary"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Updated"
+msgstr "Updated"
+
+msgid "Up to date"
+msgstr "Up to date"
+
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Failures"
+msgstr "Failures"
+
+msgid "Dataset"
+msgstr "Dataset"
+
+msgid "Reason"
+msgstr "Reason"
+
+msgid "All selected datasets synced successfully."
+msgstr "All selected datasets synced successfully."
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Mapping — {{value}}"
+msgstr "Mapping — {{value}}"
+
+msgid "none — link in the Mappings view"
+msgstr "none — link in the Mappings view"
+
+msgid "Mapping key ({{field}}) — {{value}}"
+msgstr "Mapping key ({{field}}) — {{value}}"
+
+msgid "dataset code"
+msgstr "dataset code"
+
+msgid "dataset UID"
+msgstr "dataset UID"
+
+msgid "none"
+msgstr "none"
+
+msgid ""
+"This dataset has no manual mapping yet. Open the Mappings view to link it "
+"to an existing group."
+msgstr ""
+"This dataset has no manual mapping yet. Open the Mappings view to link it "
+"to an existing group."
+
+msgid ""
+"Switch the mapping key in Settings, or assign this dataset a code, before "
+"syncing it."
+msgstr ""
+"Switch the mapping key in Settings, or assign this dataset a code, before "
+"syncing it."
+
+msgid ""
+"Cannot sync — the name/short name \"{{targetName}}\" is already used by a "
+"different group, {{conflictName}} ({{conflictId}}). Adjust the name "
+"prefix/suffix in Settings, or resolve the conflict manually."
+msgstr ""
+"Cannot sync — the name/short name \"{{targetName}}\" is already used by a "
+"different group, {{conflictName}} ({{conflictId}}). Adjust the name "
+"prefix/suffix in Settings, or resolve the conflict manually."
+
+msgid "This dataset has no data elements."
+msgstr "This dataset has no data elements."
+
+msgid "(missing from group)"
+msgstr "(missing from group)"
+
+msgid "Group"
+msgstr "Group"
+
+msgid "Group (target \"{{targetName}}\")"
+msgstr "Group (target \"{{targetName}}\")"
+
+msgid "Not mapped to a group yet."
+msgstr "Not mapped to a group yet."
+
+msgid ""
+"No data element group exists yet for this dataset. Syncing will create one "
+"named \"{{targetName}}\"."
+msgstr ""
+"No data element group exists yet for this dataset. Syncing will create one "
+"named \"{{targetName}}\"."
+
+msgid "Consistent"
+msgstr "Consistent"
+
+msgid "Inconsistent"
+msgstr "Inconsistent"
+
+msgid "Group name will update to \"{{targetName}}\" on next sync."
+msgstr "Group name will update to \"{{targetName}}\" on next sync."
+
+msgid "This group has no data elements."
+msgstr "This group has no data elements."
+
+msgid "(not in dataset)"
+msgstr "(not in dataset)"
+
+msgid ""
+"This dataset has no manual mapping yet. Link it to a group in the Mappings "
+"view."
+msgstr ""
+"This dataset has no manual mapping yet. Link it to a group in the Mappings "
+"view."
+
+msgid "This dataset has no {{field}} to use as the mapping key."
+msgstr "This dataset has no {{field}} to use as the mapping key."
+
+msgid "code"
+msgstr "code"
+
+msgid "UID"
+msgstr "UID"
+
+msgid ""
+"Cannot sync — another Data Element Group already uses this name or short "
+"name (\"{{name}}\", {{id}}). Adjust the name prefix/suffix in Settings, or "
+"resolve the conflict manually."
+msgstr ""
+"Cannot sync — another Data Element Group already uses this name or short "
+"name (\"{{name}}\", {{id}}). Adjust the name prefix/suffix in Settings, or "
+"resolve the conflict manually."
+
+msgid "Unknown error"
+msgstr "Unknown error"
+
+msgid "Processing {{done}} / {{total}} datasets…"
+msgstr "Processing {{done}} / {{total}} datasets…"
+
+msgid "Filter datasets"
+msgstr "Filter datasets"
+
+msgid "Search by name or code…"
+msgstr "Search by name or code…"
+
+msgid "Select Needs Sync"
+msgstr "Select Needs Sync"
+
+msgid "Clear Selection"
+msgstr "Clear Selection"
+
+msgid "Processing… ({{done}}/{{total}})"
+msgstr "Processing… ({{done}}/{{total}})"
+
+msgid "No datasets match the current search/filter."
+msgstr "No datasets match the current search/filter."
+
+msgid "Dataset Name"
+msgstr "Dataset Name"
+
+msgid "Target Group"
+msgstr "Target Group"
+
+msgid "Sync Status"
+msgstr "Sync Status"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Bulk Run Status"
+msgstr "Bulk Run Status"
+
+msgid "No manual mapping"
+msgstr "No manual mapping"
+
+msgid "No code available"
+msgstr "No code available"
+
+msgid "No UID available"
+msgstr "No UID available"
+
+msgid "Already used by \"{{name}}\" ({{id}})"
+msgstr "Already used by \"{{name}}\" ({{id}})"
+
+msgid "View details"
+msgstr "View details"
+
+msgid "Delete \"{{name}}\"?"
+msgstr "Delete \"{{name}}\"?"
+
+msgid "Could not delete this group"
+msgstr "Could not delete this group"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Deleting…"
+msgstr "Deleting…"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Code {{code}} · UID {{id}}"
+msgstr "Code {{code}} · UID {{id}}"
+
+msgid "Sharing settings"
+msgstr "Sharing settings"
+
+msgid "Linked dataset"
+msgstr "Linked dataset"
+
+msgid "Not linked to any dataset — pair it in the Mappings view."
+msgstr "Not linked to any dataset — pair it in the Mappings view."
+
+msgid "Not linked to any dataset via the current mapping key ({{field}})."
+msgstr "Not linked to any dataset via the current mapping key ({{field}})."
+
+msgid "(not in linked dataset)"
+msgstr "(not in linked dataset)"
+
+msgid "Missing from this group"
+msgstr "Missing from this group"
+
+msgid ""
+"All Data Element Groups on this instance. \"Linked dataset\" is worked out "
+"from the current mapping key setting, not stored on the group itself."
+msgstr ""
+"All Data Element Groups on this instance. \"Linked dataset\" is worked out "
+"from the current mapping key setting, not stored on the group itself."
+
+msgid "Filter groups"
+msgstr "Filter groups"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "# Data Elements"
+msgstr "# Data Elements"
+
+msgid "Linked Dataset"
+msgstr "Linked Dataset"
+
+msgid "Unlinked"
+msgstr "Unlinked"
+
+msgid "View"
+msgstr "View"
+
+msgid "No data element groups match the current search/filter."
+msgstr "No data element groups match the current search/filter."
+
+msgid "Manual mapping isn't active"
+msgstr "Manual mapping isn't active"
+
+msgid ""
+"These pairings are saved, but datasets are currently linked using "
+"{{field}}. Switch \"Map groups to datasets using\" to Manual in Settings "
+"for them to take effect."
+msgstr ""
+"These pairings are saved, but datasets are currently linked using "
+"{{field}}. Switch \"Map groups to datasets using\" to Manual in Settings "
+"for them to take effect."
+
+msgid "Dataset code"
+msgstr "Dataset code"
+
+msgid "Dataset UID"
+msgstr "Dataset UID"
+
+msgid ""
+"Pair a dataset with an existing Data Element Group by hand. Only used when "
+"the mapping mode in Settings is set to Manual — a dataset can be synced "
+"(data elements and name kept in sync) once paired, but this view never "
+"creates a new group."
+msgstr ""
+"Pair a dataset with an existing Data Element Group by hand. Only used when "
+"the mapping mode in Settings is set to Manual — a dataset can be synced "
+"(data elements and name kept in sync) once paired, but this view never "
+"creates a new group."
+
+msgid "Add a mapping"
+msgstr "Add a mapping"
+
+msgid "Select a dataset…"
+msgstr "Select a dataset…"
+
+msgid "No matching datasets"
+msgstr "No matching datasets"
+
+msgid "Data Element Group"
+msgstr "Data Element Group"
+
+msgid "Select a group…"
+msgstr "Select a group…"
+
+msgid "No matching groups"
+msgstr "No matching groups"
+
+msgid "Linking…"
+msgstr "Linking…"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Could not save mapping"
+msgstr "Could not save mapping"
+
+msgid "Current mappings"
+msgstr "Current mappings"
+
+msgid "Filter mappings"
+msgstr "Filter mappings"
+
+msgid "Search by dataset or group name…"
+msgstr "Search by dataset or group name…"
+
+msgid "Unknown dataset ({{id}})"
+msgstr "Unknown dataset ({{id}})"
+
+msgid "Unknown group ({{id}})"
+msgstr "Unknown group ({{id}})"
+
+msgid "Unlink"
+msgstr "Unlink"
+
+msgid "No mappings yet."
+msgstr "No mappings yet."
+
+msgid "No mappings match \"{{search}}\"."
+msgstr "No mappings match \"{{search}}\"."
+
+msgid "Will create"
+msgstr "Will create"
+
+msgid "Will update"
+msgstr "Will update"
+
+msgid "No change"
+msgstr "No change"
+
+msgid "Will fail"
+msgstr "Will fail"
+
+msgid "name change"
+msgstr "name change"
+
+msgid "Update group."
+msgstr "Update group."
+
+msgid "Already in sync."
+msgstr "Already in sync."
+
+msgid "Name/short name already used by \"{{name}}\" ({{id}})."
+msgstr "Name/short name already used by \"{{name}}\" ({{id}})."
+
+msgid "No mapping key value on this dataset."
+msgstr "No mapping key value on this dataset."
+
+msgid ""
+"Nothing has been changed yet. This is what running the sync now would do, "
+"based on the current settings."
+msgstr ""
+"Nothing has been changed yet. This is what running the sync now would do, "
+"based on the current settings."
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Run Sync Now"
+msgstr "Run Sync Now"
+
+msgid "More actions"
+msgstr "More actions"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "View only"
+msgstr "View only"
+
+msgid "View and edit"
+msgstr "View and edit"
+
+msgid "No public access"
+msgstr "No public access"
+
+msgid "Same as dataset"
+msgstr "Same as dataset"
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "Dataset name"
+msgstr "Dataset name"
+
+msgid "Sync settings"
+msgstr "Sync settings"
+
+msgid "Map groups to datasets using"
+msgstr "Map groups to datasets using"
+
+msgid ""
+"Linkage comes from explicit dataset↔group pairings made in the Mappings "
+"view instead of a value written to the group's Code field. Bulk sync will "
+"never create a new group in this mode — pair a dataset with an existing "
+"group first."
+msgstr ""
+"Linkage comes from explicit dataset↔group pairings made in the Mappings "
+"view instead of a value written to the group's Code field. Bulk sync will "
+"never create a new group in this mode — pair a dataset with an existing "
+"group first."
+
+msgid ""
+"This value is written to each group's Code field and used to link it back "
+"to its dataset. Changing it after groups already exist may create "
+"duplicates for datasets processed under the old setting."
+msgstr ""
+"This value is written to each group's Code field and used to link it back "
+"to its dataset. Changing it after groups already exist may create "
+"duplicates for datasets processed under the old setting."
+
+msgid "Group naming"
+msgstr "Group naming"
+
+msgid "Name prefix"
+msgstr "Name prefix"
+
+msgid "e.g. DEG - "
+msgstr "e.g. DEG - "
+
+msgid "Name suffix"
+msgstr "Name suffix"
+
+msgid "e.g.  (auto)"
+msgstr "e.g.  (auto)"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Also update Short Name when syncing"
+msgstr "Also update Short Name when syncing"
+
+msgid ""
+"New groups always get a Short Name (it's required). Turn this off to leave "
+"an existing group's Short Name as-is on later syncs, e.g. if it's been "
+"hand-tuned to a different abbreviation."
+msgstr ""
+"New groups always get a Short Name (it's required). Turn this off to leave "
+"an existing group's Short Name as-is on later syncs, e.g. if it's been "
+"hand-tuned to a different abbreviation."
+
+msgid "Default sharing for new groups"
+msgstr "Default sharing for new groups"
+
+msgid "Apply sharing settings when a group is first created"
+msgstr "Apply sharing settings when a group is first created"
+
+msgid "Sharing source"
+msgstr "Sharing source"
+
+msgid ""
+"The new group copies its source dataset's own sharing (public access and "
+"user groups) at creation time. If a dataset has no sharing configured, the "
+"server's own default sharing is used instead."
+msgstr ""
+"The new group copies its source dataset's own sharing (public access and "
+"user groups) at creation time. If a dataset has no sharing configured, the "
+"server's own default sharing is used instead."
+
+msgid "Public access"
+msgstr "Public access"
+
+msgid ""
+"Also share with specific user groups (combines with public access above — "
+"e.g. \"no public access, but these groups can edit\" is fine)"
+msgstr ""
+"Also share with specific user groups (combines with public access above — "
+"e.g. \"no public access, but these groups can edit\" is fine)"
+
+msgid "No matching user groups"
+msgstr "No matching user groups"
+
+msgid "Loading user groups…"
+msgstr "Loading user groups…"
+
+msgid "Add a user group…"
+msgstr "Add a user group…"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid ""
+"Only applies at creation time — existing groups' sharing is never changed "
+"by a sync. Use the Sharing action on a group to change it later. Leave "
+"unchecked to use this server's own default."
+msgstr ""
+"Only applies at creation time — existing groups' sharing is never changed "
+"by a sync. Use the Sharing action on a group to change it later. Leave "
+"unchecked to use this server's own default."
+
+msgid "Could not save settings"
+msgstr "Could not save settings"
+
+msgid "Saving…"
+msgstr "Saving…"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Unmappable"
+msgstr "Unmappable"
+
+msgid "Name conflict"
+msgstr "Name conflict"
+
+msgid "Needs update"
+msgstr "Needs update"
+
+msgid "All"
+msgstr "All"
+
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Processing…"
+msgstr "Processing…"
+
+msgid "Created ✓"
+msgstr "Created ✓"
+
+msgid "Updated ✓"
+msgstr "Updated ✓"
+
+msgid "Up to date ✓"
+msgstr "Up to date ✓"
+
+msgid "Error ✗"
+msgstr "Error ✗"
+
+msgid "Skipped"
+msgstr "Skipped"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "DEG Manager"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
+"Manage Data Element Groups derived from Dataset data elements: bulk "
+"create/update/delete, sharing, and configurable mapping/naming, with clear "
+"bulk-run error reporting."
