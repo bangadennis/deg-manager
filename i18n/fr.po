@@ -40,6 +40,15 @@ msgstr "Superutilisateur"
 msgid "Standard user"
 msgstr "Utilisateur standard"
 
+msgid "Created {{date}} by {{user}}"
+msgstr "Créé le {{date}} par {{user}}"
+
+msgid "Unknown user"
+msgstr "Utilisateur inconnu"
+
+msgid "Last updated {{date}} by {{user}}"
+msgstr "Mis à jour le {{date}} par {{user}}"
+
 msgid "Bulk sync summary"
 msgstr "Résumé de la synchronisation groupée"
 
@@ -211,6 +220,9 @@ msgstr "État de synchronisation"
 
 msgid "Data Elements"
 msgstr "Éléments de données"
+
+msgid "Last Updated"
+msgstr "Dernière mise à jour"
 
 msgid "Bulk Run Status"
 msgstr "État de l'exécution groupée"

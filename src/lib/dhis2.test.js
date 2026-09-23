@@ -10,6 +10,7 @@ import {
   findNameConflict,
   evaluateDataset,
   findDatasetForGroup,
+  formatDate,
 } from './dhis2';
 import { DEFAULT_SETTINGS, MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from './settings';
 
@@ -333,5 +334,36 @@ describe('buildSharingPayload', () => {
     const settings = { ...DEFAULT_SETTINGS, defaultSharing: { ...DEFAULT_SETTINGS.defaultSharing, enabled: true, source: SHARING_SOURCE.DATASET } };
     expect(() => buildSharingPayload(settings)).not.toThrow();
     expect(buildSharingPayload(settings)).toBeUndefined();
+  });
+});
+
+describe('formatDate', () => {
+  // Force a fixed locale so Intl.DateTimeFormat's output is deterministic
+  // regardless of the host machine's/CI runner's own default locale. The
+  // *timezone* is intentionally left alone (formatDate renders in whichever
+  // timezone the browser is in, same as the rest of the app) — a noon-UTC
+  // fixture and a locale-agnostic time pattern below keep the date portion
+  // stable across any real-world UTC offset without needing to fake it.
+  const i18n = require('@dhis2/d2-i18n').default;
+  const originalLanguage = i18n.language;
+  beforeAll(() => { i18n.language = 'en'; });
+  afterAll(() => { i18n.language = originalLanguage; });
+
+  it('formats a date without time by default', () => {
+    expect(formatDate('2024-03-15T12:00:00Z')).toBe('Mar 15, 2024');
+  });
+
+  it('includes the time when withTime is set', () => {
+    expect(formatDate('2024-03-15T12:00:00Z', { withTime: true })).toMatch(/^Mar 15, 2024, \d{1,2}:\d{2}\s?(AM|PM)$/);
+  });
+
+  it('falls back to an em dash for a missing date', () => {
+    expect(formatDate(undefined)).toBe('—');
+    expect(formatDate(null)).toBe('—');
+    expect(formatDate('')).toBe('—');
+  });
+
+  it('falls back to an em dash for an invalid date string', () => {
+    expect(formatDate('not-a-date')).toBe('—');
   });
 });

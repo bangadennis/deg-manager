@@ -17,7 +17,7 @@ import {
   colors,
 } from '@dhis2/ui';
 import { IconView16, IconEdit16, IconShare16, IconDelete16 } from '@dhis2/ui-icons';
-import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters } from '../lib/dhis2';
+import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters, formatDate } from '../lib/dhis2';
 import { columnSortProps, sortRows } from '../lib/sorting';
 import GroupDetailModal from './GroupDetailModal';
 import EditGroupModal from './EditGroupModal';
@@ -34,6 +34,8 @@ function getComparators() {
     elements:  (a, b) => (a.group.dataElements || []).length - (b.group.dataElements || []).length,
     linked:    (a, b) => (a.linkedDataset?.name || '').localeCompare(b.linkedDataset?.name || ''),
     status:    (a, b) => getCategoryLabel(a.category).localeCompare(getCategoryLabel(b.category)),
+    // ISO-8601 strings compare correctly as plain strings, no Date parsing needed.
+    lastUpdated: (a, b) => (a.group.lastUpdated || '').localeCompare(b.group.lastUpdated || ''),
   };
 }
 
@@ -154,6 +156,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
             <DataTableColumnHeader {...sortProps('elements', i18n.t('# Data Elements'))}>{i18n.t('# Data Elements')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('linked', i18n.t('Linked Dataset'))}>{i18n.t('Linked Dataset')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('status', i18n.t('Sync Status'))}>{i18n.t('Sync Status')}</DataTableColumnHeader>
+            <DataTableColumnHeader {...sortProps('lastUpdated', i18n.t('Last Updated'))}>{i18n.t('Last Updated')}</DataTableColumnHeader>
             <DataTableColumnHeader></DataTableColumnHeader>
           </DataTableRow>
         </DataTableHead>
@@ -174,6 +177,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
                   {getCategoryLabel(category)}
                 </Tag>
               </DataTableCell>
+              <DataTableCell>{formatDate(group.lastUpdated)}</DataTableCell>
               <DataTableCell>
                 <RowActionsMenu>
                   <MenuItem label={i18n.t('View')} icon={<IconView16 />} onClick={() => setDetailsForId(group.id)} />

@@ -13,7 +13,7 @@ import {
   colors,
 } from '@dhis2/ui';
 import { IconView16 } from '@dhis2/ui-icons';
-import { evaluateDataset, getCategoryLabel } from '../lib/dhis2';
+import { evaluateDataset, getCategoryLabel, formatDate } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import { columnSortProps } from '../lib/sorting';
 import StatusTag from './StatusTag';
@@ -39,6 +39,7 @@ export default function DatasetsTable({
             <DataTableColumnHeader {...sortProps('targetGroup', i18n.t('Target Group'))}>{i18n.t('Target Group')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('status', i18n.t('Sync Status'))}>{i18n.t('Sync Status')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('elements', i18n.t('Data Elements'))}>{i18n.t('Data Elements')}</DataTableColumnHeader>
+            <DataTableColumnHeader {...sortProps('lastUpdated', i18n.t('Last Updated'))}>{i18n.t('Last Updated')}</DataTableColumnHeader>
             <DataTableColumnHeader>{i18n.t('Bulk Run Status')}</DataTableColumnHeader>
             <DataTableColumnHeader></DataTableColumnHeader>
           </DataTableRow>
@@ -112,6 +113,8 @@ export default function DatasetsTable({
                     </span>
                   )}
                 </DataTableCell>
+
+                <DataTableCell>{formatDate(dataset.lastUpdated)}</DataTableCell>
 
                 <DataTableCell>
                   {track ? <StatusTag status={track.status} errorMsg={track.errorMsg} /> : <Tag neutral>—</Tag>}

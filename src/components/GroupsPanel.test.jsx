@@ -106,6 +106,33 @@ describe('GroupsPanel', () => {
     });
     expect(screen.getByText('BRAVO')).toBeInTheDocument();
   });
+
+  it('shows each group\'s formatted last updated date', () => {
+    renderPanel({
+      groups: [{ ...group('g1', 'Bravo Group', 'ds2'), lastUpdated: '2024-03-15T12:00:00Z' }],
+    });
+    expect(screen.getByText('Mar 15, 2024')).toBeInTheDocument();
+  });
+
+  it('sorts by last updated ascending and descending on repeated header clicks', async () => {
+    const user = userEvent.setup();
+    renderPanel({
+      groups: [
+        { ...group('g1', 'Bravo Group', 'ds2'), lastUpdated: '2024-06-01T00:00:00Z' },
+        { ...group('g2', 'Alpha Group', 'ds1'), lastUpdated: '2024-01-01T00:00:00Z' },
+      ],
+    });
+
+    // Unsorted (insertion order): Bravo (newer), Alpha (older).
+    expect(rowOrder()).toEqual(['Bravo Group', 'Alpha Group']);
+
+    const sortByLastUpdated = screen.getByTitle('Sort by Last Updated');
+    await user.click(sortByLastUpdated);
+    expect(rowOrder()).toEqual(['Alpha Group', 'Bravo Group']);
+
+    await user.click(sortByLastUpdated);
+    expect(rowOrder()).toEqual(['Bravo Group', 'Alpha Group']);
+  });
 });
 
 describe('GroupsPanel editing', () => {

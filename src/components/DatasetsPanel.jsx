@@ -35,6 +35,8 @@ function makeComparators(settings) {
     targetGroup: (a, b) => targetGroupSortValue(a, settings).localeCompare(targetGroupSortValue(b, settings)),
     status:      (a, b) => getCategoryLabel(a.evalResult.category).localeCompare(getCategoryLabel(b.evalResult.category)),
     elements:    (a, b) => a.evalResult.dsDEs.length - b.evalResult.dsDEs.length,
+    // ISO-8601 strings compare correctly as plain strings, no Date parsing needed.
+    lastUpdated: (a, b) => (a.dataset.lastUpdated || '').localeCompare(b.dataset.lastUpdated || ''),
   };
 }
 

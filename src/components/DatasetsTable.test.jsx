@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DatasetsTable from './DatasetsTable';
 import { DEFAULT_SETTINGS } from '../lib/settings';
@@ -73,5 +73,24 @@ describe('DatasetsTable category display', () => {
       groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', shortName: 'Immun', dataElements: [{ id: 'de1', name: 'BCG doses' }] }],
     });
     expect(screen.getByText('Consistent')).toBeInTheDocument();
+  });
+});
+
+describe('DatasetsTable last updated column', () => {
+  // Column order: checkbox, name, target group, sync status, data elements,
+  // last updated, bulk run status, view-details action.
+  function lastUpdatedCellText() {
+    const row = screen.getAllByRole('row')[1]; // row 0 is the header
+    return within(row).getAllByRole('cell')[5].textContent;
+  }
+
+  it('shows the formatted lastUpdated date', () => {
+    renderTable({ datasets: [dataset({ lastUpdated: '2024-03-15T12:00:00Z' })] });
+    expect(lastUpdatedCellText()).toBe('Mar 15, 2024');
+  });
+
+  it('falls back to an em dash when lastUpdated is missing', () => {
+    renderTable();
+    expect(lastUpdatedCellText()).toBe('—');
   });
 });

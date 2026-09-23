@@ -7,7 +7,8 @@ export const DATASETS_QUERY = {
   dataSets: {
     resource: 'dataSets',
     params: {
-      fields: 'id,name,shortName,code,dataSetElements[dataElement[id,name]],sharing[public,external,userGroups,users]',
+      fields:
+        'id,name,shortName,code,created,lastUpdated,createdBy[id,name],lastUpdatedBy[id,name],dataSetElements[dataElement[id,name]],sharing[public,external,userGroups,users]',
       paging: false,
     },
   },
@@ -17,7 +18,7 @@ export const DEG_QUERY = {
   dataElementGroups: {
     resource: 'dataElementGroups',
     params: {
-      fields: 'id,name,shortName,code,dataElements[id,name]',
+      fields: 'id,name,shortName,code,created,lastUpdated,createdBy[id,name],lastUpdatedBy[id,name],dataElements[id,name]',
       paging: false,
     },
   },
@@ -70,6 +71,19 @@ export const DELETE_DEG_MUTATION = {
 };
 
 // ─── Pure helpers ────────────────────────────────────────────────────────────
+
+// Locale-aware so a date reads in French under the fr locale too — i18n.language
+// is the active i18next locale, the same instance every i18n.t() call in this
+// app already goes through.
+export function formatDate(isoString, { withTime = false } = {}) {
+  if (!isoString) return '—';
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return '—';
+  return new Intl.DateTimeFormat(i18n.language || undefined, {
+    dateStyle: 'medium',
+    ...(withTime ? { timeStyle: 'short' } : {}),
+  }).format(date);
+}
 
 export function getDatasetDEs(dataset) {
   return (dataset.dataSetElements || []).map((dse) => dse.dataElement);

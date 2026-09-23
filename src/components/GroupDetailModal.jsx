@@ -4,6 +4,7 @@ import { Button, ButtonStrip, Tag, SharingDialog, colors } from '@dhis2/ui';
 import { findDatasetForGroup, compareDataElements, getDatasetDEs } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import DetailsPanel from './DetailsPanel';
+import AuditMeta from './AuditMeta';
 import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';
 
@@ -36,6 +37,12 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
         </ButtonStrip>
       }
     >
+      <AuditMeta
+        created={group.created}
+        createdBy={group.createdBy}
+        lastUpdated={group.lastUpdated}
+        lastUpdatedBy={group.lastUpdatedBy}
+      />
       <p>
         {linkedDataset ? (
           <>

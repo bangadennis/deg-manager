@@ -4,6 +4,7 @@ import { Tag, colors } from '@dhis2/ui';
 import { evaluateDataset } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import DetailsPanel from './DetailsPanel';
+import AuditMeta from './AuditMeta';
 
 export default function DatasetDetailModal({ dataset, groups, settings, mappings, onClose }) {
   const { group, dsDEs, groupDEs, missing, extra, isConsistent, nameMismatch, hasMappingKey, conflict, expectedName: targetName } =
@@ -22,6 +23,12 @@ export default function DatasetDetailModal({ dataset, groups, settings, mappings
 
   return (
     <DetailsPanel title={dataset.name} subtitle={subtitle} onClose={onClose}>
+      <AuditMeta
+        created={dataset.created}
+        createdBy={dataset.createdBy}
+        lastUpdated={dataset.lastUpdated}
+        lastUpdatedBy={dataset.lastUpdatedBy}
+      />
       {!hasMappingKey && (
         <p style={{ color: colors.red060 }}>
           {isManual
