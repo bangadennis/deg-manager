@@ -4,9 +4,11 @@ import { Button, ButtonStrip, Tag, SharingDialog, colors } from '@dhis2/ui';
 import { findDatasetForGroup, compareDataElements, getDatasetDEs } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import DetailsPanel from './DetailsPanel';
+import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';
 
-export default function GroupDetailModal({ group, datasets, settings, mappings, onClose, onDeleted }) {
+export default function GroupDetailModal({ group, groups, datasets, settings, mappings, onClose, onDeleted, onSaved }) {
+  const [editOpen, setEditOpen]       = useState(false);
   const [sharingOpen, setSharingOpen] = useState(false);
   const [deleteOpen, setDeleteOpen]   = useState(false);
 
@@ -30,6 +32,7 @@ export default function GroupDetailModal({ group, datasets, settings, mappings, 
         <ButtonStrip end>
           <Button destructive small onClick={() => setDeleteOpen(true)}>{i18n.t('Delete')}</Button>
           <Button small onClick={() => setSharingOpen(true)}>{i18n.t('Sharing settings')}</Button>
+          <Button small onClick={() => setEditOpen(true)}>{i18n.t('Edit')}</Button>
         </ButtonStrip>
       }
     >
@@ -82,6 +85,19 @@ export default function GroupDetailModal({ group, datasets, settings, mappings, 
                 ))}
           </ul>
         </>
+      )}
+
+      {editOpen && (
+        <EditGroupModal
+          group={group}
+          groups={groups}
+          matchField={settings.matchField}
+          onClose={() => setEditOpen(false)}
+          onSaved={() => {
+            setEditOpen(false);
+            onSaved();
+          }}
+        />
       )}
 
       {sharingOpen && (

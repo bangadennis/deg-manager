@@ -16,10 +16,11 @@ import {
   SharingDialog,
   colors,
 } from '@dhis2/ui';
-import { IconView16, IconShare16, IconDelete16 } from '@dhis2/ui-icons';
+import { IconView16, IconEdit16, IconShare16, IconDelete16 } from '@dhis2/ui-icons';
 import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters } from '../lib/dhis2';
 import { columnSortProps, sortRows } from '../lib/sorting';
 import GroupDetailModal from './GroupDetailModal';
+import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';
 import RowActionsMenu from './RowActionsMenu';
 
@@ -28,6 +29,7 @@ const PAGE_SIZES = ['10', '25', '50', '100'];
 function getComparators() {
   return {
     name:      (a, b) => a.group.name.localeCompare(b.group.name),
+    shortName: (a, b) => (a.group.shortName || '').localeCompare(b.group.shortName || ''),
     code:      (a, b) => (a.group.code || '').localeCompare(b.group.code || ''),
     elements:  (a, b) => (a.group.dataElements || []).length - (b.group.dataElements || []).length,
     linked:    (a, b) => (a.linkedDataset?.name || '').localeCompare(b.linkedDataset?.name || ''),
@@ -43,6 +45,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
   const [page, setPage]                 = useState(1);
   const [pageSize, setPageSize]         = useState(25);
   const [detailsForId, setDetailsForId] = useState(null);
+  const [editingId, setEditingId]       = useState(null);
   const [sharingForId, setSharingForId] = useState(null);
   const [deletingId, setDeletingId]     = useState(null);
 
@@ -101,6 +104,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
   const sortProps = (name, label) => columnSortProps(name, label, sortColumn, sortDirection, handleSortIconClick);
 
   const detailsGroup = detailsForId ? groups.find((g) => g.id === detailsForId) : null;
+  const editingGroup = editingId ? groups.find((g) => g.id === editingId) : null;
   const sharingGroup = sharingForId ? groups.find((g) => g.id === sharingForId) : null;
   const deletingGroup = deletingId ? groups.find((g) => g.id === deletingId) : null;
 
@@ -145,6 +149,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
         <DataTableHead>
           <DataTableRow>
             <DataTableColumnHeader {...sortProps('name', i18n.t('Name'))}>{i18n.t('Name')}</DataTableColumnHeader>
+            <DataTableColumnHeader {...sortProps('shortName', i18n.t('Short Name'))}>{i18n.t('Short Name')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('code', i18n.t('Code'))}>{i18n.t('Code')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('elements', i18n.t('# Data Elements'))}>{i18n.t('# Data Elements')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('linked', i18n.t('Linked Dataset'))}>{i18n.t('Linked Dataset')}</DataTableColumnHeader>
@@ -156,6 +161,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
           {pagedEntries.map(({ group, linkedDataset, category }) => (
             <DataTableRow key={group.id}>
               <DataTableCell>{group.name}</DataTableCell>
+              <DataTableCell>{group.shortName || '—'}</DataTableCell>
               <DataTableCell>
                 <code>{group.code || '—'}</code>
               </DataTableCell>
@@ -171,6 +177,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
               <DataTableCell>
                 <RowActionsMenu>
                   <MenuItem label={i18n.t('View')} icon={<IconView16 />} onClick={() => setDetailsForId(group.id)} />
+                  <MenuItem label={i18n.t('Edit')} icon={<IconEdit16 />} onClick={() => setEditingId(group.id)} />
                   <MenuItem label={i18n.t('Sharing settings')} icon={<IconShare16 />} onClick={() => setSharingForId(group.id)} />
                   <MenuDivider />
                   <MenuItem
@@ -207,16 +214,32 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
       {detailsGroup && (
         <GroupDetailModal
           group={detailsGroup}
+          groups={groups}
           datasets={datasets}
           settings={settings}
           mappings={mappings}
           onClose={() => setDetailsForId(null)}
+          onSaved={() => refetchDEG().catch(() => {})}
           onDeleted={() => {
             setDetailsForId(null);
             // Not awaited: useDataQuery's refetch() never rejects on failure
             // — it just never resolves at all — so awaiting it here would
             // risk hanging this callback chain for no benefit; nothing else
             // depends on it completing.
+            refetchDEG().catch(() => {});
+          }}
+        />
+      )}
+
+      {editingGroup && (
+        <EditGroupModal
+          group={editingGroup}
+          groups={groups}
+          matchField={settings.matchField}
+          onClose={() => setEditingId(null)}
+          onSaved={() => {
+            setEditingId(null);
+            // Not awaited — see the refetchDEG() comment on onDeleted below.
             refetchDEG().catch(() => {});
           }}
         />

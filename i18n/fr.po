@@ -245,6 +245,44 @@ msgstr "Suppression…"
 msgid "Delete"
 msgstr "Supprimer"
 
+msgid "Name is required"
+msgstr "Le nom est requis"
+
+msgid "Short name is required"
+msgstr "Le nom court est requis"
+
+msgid "Short name must be {{max}} characters or fewer"
+msgstr "Le nom court doit comporter au maximum {{max}} caractères"
+
+msgid ""
+"The name or short name is already used by another group, \"{{name}}\" "
+"({{id}})."
+msgstr ""
+"Le nom ou le nom court est déjà utilisé par un autre groupe, « {{name}} » "
+"({{id}})."
+
+msgid "Edit \"{{name}}\""
+msgstr "Modifier « {{name}} »"
+
+msgid "Short name"
+msgstr "Nom court"
+
+msgid ""
+"Changing this may break this group's link to its dataset — the app "
+"matches them by code."
+msgstr ""
+"Modifier ce champ peut rompre le lien de ce groupe avec son ensemble de "
+"données — l'application les associe par le code."
+
+msgid "Could not save this group"
+msgstr "Impossible d'enregistrer ce groupe"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Short Name"
+msgstr "Nom court"
+
 msgid "Code {{code}} · UID {{id}}"
 msgstr "Code {{code}} · UID {{id}}"
 
