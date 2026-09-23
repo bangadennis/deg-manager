@@ -1,6 +1,12 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
+// Registers the generated en/fr resource bundles (src/locales/index.js,
+// regenerated on every build from i18n/*.po) with this same i18n instance.
+// Without this import nothing ever calls addResourceBundle(), so i18n.t()
+// silently falls back to its raw English key regardless of the active
+// DHIS2 UI locale — the translations exist but are never loaded.
+import './locales';
 import { CircularLoader, NoticeBox, Menu, MenuItem, MenuSectionHeader, MenuDivider, Tag, colors } from '@dhis2/ui';
 import { IconSettings16 } from '@dhis2/ui-icons';
 import { DATASETS_QUERY, DEG_QUERY, ME_QUERY, evaluateDataset } from './lib/dhis2';
