@@ -71,7 +71,10 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
     const q = search.trim().toLowerCase();
     if (!q) return evaluated;
     return evaluated.filter(
-      ({ dataset }) => dataset.name.toLowerCase().includes(q) || (dataset.code || '').toLowerCase().includes(q)
+      ({ dataset }) =>
+        dataset.name.toLowerCase().includes(q) ||
+        (dataset.code || '').toLowerCase().includes(q) ||
+        dataset.id.toLowerCase().includes(q)
     );
   }, [evaluated, search]);
 
@@ -292,7 +295,7 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
         <div style={{ maxWidth: '20rem', marginBottom: '0.75rem' }}>
           <InputField
             label={i18n.t('Filter datasets')}
-            placeholder={i18n.t('Search by name or code…')}
+            placeholder={i18n.t('Search by name, code or UID…')}
             value={search}
             disabled={bulkRunning}
             onChange={({ value }) => { setSearch(value || ''); resetToFirstPage(); }}

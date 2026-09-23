@@ -48,7 +48,7 @@
     "Unknown error": "Unknown error",
     "Processing {{done}} / {{total}} datasets…": "Processing {{done}} / {{total}} datasets…",
     "Filter datasets": "Filter datasets",
-    "Search by name or code…": "Search by name or code…",
+    "Search by name, code or UID…": "Search by name, code or UID…",
     "Select Needs Sync": "Select Needs Sync",
     "Clear Selection": "Clear Selection",
     "Processing… ({{done}}/{{total}})": "Processing… ({{done}}/{{total}})",

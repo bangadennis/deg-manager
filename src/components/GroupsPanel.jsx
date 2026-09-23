@@ -62,7 +62,10 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
     if (!search.trim()) return evaluated;
     const q = search.trim().toLowerCase();
     return evaluated.filter(
-      ({ group }) => group.name.toLowerCase().includes(q) || (group.code || '').toLowerCase().includes(q)
+      ({ group }) =>
+        group.name.toLowerCase().includes(q) ||
+        (group.code || '').toLowerCase().includes(q) ||
+        group.id.toLowerCase().includes(q)
     );
   }, [evaluated, search]);
 
@@ -119,7 +122,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
         <div style={{ maxWidth: '20rem', marginBottom: '0.75rem' }}>
           <InputField
             label={i18n.t('Filter groups')}
-            placeholder={i18n.t('Search by name or code…')}
+            placeholder={i18n.t('Search by name, code or UID…')}
             value={search}
             onChange={({ value }) => { setSearch(value || ''); resetToFirstPage(); }}
           />

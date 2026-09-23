@@ -48,7 +48,7 @@
     "Unknown error": "Erreur inconnue",
     "Processing {{done}} / {{total}} datasets…": "Traitement de {{done}} / {{total}} ensembles de données…",
     "Filter datasets": "Filtrer les ensembles de données",
-    "Search by name or code…": "Rechercher par nom ou code…",
+    "Search by name, code or UID…": "Rechercher par nom, code ou UID…",
     "Select Needs Sync": "Sélectionner à synchroniser",
     "Clear Selection": "Effacer la sélection",
     "Processing… ({{done}}/{{total}})": "Traitement… ({{done}}/{{total}})",

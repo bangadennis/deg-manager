@@ -90,3 +90,44 @@ describe('DatasetsPanel bulk run resilience', () => {
     expect(screen.queryByText(/Processing/)).not.toBeInTheDocument();
   });
 });
+
+describe('DatasetsPanel search', () => {
+  function renderTwoDatasets() {
+    return renderPanel({
+      datasets: [
+        { id: 'ds1', name: 'Immunization', code: 'IMM', dataSetElements: [] },
+        { id: 'ds2', name: 'Nutrition', code: 'NUT', dataSetElements: [] },
+      ],
+    });
+  }
+
+  it('filters by dataset name', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'Immun');
+
+    expect(screen.getByText('Immunization')).toBeInTheDocument();
+    expect(screen.queryByText('Nutrition')).not.toBeInTheDocument();
+  });
+
+  it('filters by dataset code', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'NUT');
+
+    expect(screen.getByText('Nutrition')).toBeInTheDocument();
+    expect(screen.queryByText('Immunization')).not.toBeInTheDocument();
+  });
+
+  it('filters by dataset UID', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'ds1');
+
+    expect(screen.getByText('Immunization')).toBeInTheDocument();
+    expect(screen.queryByText('Nutrition')).not.toBeInTheDocument();
+  });
+});

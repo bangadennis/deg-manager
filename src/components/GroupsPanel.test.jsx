@@ -63,7 +63,17 @@ describe('GroupsPanel', () => {
     const user = userEvent.setup();
     renderPanel();
 
-    await user.type(screen.getByPlaceholderText('Search by name or code…'), 'Alpha');
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'Alpha');
+
+    expect(screen.getByText('Alpha Group')).toBeInTheDocument();
+    expect(screen.queryByText('Bravo Group')).not.toBeInTheDocument();
+  });
+
+  it('search filters by group UID', async () => {
+    const user = userEvent.setup();
+    renderPanel();
+
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'g2');
 
     expect(screen.getByText('Alpha Group')).toBeInTheDocument();
     expect(screen.queryByText('Bravo Group')).not.toBeInTheDocument();

@@ -185,8 +185,8 @@ msgstr "Traitement de {{done}} / {{total}} ensembles de données…"
 msgid "Filter datasets"
 msgstr "Filtrer les ensembles de données"
 
-msgid "Search by name or code…"
-msgstr "Rechercher par nom ou code…"
+msgid "Search by name, code or UID…"
+msgstr "Rechercher par nom, code ou UID…"
 
 msgid "Select Needs Sync"
 msgstr "Sélectionner à synchroniser"
