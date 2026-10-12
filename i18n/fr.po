@@ -76,6 +76,9 @@ msgstr "Raison"
 msgid "All selected datasets synced successfully."
 msgstr "Tous les ensembles de données sélectionnés ont été synchronisés avec succès."
 
+msgid "Retry Failed ({{n}})"
+msgstr "Réessayer les échecs ({{n}})"
+
 msgid "Close"
 msgstr "Fermer"
 
@@ -121,6 +124,26 @@ msgstr ""
 "préfixe/suffixe du nom dans les Paramètres, ou résolvez le conflit "
 "manuellement."
 
+msgid ""
+"This looks like a pre-existing group with no dataset linked to it yet — "
+"relink it to this dataset instead of staying blocked?"
+msgstr ""
+"Il s'agit apparemment d'un groupe préexistant sans ensemble de données "
+"associé pour l'instant — l'associer à cet ensemble de données plutôt que "
+"de rester bloqué ?"
+
+msgid "Relinking…"
+msgstr "Association en cours…"
+
+msgid "Relink to this group"
+msgstr "Associer à ce groupe"
+
+msgid "Could not relink this group"
+msgstr "Impossible d'associer ce groupe"
+
+msgid "Dataset data elements ({{n}})"
+msgstr "Éléments de données de l'ensemble de données ({{n}})"
+
 msgid "This dataset has no data elements."
 msgstr "Cet ensemble de données ne contient aucun élément de données."
 
@@ -129,6 +152,9 @@ msgstr "(absent du groupe)"
 
 msgid "Group"
 msgstr "Groupe"
+
+msgid "Group \"{{name}}\" ({{n}})"
+msgstr "Groupe « {{name}} » ({{n}})"
 
 msgid "Group (target \"{{targetName}}\")"
 msgstr "Groupe (cible « {{targetName}} »)"
@@ -197,14 +223,29 @@ msgstr "Filtrer les ensembles de données"
 msgid "Search by name, code or UID…"
 msgstr "Rechercher par nom, code ou UID…"
 
+msgid "Select All ({{n}})"
+msgstr "Tout sélectionner ({{n}})"
+
 msgid "Select Needs Sync"
 msgstr "Sélectionner à synchroniser"
+
+msgid "Select Relinkable ({{n}})"
+msgstr "Sélectionner les associables ({{n}})"
 
 msgid "Clear Selection"
 msgstr "Effacer la sélection"
 
+msgid "Preview ({{n}})"
+msgstr "Aperçu ({{n}})"
+
 msgid "Processing… ({{done}}/{{total}})"
 msgstr "Traitement… ({{done}}/{{total}})"
+
+msgid "Bulk Create / Update ({{n}} selected)"
+msgstr "Créer/mettre à jour en masse ({{n}} sélectionné(s))"
+
+msgid "Relink Conflicts ({{n}} selected)"
+msgstr "Associer les conflits ({{n}} sélectionné(s))"
 
 msgid "No datasets match the current search/filter."
 msgstr "Aucun ensemble de données ne correspond à la recherche/au filtre actuel."
@@ -239,11 +280,40 @@ msgstr "Aucun UID disponible"
 msgid "Already used by \"{{name}}\" ({{id}})"
 msgstr "Déjà utilisé par « {{name}} » ({{id}})"
 
+msgid ""
+"This group has no code yet and is free to claim — open the dataset or use "
+"Relink Conflicts to link it here."
+msgstr ""
+"Ce groupe n'a pas encore de code et peut être revendiqué — ouvrez "
+"l'ensemble de données ou utilisez Associer les conflits pour l'associer "
+"ici."
+
+msgid "Relinkable"
+msgstr "Associable"
+
+msgid "{{n}} total"
+msgstr "{{n}} au total"
+
+msgid "{{n}} missing"
+msgstr "{{n}} manquant(s)"
+
+msgid "{{n}} extra"
+msgstr "{{n}} en trop"
+
 msgid "View details"
 msgstr "Voir les détails"
 
 msgid "Delete \"{{name}}\"?"
 msgstr "Supprimer « {{name}} » ?"
+
+msgid ""
+"This permanently deletes the Data Element Group ({{n}} data elements, code "
+"{{code}}). This cannot be undone, and does not affect the dataset or its "
+"data elements."
+msgstr ""
+"Cela supprime définitivement le groupe d'éléments de données ({{n}} "
+"éléments de données, code {{code}}). Cette action est irréversible et "
+"n'affecte pas l'ensemble de données ni ses éléments de données."
 
 msgid "Could not delete this group"
 msgstr "Impossible de supprimer ce groupe"
@@ -311,6 +381,9 @@ msgid "Not linked to any dataset via the current mapping key ({{field}})."
 msgstr ""
 "Non associé à un ensemble de données via la clé de correspondance actuelle "
 "({{field}})."
+
+msgid "Data elements ({{n}})"
+msgstr "Éléments de données ({{n}})"
 
 msgid "(not in linked dataset)"
 msgstr "(absent de l'ensemble de données associé)"
@@ -446,6 +519,15 @@ msgstr "Aucun changement"
 msgid "Will fail"
 msgstr "Échouera"
 
+msgid "Create \"{{name}}\" with {{n}} data elements."
+msgstr "Créer « {{name}} » avec {{n}} éléments de données."
+
+msgid "+{{n}} missing"
+msgstr "+{{n}} manquant(s)"
+
+msgid "-{{n}} extra"
+msgstr "-{{n}} en trop"
+
 msgid "name change"
 msgstr "changement de nom"
 
@@ -460,6 +542,12 @@ msgstr "Nom/nom court déjà utilisé par « {{name}} » ({{id}})."
 
 msgid "No mapping key value on this dataset."
 msgstr "Aucune valeur de clé de correspondance sur cet ensemble de données."
+
+msgid "Preview — {{n}} selected dataset"
+msgstr "Aperçu — {{n}} ensemble de données sélectionné"
+
+msgid "Preview — {{n}} selected datasets"
+msgstr "Aperçu — {{n}} ensembles de données sélectionnés"
 
 msgid ""
 "Nothing has been changed yet. This is what running the sync now would do, "
@@ -482,6 +570,27 @@ msgstr "Détails"
 
 msgid "Run Sync Now"
 msgstr "Exécuter la synchronisation maintenant"
+
+msgid "Relink {{n}} conflicting group(s) to their datasets"
+msgstr "Associer {{n}} groupe(s) en conflit à leurs ensembles de données"
+
+msgid ""
+"Nothing has been changed yet. Each existing group below will have its "
+"Code field set to the matching dataset's {{field}} — its name, short name "
+"and data elements are left untouched."
+msgstr ""
+"Rien n'a encore été modifié. Chaque groupe existant ci-dessous aura son "
+"champ Code défini sur le {{field}} de l'ensemble de données correspondant "
+"— son nom, son nom court et ses éléments de données restent inchangés."
+
+msgid "Existing group"
+msgstr "Groupe existant"
+
+msgid "Code to write"
+msgstr "Code à écrire"
+
+msgid "Relink Now"
+msgstr "Associer maintenant"
 
 msgid "More actions"
 msgstr "Plus d'actions"
@@ -534,6 +643,23 @@ msgstr ""
 "relier à son ensemble de données. La modifier après que des groupes "
 "existent déjà peut créer des doublons pour les ensembles de données "
 "traités sous l'ancien paramètre."
+
+msgid "Allow relinking name-conflicted groups"
+msgstr "Autoriser l'association des groupes en conflit de nom"
+
+msgid ""
+"Lets a dataset blocked by a name conflict claim that existing, unclaimed "
+"group by writing its code/UID into the group's empty Code field, instead of "
+"staying permanently blocked. Only ever applies to a group with no code that "
+"isn't already linked to a different dataset — never overwrites one that's "
+"already in use."
+msgstr ""
+"Permet à un ensemble de données bloqué par un conflit de nom de "
+"revendiquer ce groupe existant et non réclamé en inscrivant son code/UID "
+"dans le champ Code vide du groupe, plutôt que de rester bloqué "
+"indéfiniment. S'applique uniquement à un groupe sans code qui n'est pas "
+"déjà associé à un autre ensemble de données — n'écrase jamais un groupe "
+"déjà utilisé."
 
 msgid "Group naming"
 msgstr "Nom des groupes"

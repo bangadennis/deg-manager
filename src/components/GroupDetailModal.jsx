@@ -64,7 +64,7 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
         )}
       </p>
 
-      <h4 style={{ marginBottom: '0.25rem' }}>{i18n.t('Data elements ({{count}})', { count: groupDEs.length })}</h4>
+      <h4 style={{ marginBottom: '0.25rem' }}>{i18n.t('Data elements ({{n}})', { n: groupDEs.length })}</h4>
       {groupDEs.length === 0 ? (
         <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
       ) : (

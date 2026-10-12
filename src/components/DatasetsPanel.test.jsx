@@ -131,3 +131,85 @@ describe('DatasetsPanel search', () => {
     expect(screen.queryByText('Nutrition')).not.toBeInTheDocument();
   });
 });
+
+describe('DatasetsPanel relink conflicts', () => {
+  const conflictedDataset = { id: 'ds1', name: 'Mortality < 5 years', dataSetElements: [] };
+  const orphanGroup = { id: 'g1', code: '', name: 'Mortality < 5 years', shortName: 'Mort<5', dataElements: [{ id: 'de1' }] };
+
+  it('is hidden by default (setting off)', () => {
+    renderPanel({ datasets: [conflictedDataset], groups: [orphanGroup] });
+    expect(screen.queryByText(/Relink Conflicts/)).not.toBeInTheDocument();
+  });
+
+  it('is hidden in Manual mode even when the setting is on', () => {
+    renderPanel({
+      datasets: [conflictedDataset],
+      groups: [orphanGroup],
+      settings: { ...DEFAULT_SETTINGS, matchField: MATCH_FIELDS.MANUAL, allowOrphanRelink: true },
+    });
+    expect(screen.queryByText(/Relink Conflicts/)).not.toBeInTheDocument();
+  });
+
+  it('is hidden when the conflicting group already has a code (not an orphan)', () => {
+    renderPanel({
+      datasets: [conflictedDataset],
+      groups: [{ ...orphanGroup, code: 'already-set' }],
+      settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+    });
+    expect(screen.queryByText(/Relink Conflicts/)).not.toBeInTheDocument();
+  });
+
+  it('shows the button, disabled, with a zero count until something eligible is selected', () => {
+    renderPanel({
+      datasets: [conflictedDataset],
+      groups: [orphanGroup],
+      settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+    });
+    expect(screen.getByText('Relink Conflicts (0 selected)').closest('button')).toBeDisabled();
+  });
+
+  it('selecting a relinkable dataset via "Select Relinkable" enables the button with the right count', async () => {
+    const user = userEvent.setup();
+    renderPanel({
+      datasets: [conflictedDataset],
+      groups: [orphanGroup],
+      settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+    });
+
+    await user.click(screen.getByText('Select Relinkable (1)'));
+
+    expect(screen.getByText('Relink Conflicts (1 selected)').closest('button')).not.toBeDisabled();
+  });
+
+  it('only relinks datasets that are both eligible and selected, leaving everything else untouched', async () => {
+    const user = userEvent.setup();
+    const mutate = jest.fn().mockResolvedValue({ status: 'OK' });
+    const { refetchDEG } = renderPanel(
+      {
+        datasets: [conflictedDataset],
+        groups: [orphanGroup],
+        settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+      },
+      { dataElementGroups: mutate }
+    );
+
+    // Not selected yet — the preview must not open on a disabled button.
+    await user.click(screen.getByText('Relink Conflicts (0 selected)'));
+    expect(screen.queryByText('Relink Now')).not.toBeInTheDocument();
+
+    await user.click(screen.getByText('Select Relinkable (1)'));
+    await user.click(screen.getByText('Relink Conflicts (1 selected)'));
+    await user.click(screen.getByText('Relink Now'));
+
+    await waitFor(() => expect(screen.getByText('Bulk sync summary')).toBeInTheDocument());
+
+    expect(mutate).toHaveBeenCalledTimes(1);
+    const [, query] = mutate.mock.calls[0];
+    expect(query.id).toBe('g1');
+    expect(query.data.code).toBe('ds1');
+    expect(query.data.name).toBe('Mortality < 5 years');
+    expect(query.data.shortName).toBe('Mort<5');
+    expect(query.data.dataElements).toEqual([{ id: 'de1' }]);
+    expect(refetchDEG).toHaveBeenCalled();
+  });
+});

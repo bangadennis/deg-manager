@@ -80,7 +80,7 @@ export default function BulkSummaryModal({ summary, onRetryFailed, onClose }) {
                 onRetryFailed();
               }}
             >
-              {i18n.t('Retry Failed ({{count}})', { count: failures.length })}
+              {i18n.t('Retry Failed ({{n}})', { n: failures.length })}
             </Button>
           )}
           <Button primary onClick={onClose}>{i18n.t('Close')}</Button>

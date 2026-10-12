@@ -301,6 +301,27 @@ export function findDatasetForGroup(datasets, group, settings, mappings = []) {
   return datasets.find((ds) => ds[settings.matchField] === group.code);
 }
 
+// A dataset's name/shortName conflict is only safe to auto-resolve by bulk
+// when the conflicting group is genuinely unclaimed: no code at all (never
+// overwrite an existing value via bulk — that's left for manual resolution),
+// and not already the linked group for some *other* dataset (never steal a
+// group from a dataset it's already correctly serving). Meaningless in
+// Manual mode, where linkage comes from the Mappings view, not group.code.
+export function isOrphanedConflict(conflictGroup, datasets, settings, mappings) {
+  if (!conflictGroup || settings.matchField === MATCH_FIELDS.MANUAL) return false;
+  return !conflictGroup.code && !findDatasetForGroup(datasets, conflictGroup, settings, mappings);
+}
+
+// Every dataset currently blocked by a conflict that's safe to auto-resolve
+// — single source of truth reused by both the bulk "Relink Conflicts" button
+// and the per-dataset action in the detail panel.
+export function getRelinkCandidates(datasets, groups, settings, mappings) {
+  return datasets
+    .map((dataset) => ({ dataset, evalResult: evaluateDataset(dataset, groups, settings, mappings) }))
+    .filter(({ evalResult }) => evalResult.category === 'conflict' && isOrphanedConflict(evalResult.conflict, datasets, settings, mappings))
+    .map(({ dataset, evalResult }) => ({ dataset, group: evalResult.conflict }));
+}
+
 export function getStatusConfig(status) {
   const config = {
     pending:     { label: i18n.t('Pending'),        color: 'default'  },

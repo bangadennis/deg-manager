@@ -10,6 +10,8 @@ import {
   findNameConflict,
   evaluateDataset,
   findDatasetForGroup,
+  isOrphanedConflict,
+  getRelinkCandidates,
   formatDate,
 } from './dhis2';
 import { DEFAULT_SETTINGS, MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from './settings';
@@ -242,6 +244,61 @@ describe('findDatasetForGroup', () => {
     const mappings = [{ datasetId: 'ds1', groupId: 'g1' }];
     expect(findDatasetForGroup(datasets, group, manualSettings, mappings)).toBe(datasets[0]);
     expect(findDatasetForGroup(datasets, group, manualSettings, [])).toBeUndefined();
+  });
+});
+
+describe('isOrphanedConflict', () => {
+  it('is true for a conflicting group with no code and no other dataset linked to it', () => {
+    const conflictGroup = { id: 'g1', name: 'Mortality < 5 years', code: '' };
+    expect(isOrphanedConflict(conflictGroup, [], DEFAULT_SETTINGS, [])).toBe(true);
+  });
+
+  it('is false when the conflicting group already has a code — never overwritten by bulk', () => {
+    const conflictGroup = { id: 'g1', name: 'Mortality < 5 years', code: 'some-stale-code' };
+    expect(isOrphanedConflict(conflictGroup, [], DEFAULT_SETTINGS, [])).toBe(false);
+  });
+
+  it('is false when the conflicting group is already linked to a different dataset', () => {
+    const conflictGroup = { id: 'g1', name: 'Mortality < 5 years', code: 'ds2' };
+    const datasets = [{ id: 'ds2', name: 'DS2' }];
+    expect(isOrphanedConflict(conflictGroup, datasets, DEFAULT_SETTINGS, [])).toBe(false);
+  });
+
+  it('is always false in Manual mode', () => {
+    const manualSettings = { ...DEFAULT_SETTINGS, matchField: MATCH_FIELDS.MANUAL };
+    const conflictGroup = { id: 'g1', name: 'Mortality < 5 years', code: '' };
+    expect(isOrphanedConflict(conflictGroup, [], manualSettings, [])).toBe(false);
+  });
+
+  it('is false when there is no conflict group', () => {
+    expect(isOrphanedConflict(undefined, [], DEFAULT_SETTINGS, [])).toBe(false);
+  });
+});
+
+describe('getRelinkCandidates', () => {
+  it('picks up exactly the datasets with an orphaned name conflict', () => {
+    const datasets = [
+      { id: 'ds1', name: 'Mortality < 5 years', dataSetElements: [] }, // orphaned conflict
+      { id: 'ds2', name: 'Immunization', dataSetElements: [] },        // unlinked, no conflict
+    ];
+    const groups = [
+      { id: 'g1', code: '', name: 'Mortality < 5 years', dataElements: [] },
+    ];
+    const candidates = getRelinkCandidates(datasets, groups, DEFAULT_SETTINGS, []);
+    expect(candidates).toEqual([{ dataset: datasets[0], group: groups[0] }]);
+  });
+
+  it('excludes a conflict whose group already has a code', () => {
+    const datasets = [{ id: 'ds1', name: 'Mortality < 5 years', dataSetElements: [] }];
+    const groups = [{ id: 'g1', code: 'already-set', name: 'Mortality < 5 years', dataElements: [] }];
+    expect(getRelinkCandidates(datasets, groups, DEFAULT_SETTINGS, [])).toEqual([]);
+  });
+
+  it('returns nothing in Manual mode', () => {
+    const manualSettings = { ...DEFAULT_SETTINGS, matchField: MATCH_FIELDS.MANUAL };
+    const datasets = [{ id: 'ds1', name: 'Mortality < 5 years', dataSetElements: [] }];
+    const groups = [{ id: 'g1', code: '', name: 'Mortality < 5 years', dataElements: [] }];
+    expect(getRelinkCandidates(datasets, groups, manualSettings, [])).toEqual([]);
   });
 });
 

@@ -130,6 +130,21 @@ describe('SettingsModal', () => {
     ]);
   });
 
+  it('switching mapping mode via the radio buttons updates matchField and hides the relink checkbox in Manual', async () => {
+    const user = userEvent.setup();
+    const { onSave } = renderSettingsModal();
+
+    expect(screen.getByLabelText('Dataset UID')).toBeChecked();
+    expect(screen.getByLabelText('Allow relinking name-conflicted groups')).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText('Manual'));
+
+    expect(screen.queryByLabelText('Allow relinking name-conflicted groups')).not.toBeInTheDocument();
+
+    await user.click(screen.getByText('Save'));
+    expect(onSave.mock.calls[0][0].matchField).toBe('manual');
+  });
+
   it('shows the error and keeps the dialog open when saving to the datastore fails', async () => {
     const user = userEvent.setup();
     const onSave = jest.fn().mockRejectedValue(new Error('No write access to this namespace.'));

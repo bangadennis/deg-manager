@@ -76,6 +76,36 @@ describe('DatasetsTable category display', () => {
   });
 });
 
+describe('DatasetsTable relinkable badge', () => {
+  // Dataset's expected group name ("Immunization", from buildGroupName with
+  // no prefix/suffix) collides with a different, codeless group — a
+  // category: 'conflict' that's also an orphan, so eligible for relink.
+  const orphanConflictGroup = { id: 'g-other', code: '', name: 'Immunization', shortName: 'Immun', dataElements: [] };
+
+  it('shows "Relinkable" when the setting is on and the conflict is an orphan', () => {
+    renderTable({
+      groups: [orphanConflictGroup],
+      allDatasets: [dataset()],
+      settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+    });
+    expect(screen.getByText('Relinkable')).toBeInTheDocument();
+  });
+
+  it('hides "Relinkable" when the setting is off', () => {
+    renderTable({ groups: [orphanConflictGroup], allDatasets: [dataset()] });
+    expect(screen.queryByText('Relinkable')).not.toBeInTheDocument();
+  });
+
+  it('hides "Relinkable" when the conflicting group already has a code', () => {
+    renderTable({
+      groups: [{ ...orphanConflictGroup, code: 'already-set' }],
+      allDatasets: [dataset()],
+      settings: { ...DEFAULT_SETTINGS, allowOrphanRelink: true },
+    });
+    expect(screen.queryByText('Relinkable')).not.toBeInTheDocument();
+  });
+});
+
 describe('DatasetsTable last updated column', () => {
   // Column order: checkbox, name, target group, sync status, data elements,
   // last updated, bulk run status, view-details action.

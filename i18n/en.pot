@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-09-23T11:44:05.379Z\n"
-"PO-Revision-Date: 2026-09-23T11:44:05.380Z\n"
+"POT-Creation-Date: 2026-10-12T15:09:43.045Z\n"
+"PO-Revision-Date: 2026-10-12T15:09:43.045Z\n"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -17,12 +17,6 @@ msgstr "Error loading datasets"
 msgid "Error loading data element groups"
 msgstr "Error loading data element groups"
 
-msgid "Dataset data elements to Data Element Groups"
-msgstr "Dataset data elements to Data Element Groups"
-
-msgid "Manage"
-msgstr "Manage"
-
 msgid "Datasets"
 msgstr "Datasets"
 
@@ -31,18 +25,6 @@ msgstr "Data Element Groups"
 
 msgid "Mappings"
 msgstr "Mappings"
-
-msgid "Only superusers can change settings"
-msgstr "Only superusers can change settings"
-
-msgid "Settings"
-msgstr "Settings"
-
-msgid "Superuser"
-msgstr "Superuser"
-
-msgid "Standard user"
-msgstr "Standard user"
 
 msgid "Created {{date}} by {{user}}"
 msgstr "Created {{date}} by {{user}}"
@@ -79,6 +61,9 @@ msgstr "Reason"
 
 msgid "All selected datasets synced successfully."
 msgstr "All selected datasets synced successfully."
+
+msgid "Retry Failed ({{n}})"
+msgstr "Retry Failed ({{n}})"
 
 msgid "Close"
 msgstr "Close"
@@ -124,11 +109,33 @@ msgstr ""
 "different group, {{conflictName}} ({{conflictId}}). Adjust the name "
 "prefix/suffix in Settings, or resolve the conflict manually."
 
+msgid ""
+"This looks like a pre-existing group with no dataset linked to it yet — "
+"relink it to this dataset instead of staying blocked?"
+msgstr ""
+"This looks like a pre-existing group with no dataset linked to it yet — "
+"relink it to this dataset instead of staying blocked?"
+
+msgid "Relinking…"
+msgstr "Relinking…"
+
+msgid "Relink to this group"
+msgstr "Relink to this group"
+
+msgid "Could not relink this group"
+msgstr "Could not relink this group"
+
+msgid "Dataset data elements ({{n}})"
+msgstr "Dataset data elements ({{n}})"
+
 msgid "This dataset has no data elements."
 msgstr "This dataset has no data elements."
 
 msgid "(missing from group)"
 msgstr "(missing from group)"
+
+msgid "Group \"{{name}}\" ({{n}})"
+msgstr "Group \"{{name}}\" ({{n}})"
 
 msgid "Group"
 msgstr "Group"
@@ -198,14 +205,29 @@ msgstr "Filter datasets"
 msgid "Search by name, code or UID…"
 msgstr "Search by name, code or UID…"
 
+msgid "Select All ({{n}})"
+msgstr "Select All ({{n}})"
+
 msgid "Select Needs Sync"
 msgstr "Select Needs Sync"
+
+msgid "Select Relinkable ({{n}})"
+msgstr "Select Relinkable ({{n}})"
 
 msgid "Clear Selection"
 msgstr "Clear Selection"
 
+msgid "Preview ({{n}})"
+msgstr "Preview ({{n}})"
+
 msgid "Processing… ({{done}}/{{total}})"
 msgstr "Processing… ({{done}}/{{total}})"
+
+msgid "Bulk Create / Update ({{n}} selected)"
+msgstr "Bulk Create / Update ({{n}} selected)"
+
+msgid "Relink Conflicts ({{n}} selected)"
+msgstr "Relink Conflicts ({{n}} selected)"
 
 msgid "No datasets match the current search/filter."
 msgstr "No datasets match the current search/filter."
@@ -240,11 +262,39 @@ msgstr "No UID available"
 msgid "Already used by \"{{name}}\" ({{id}})"
 msgstr "Already used by \"{{name}}\" ({{id}})"
 
+msgid ""
+"This group has no code yet and is free to claim — open the dataset or use "
+"Relink Conflicts to link it here."
+msgstr ""
+"This group has no code yet and is free to claim — open the dataset or use "
+"Relink Conflicts to link it here."
+
+msgid "Relinkable"
+msgstr "Relinkable"
+
+msgid "{{n}} total"
+msgstr "{{n}} total"
+
+msgid "{{n}} missing"
+msgstr "{{n}} missing"
+
+msgid "{{n}} extra"
+msgstr "{{n}} extra"
+
 msgid "View details"
 msgstr "View details"
 
 msgid "Delete \"{{name}}\"?"
 msgstr "Delete \"{{name}}\"?"
+
+msgid ""
+"This permanently deletes the Data Element Group ({{n}} data elements, code "
+"{{code}}). This cannot be undone, and does not affect the dataset or its "
+"data elements."
+msgstr ""
+"This permanently deletes the Data Element Group ({{n}} data elements, code "
+"{{code}}). This cannot be undone, and does not affect the dataset or its "
+"data elements."
 
 msgid "Could not delete this group"
 msgstr "Could not delete this group"
@@ -316,6 +366,9 @@ msgstr "Not linked to any dataset — pair it in the Mappings view."
 
 msgid "Not linked to any dataset via the current mapping key ({{field}})."
 msgstr "Not linked to any dataset via the current mapping key ({{field}})."
+
+msgid "Data elements ({{n}})"
+msgstr "Data elements ({{n}})"
 
 msgid "(not in linked dataset)"
 msgstr "(not in linked dataset)"
@@ -443,6 +496,15 @@ msgstr "No change"
 msgid "Will fail"
 msgstr "Will fail"
 
+msgid "Create \"{{name}}\" with {{n}} data elements."
+msgstr "Create \"{{name}}\" with {{n}} data elements."
+
+msgid "+{{n}} missing"
+msgstr "+{{n}} missing"
+
+msgid "-{{n}} extra"
+msgstr "-{{n}} extra"
+
 msgid "name change"
 msgstr "name change"
 
@@ -457,6 +519,12 @@ msgstr "Name/short name already used by \"{{name}}\" ({{id}})."
 
 msgid "No mapping key value on this dataset."
 msgstr "No mapping key value on this dataset."
+
+msgid "Preview — {{n}} selected dataset"
+msgstr "Preview — {{n}} selected dataset"
+
+msgid "Preview — {{n}} selected datasets"
+msgstr "Preview — {{n}} selected datasets"
 
 msgid ""
 "Nothing has been changed yet. This is what running the sync now would do, "
@@ -479,6 +547,27 @@ msgstr "Details"
 
 msgid "Run Sync Now"
 msgstr "Run Sync Now"
+
+msgid "Relink {{n}} conflicting group(s) to their datasets"
+msgstr "Relink {{n}} conflicting group(s) to their datasets"
+
+msgid ""
+"Nothing has been changed yet. Each existing group below will have its Code "
+"field set to the matching dataset's {{field}} — its name, short name and "
+"data elements are left untouched."
+msgstr ""
+"Nothing has been changed yet. Each existing group below will have its Code "
+"field set to the matching dataset's {{field}} — its name, short name and "
+"data elements are left untouched."
+
+msgid "Existing group"
+msgstr "Existing group"
+
+msgid "Code to write"
+msgstr "Code to write"
+
+msgid "Relink Now"
+msgstr "Relink Now"
 
 msgid "More actions"
 msgstr "More actions"
@@ -529,6 +618,22 @@ msgstr ""
 "This value is written to each group's Code field and used to link it back "
 "to its dataset. Changing it after groups already exist may create "
 "duplicates for datasets processed under the old setting."
+
+msgid "Allow relinking name-conflicted groups"
+msgstr "Allow relinking name-conflicted groups"
+
+msgid ""
+"Lets a dataset blocked by a name conflict claim that existing, unclaimed "
+"group by writing its code/UID into the group's empty Code field, instead of "
+"staying permanently blocked. Only ever applies to a group with no code that "
+"isn't already linked to a different dataset — never overwrites one that's "
+"already in use."
+msgstr ""
+"Lets a dataset blocked by a name conflict claim that existing, unclaimed "
+"group by writing its code/UID into the group's empty Code field, instead of "
+"staying permanently blocked. Only ever applies to a group with no code that "
+"isn't already linked to a different dataset — never overwrites one that's "
+"already in use."
 
 msgid "Group naming"
 msgstr "Group naming"
@@ -611,6 +716,24 @@ msgstr ""
 
 msgid "Could not save settings"
 msgstr "Could not save settings"
+
+msgid "Dataset data elements to Data Element Groups"
+msgstr "Dataset data elements to Data Element Groups"
+
+msgid "Manage"
+msgstr "Manage"
+
+msgid "Only superusers can change settings"
+msgstr "Only superusers can change settings"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Superuser"
+msgstr "Superuser"
+
+msgid "Standard user"
+msgstr "Standard user"
 
 msgid "Unmappable"
 msgstr "Unmappable"

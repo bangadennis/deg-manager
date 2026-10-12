@@ -31,11 +31,11 @@ function getActionByCategory(category) {
 function reasonFor(evalResult) {
   switch (evalResult.category) {
     case 'unlinked':
-      return i18n.t('Create "{{name}}" with {{count}} data elements.', { name: evalResult.expectedName, count: evalResult.dsDEs.length });
+      return i18n.t('Create "{{name}}" with {{n}} data elements.', { name: evalResult.expectedName, n: evalResult.dsDEs.length });
     case 'needsUpdate': {
       const bits = [];
-      if (evalResult.missing.length) bits.push(i18n.t('+{{count}} missing', { count: evalResult.missing.length }));
-      if (evalResult.extra.length) bits.push(i18n.t('-{{count}} extra', { count: evalResult.extra.length }));
+      if (evalResult.missing.length) bits.push(i18n.t('+{{n}} missing', { n: evalResult.missing.length }));
+      if (evalResult.extra.length) bits.push(i18n.t('-{{n}} extra', { n: evalResult.extra.length }));
       if (evalResult.nameMismatch) bits.push(i18n.t('name change'));
       return bits.join(', ') || i18n.t('Update group.');
     }
@@ -59,7 +59,9 @@ export default function PreviewModal({ entries, onRunSync, onClose }) {
   return (
     <Modal onClose={onClose} large>
       <ModalTitle>
-        {i18n.t(entries.length === 1 ? 'Preview — {{count}} selected dataset' : 'Preview — {{count}} selected datasets', { count: entries.length })}
+        {entries.length === 1
+          ? i18n.t('Preview — {{n}} selected dataset', { n: entries.length })
+          : i18n.t('Preview — {{n}} selected datasets', { n: entries.length })}
       </ModalTitle>
       <ModalContent>
         <p style={{ color: colors.grey700, marginTop: 0 }}>

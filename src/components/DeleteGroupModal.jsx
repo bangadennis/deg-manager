@@ -31,8 +31,8 @@ export default function DeleteGroupModal({ group, onDeleted, onClose }) {
       <ModalTitle>{i18n.t('Delete "{{name}}"?', { name: group.name })}</ModalTitle>
       <ModalContent>
         <p>
-          {i18n.t('This permanently deletes the Data Element Group ({{count}} data elements, code {{code}}). This cannot be undone, and does not affect the dataset or its data elements.', {
-            count: group.dataElements?.length || 0,
+          {i18n.t('This permanently deletes the Data Element Group ({{n}} data elements, code {{code}}). This cannot be undone, and does not affect the dataset or its data elements.', {
+            n: group.dataElements?.length || 0,
             code: group.code || '—',
           })}
         </p>

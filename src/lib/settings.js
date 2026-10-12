@@ -34,6 +34,13 @@ export const DEFAULT_SETTINGS = {
   // on every run. Always applied on first creation regardless, since a
   // brand-new group has no shortName worth preserving.
   syncShortName: true,
+  // Off by default — lets an admin onboarding this app onto an instance that
+  // already has groups with matching names bulk-claim those groups (write
+  // the dataset's code/UID into the group's empty code field) instead of
+  // being permanently blocked by the name conflict. Never overwrites a group
+  // that already has a code, or one already linked to a different dataset —
+  // see isOrphanedConflict() in lib/dhis2.js. Not applicable in Manual mode.
+  allowOrphanRelink: false,
   // Sharing applied to newly created groups only; sharing on groups that
   // already exist is left alone (use the Sharing action to change it).
   // publicAccess and userGroups are only used when source is 'custom', but

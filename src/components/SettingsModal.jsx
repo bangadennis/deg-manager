@@ -9,6 +9,7 @@ import {
   ButtonStrip,
   Button,
   SegmentedControl,
+  Radio,
   InputField,
   Checkbox,
   SingleSelectField,
@@ -105,16 +106,36 @@ export default function SettingsModal({ settings, onSave, onClose }) {
       <ModalContent>
         <div style={{ marginBottom: '1.5rem' }}>
           <p style={{ fontWeight: 500, marginBottom: '0.5rem' }}>{i18n.t('Map groups to datasets using')}</p>
-          <SegmentedControl
-            selected={local.matchField}
-            options={matchFieldOptions}
-            onChange={({ value }) => setLocal((s) => ({ ...s, matchField: value }))}
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            {matchFieldOptions.map((opt) => (
+              <Radio
+                key={opt.value}
+                name="matchField"
+                label={opt.label}
+                value={opt.value}
+                checked={local.matchField === opt.value}
+                onChange={({ value }) => setLocal((s) => ({ ...s, matchField: value }))}
+              />
+            ))}
+          </div>
           <p style={{ color: colors.grey700, fontSize: '0.85rem', marginTop: '0.5rem' }}>
             {local.matchField === MATCH_FIELDS.MANUAL
               ? i18n.t("Linkage comes from explicit dataset↔group pairings made in the Mappings view instead of a value written to the group's Code field. Bulk sync will never create a new group in this mode — pair a dataset with an existing group first.")
               : i18n.t("This value is written to each group's Code field and used to link it back to its dataset. Changing it after groups already exist may create duplicates for datasets processed under the old setting.")}
           </p>
+
+          {local.matchField !== MATCH_FIELDS.MANUAL && (
+            <div style={{ marginTop: '0.75rem' }}>
+              <Checkbox
+                label={i18n.t('Allow relinking name-conflicted groups')}
+                checked={local.allowOrphanRelink}
+                onChange={({ checked }) => setLocal((s) => ({ ...s, allowOrphanRelink: checked }))}
+              />
+              <p style={{ color: colors.grey700, fontSize: '0.85rem' }}>
+                {i18n.t("Lets a dataset blocked by a name conflict claim that existing, unclaimed group by writing its code/UID into the group's empty Code field, instead of staying permanently blocked. Only ever applies to a group with no code that isn't already linked to a different dataset — never overwrites one that's already in use.")}
+              </p>
+            </div>
+          )}
         </div>
 
         <div style={{ marginBottom: '1.5rem' }}>

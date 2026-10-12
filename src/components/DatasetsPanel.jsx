@@ -9,6 +9,7 @@ import {
   buildSharingPayload,
   getCategoryLabel,
   getCategoryFilters,
+  getRelinkCandidates,
 } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import { getErrorMessage } from '../lib/errors';
@@ -16,6 +17,7 @@ import { sortRows } from '../lib/sorting';
 import DatasetsTable from './DatasetsTable';
 import BulkSummaryModal from './BulkSummaryModal';
 import PreviewModal from './PreviewModal';
+import RelinkPreviewModal from './RelinkPreviewModal';
 
 const PAGE_SIZES = ['10', '25', '50', '100'];
 
@@ -61,6 +63,7 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
   const [progress, setProgress]       = useState({ done: 0, total: 0 });
   const [summary, setSummary]         = useState(null);
   const [previewing, setPreviewing]   = useState(false);
+  const [relinkPreviewing, setRelinkPreviewing] = useState(false);
 
   // Evaluate every dataset once per render of groups/settings; reused for
   // search, category counts, the filter, and selection — one source of truth.
@@ -85,6 +88,11 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
     searchedEntries.forEach(({ evalResult }) => { c[evalResult.category]++; });
     return c;
   }, [searchedEntries]);
+
+  const relinkCandidates = useMemo(
+    () => (settings.allowOrphanRelink ? getRelinkCandidates(datasets, groups, settings, mappings) : []),
+    [datasets, groups, settings, mappings]
+  );
 
   const categoryFilters = useMemo(() => getCategoryFilters(), []);
   const filteredEntries = filter === 'all' ? searchedEntries : searchedEntries.filter((e) => e.evalResult.category === filter);
@@ -137,6 +145,15 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
 
   function clearSelection() {
     setSelected(new Set());
+  }
+
+  // Relink-eligible datasets among the ones currently searched/filtered into
+  // view — mirrors selectNeedsSyncVisible's scoping, so this is discoverable
+  // the same way.
+  function selectRelinkableVisible() {
+    const visibleIds = new Set(searchedEntries.map((e) => e.dataset.id));
+    const ids = relinkCandidates.filter((c) => visibleIds.has(c.dataset.id)).map((c) => c.dataset.id);
+    setSelected(new Set(ids));
   }
 
   // ── Processing ────────────────────────────────────────────────────────────
@@ -259,6 +276,60 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
     }
   }
 
+  // Claims a pre-existing, unclaimed group for its dataset: writes the
+  // dataset's code/UID into the group's empty Code field. Mirrors runBulk's
+  // resilience shape (per-item try/catch, try/finally around the loop, a
+  // non-awaited refetchDEG()) but the mutation itself only ever touches
+  // `code` — name/shortName/dataElements are passed through unchanged from
+  // the group's current values, same as EditGroupModal's save.
+  async function runRelink(candidates) {
+    if (candidates.length === 0) return;
+
+    setBulkRunning(true);
+    setProgress({ done: 0, total: candidates.length });
+    setTrackMap((prev) => {
+      const next = { ...prev };
+      candidates.forEach(({ dataset }) => { next[dataset.id] = { status: 'processing' }; });
+      return next;
+    });
+
+    let updated = 0;
+    const failures = [];
+
+    try {
+      for (let i = 0; i < candidates.length; i++) {
+        const { dataset, group } = candidates[i];
+        try {
+          await engine.mutate(UPDATE_DEG_MUTATION, {
+            variables: {
+              id: group.id,
+              name: group.name,
+              shortName: group.shortName,
+              code: dataset[settings.matchField],
+              dataElements: (group.dataElements || []).map((de) => ({ id: de.id })),
+            },
+          });
+          updated++;
+          setTrackMap((prev) => ({ ...prev, [dataset.id]: { status: 'updated' } }));
+        } catch (e) {
+          let message;
+          try {
+            message = getErrorMessage(e);
+          } catch (_) {
+            message = i18n.t('Unknown error');
+          }
+          failures.push({ id: dataset.id, name: dataset.name, message });
+          setTrackMap((prev) => ({ ...prev, [dataset.id]: { status: 'error', errorMsg: message } }));
+        }
+        setProgress({ done: i + 1, total: candidates.length });
+      }
+      refetchDEG().catch(() => {});
+    } finally {
+      setBulkRunning(false);
+      setSummary({ created: 0, updated, consistent: 0, failures });
+    }
+  }
+
   function handleBulkProcess() {
     runBulk(datasets.filter((ds) => selected.has(ds.id)));
   }
@@ -273,6 +344,11 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
   const failedCount     = Object.values(trackMap).filter((t) => t.status === 'error').length;
   const progressPercent = progress.total > 0 ? Math.round((progress.done / progress.total) * 100) : 0;
   const selectedEntries = evaluated.filter((e) => selected.has(e.dataset.id));
+  // Relink, like the main bulk sync, only ever acts on what's checked —
+  // relinkCandidates itself (shown/used for the Select-Relinkable helper and
+  // the eligibility badge in the table) is everything eligible regardless of
+  // selection.
+  const selectedRelinkCandidates = relinkCandidates.filter((c) => selected.has(c.dataset.id));
 
   return (
     <div>
@@ -319,29 +395,45 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <ButtonStrip>
             <Button small onClick={selectAllVisible} disabled={bulkRunning || visibleDatasets.length === 0}>
-              {i18n.t('Select All ({{count}})', { count: visibleDatasets.length })}
+              {i18n.t('Select All ({{n}})', { n: visibleDatasets.length })}
             </Button>
             <Button small onClick={selectNeedsSyncVisible} disabled={bulkRunning}>
               {i18n.t('Select Needs Sync')}
             </Button>
+            {relinkCandidates.length > 0 && (
+              <Button small onClick={selectRelinkableVisible} disabled={bulkRunning}>
+                {i18n.t('Select Relinkable ({{n}})', { n: relinkCandidates.length })}
+              </Button>
+            )}
             <Button small onClick={clearSelection} disabled={bulkRunning}>
               {i18n.t('Clear Selection')}
             </Button>
           </ButtonStrip>
 
           <Button small secondary disabled={selectedCount === 0 || bulkRunning} onClick={() => setPreviewing(true)}>
-            {i18n.t('Preview ({{count}})', { count: selectedCount })}
+            {i18n.t('Preview ({{n}})', { n: selectedCount })}
           </Button>
 
           <Button primary disabled={selectedCount === 0 || bulkRunning} onClick={handleBulkProcess}>
             {bulkRunning
               ? i18n.t('Processing… ({{done}}/{{total}})', { done: progress.done, total: progress.total })
-              : i18n.t('Bulk Create / Update ({{count}} selected)', { count: selectedCount })}
+              : i18n.t('Bulk Create / Update ({{n}} selected)', { n: selectedCount })}
           </Button>
 
           {failedCount > 0 && !bulkRunning && (
             <Button destructive small onClick={retryFailed}>
-              {i18n.t('Retry Failed ({{count}})', { count: failedCount })}
+              {i18n.t('Retry Failed ({{n}})', { n: failedCount })}
+            </Button>
+          )}
+
+          {relinkCandidates.length > 0 && (
+            <Button
+              small
+              secondary
+              disabled={selectedRelinkCandidates.length === 0 || bulkRunning}
+              onClick={() => setRelinkPreviewing(true)}
+            >
+              {i18n.t('Relink Conflicts ({{n}} selected)', { n: selectedRelinkCandidates.length })}
             </Button>
           )}
         </div>
@@ -349,6 +441,7 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
 
       <DatasetsTable
         datasets={pagedDatasets}
+        allDatasets={datasets}
         groups={groups}
         settings={settings}
         mappings={mappings}
@@ -359,6 +452,7 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
         sortColumn={sortColumn}
         sortDirection={sortDirection}
         onSortIconClick={handleSortIconClick}
+        onRelinked={() => refetchDEG().catch(() => {})}
       />
 
       {visibleDatasets.length === 0 && (
@@ -394,6 +488,18 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
           onRunSync={() => {
             setPreviewing(false);
             handleBulkProcess();
+          }}
+        />
+      )}
+
+      {relinkPreviewing && (
+        <RelinkPreviewModal
+          candidates={selectedRelinkCandidates}
+          settings={settings}
+          onClose={() => setRelinkPreviewing(false)}
+          onConfirm={() => {
+            setRelinkPreviewing(false);
+            runRelink(selectedRelinkCandidates);
           }}
         />
       )}

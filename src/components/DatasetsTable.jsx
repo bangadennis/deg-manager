@@ -13,15 +13,15 @@ import {
   colors,
 } from '@dhis2/ui';
 import { IconView16 } from '@dhis2/ui-icons';
-import { evaluateDataset, getCategoryLabel, formatDate } from '../lib/dhis2';
+import { evaluateDataset, getCategoryLabel, formatDate, isOrphanedConflict } from '../lib/dhis2';
 import { MATCH_FIELDS } from '../lib/settings';
 import { columnSortProps } from '../lib/sorting';
 import StatusTag from './StatusTag';
 import DatasetDetailModal from './DatasetDetailModal';
 
 export default function DatasetsTable({
-  datasets, groups, settings, mappings, selected, toggleSelect, trackMap, bulkRunning,
-  sortColumn, sortDirection, onSortIconClick,
+  datasets, allDatasets, groups, settings, mappings, selected, toggleSelect, trackMap, bulkRunning,
+  sortColumn, sortDirection, onSortIconClick, onRelinked,
 }) {
   const [detailsForId, setDetailsForId] = useState(null);
   const detailsDataset = detailsForId ? datasets.find((ds) => ds.id === detailsForId) : null;
@@ -50,6 +50,8 @@ export default function DatasetsTable({
             const { dsDEs, missing, extra, hasMappingKey, group, category, conflict } = evalResult;
             const track      = trackMap[dataset.id];
             const isSelected = selected.has(dataset.id);
+            const canRelink  = settings.allowOrphanRelink && category === 'conflict'
+              && isOrphanedConflict(conflict, allDatasets, settings, mappings);
 
             return (
               <DataTableRow
@@ -95,21 +97,26 @@ export default function DatasetsTable({
                       <Tag negative>{getCategoryLabel(category)}</Tag>
                     </span>
                   )}
+                  {canRelink && (
+                    <span title={i18n.t('This group has no code yet and is free to claim — open the dataset or use Relink Conflicts to link it here.')} style={{ marginLeft: '0.25rem' }}>
+                      <Tag neutral>{i18n.t('Relinkable')}</Tag>
+                    </span>
+                  )}
                 </DataTableCell>
 
                 {/* Compact at-a-glance counts instead of full comma-separated
                     lists, which got unreadable once a dataset had more than a
                     handful of elements — full detail is one click away. */}
                 <DataTableCell onClick={(e) => { e.stopPropagation(); setDetailsForId(dataset.id); }} style={{ cursor: 'pointer' }}>
-                  <span style={{ color: colors.grey700, fontSize: '0.85rem' }}>{i18n.t('{{count}} total', { count: dsDEs.length })}</span>
+                  <span style={{ color: colors.grey700, fontSize: '0.85rem' }}>{i18n.t('{{n}} total', { n: dsDEs.length })}</span>
                   {missing.length > 0 && (
                     <span style={{ color: colors.red060, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
-                      {i18n.t('{{count}} missing', { count: missing.length })}
+                      {i18n.t('{{n}} missing', { n: missing.length })}
                     </span>
                   )}
                   {extra.length > 0 && (
                     <span style={{ color: colors.orange060, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
-                      {i18n.t('{{count}} extra', { count: extra.length })}
+                      {i18n.t('{{n}} extra', { n: extra.length })}
                     </span>
                   )}
                 </DataTableCell>
@@ -132,10 +139,12 @@ export default function DatasetsTable({
       {detailsDataset && (
         <DatasetDetailModal
           dataset={detailsDataset}
+          datasets={allDatasets}
           groups={groups}
           settings={settings}
           mappings={mappings}
           onClose={() => setDetailsForId(null)}
+          onRelinked={onRelinked}
         />
       )}
     </>
