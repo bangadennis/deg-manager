@@ -348,6 +348,11 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
   const failedCount     = Object.values(trackMap).filter((t) => t.status === 'error').length;
   const progressPercent = progress.total > 0 ? Math.round((progress.done / progress.total) * 100) : 0;
   const selectedEntries = evaluated.filter((e) => selected.has(e.dataset.id));
+  // Running the bulk sync is a pure no-op when every selected dataset is
+  // already 'consistent' — nothing would be created, updated, or even
+  // reported as a failure, so there's nothing to gain from letting the
+  // button be clicked at all in that case.
+  const hasSyncableSelection = selectedEntries.some((e) => e.evalResult.category !== 'consistent');
   // Relink, like the main bulk sync, only ever acts on what's checked —
   // relinkCandidates itself (shown/used for the Select-Relinkable helper and
   // the eligibility badge in the table) is everything eligible regardless of
@@ -418,7 +423,12 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
             {i18n.t('Preview ({{n}})', { n: selectedCount })}
           </Button>
 
-          <Button primary disabled={selectedCount === 0 || bulkRunning} onClick={handleBulkProcess}>
+          <Button
+            primary
+            disabled={selectedCount === 0 || !hasSyncableSelection || bulkRunning}
+            title={selectedCount > 0 && !hasSyncableSelection ? i18n.t('Everything selected is already in sync — nothing to do.') : undefined}
+            onClick={handleBulkProcess}
+          >
             {bulkRunning
               ? i18n.t('Processing… ({{done}}/{{total}})', { done: progress.done, total: progress.total })
               : i18n.t('Bulk Create / Update ({{n}} selected)', { n: selectedCount })}

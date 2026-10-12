@@ -70,6 +70,7 @@ export default function App() {
       <Sidebar
         activeTab={activeTab}
         matchField={settings.matchField}
+        datasetsCount={datasets.length}
         needsSyncCount={needsSyncCount}
         groupsCount={groups.length}
         mappingsCount={mappings.length}

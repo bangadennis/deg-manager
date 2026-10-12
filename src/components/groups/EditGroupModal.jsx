@@ -33,7 +33,13 @@ export default function EditGroupModal({ group, groups, matchField, onSaved, onC
     ? i18n.t('Short name must be {{max}} characters or fewer', { max: SHORT_NAME_MAX_LENGTH })
     : undefined;
 
-  const canSave = !nameError && !shortNameError && !saving;
+  // Saving when nothing actually changed would just be a no-op PUT of the
+  // same values back — nothing to gain from letting the button be active.
+  const hasChanges = trimmedName !== group.name
+    || trimmedShortName !== (group.shortName || '')
+    || code.trim() !== (group.code || '');
+
+  const canSave = !nameError && !shortNameError && !saving && hasChanges;
 
   // Changing the code (or, in UID mode, effectively swapping which dataset
   // it points at) doesn't just relabel the group — it's also the join key

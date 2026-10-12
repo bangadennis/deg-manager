@@ -64,6 +64,7 @@
     "Select Relinkable ({{n}})": "Select Relinkable ({{n}})",
     "Clear Selection": "Clear Selection",
     "Preview ({{n}})": "Preview ({{n}})",
+    "Everything selected is already in sync — nothing to do.": "Everything selected is already in sync — nothing to do.",
     "Processing… ({{done}}/{{total}})": "Processing… ({{done}}/{{total}})",
     "Bulk Create / Update ({{n}} selected)": "Bulk Create / Update ({{n}} selected)",
     "Relink Conflicts ({{n}} selected)": "Relink Conflicts ({{n}} selected)",

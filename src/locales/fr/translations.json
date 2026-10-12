@@ -66,6 +66,7 @@
     "Select Relinkable ({{n}})": "Sélectionner les associables ({{n}})",
     "Clear Selection": "Effacer la sélection",
     "Preview ({{n}})": "Aperçu ({{n}})",
+    "Everything selected is already in sync — nothing to do.": "Tout ce qui est sélectionné est déjà synchronisé — rien à faire.",
     "Processing… ({{done}}/{{total}})": "Traitement… ({{done}}/{{total}})",
     "Bulk Create / Update ({{n}} selected)": "Créer/mettre à jour en masse ({{n}} sélectionné(s))",
     "Relink Conflicts ({{n}} selected)": "Associer les conflits ({{n}} sélectionné(s))",

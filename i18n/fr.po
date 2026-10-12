@@ -244,6 +244,9 @@ msgstr "Effacer la sélection"
 msgid "Preview ({{n}})"
 msgstr "Aperçu ({{n}})"
 
+msgid "Everything selected is already in sync — nothing to do."
+msgstr "Tout ce qui est sélectionné est déjà synchronisé — rien à faire."
+
 msgid "Processing… ({{done}}/{{total}})"
 msgstr "Traitement… ({{done}}/{{total}})"
 

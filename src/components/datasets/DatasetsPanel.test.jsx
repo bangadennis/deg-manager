@@ -91,6 +91,36 @@ describe('DatasetsPanel bulk run resilience', () => {
   });
 });
 
+describe('DatasetsPanel no-op guard', () => {
+  it('disables Bulk Create / Update when every selected dataset is already consistent', async () => {
+    const user = userEvent.setup();
+    renderPanel({
+      groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [] }],
+    });
+
+    await user.click(screen.getByRole('checkbox'));
+
+    expect(screen.getByText(/Bulk Create \/ Update/).closest('button')).toBeDisabled();
+  });
+
+  it('enables Bulk Create / Update once at least one selected dataset actually needs a sync', async () => {
+    const user = userEvent.setup();
+    renderPanel({
+      datasets: [
+        { id: 'ds1', name: 'Immunization', dataSetElements: [] },
+        { id: 'ds2', name: 'Nutrition', dataSetElements: [] },
+      ],
+      groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [] }],
+    });
+
+    const checkboxes = screen.getAllByRole('checkbox');
+    await user.click(checkboxes[0]); // ds1 — already consistent
+    await user.click(checkboxes[1]); // ds2 — unlinked, actually syncable
+
+    expect(screen.getByText(/Bulk Create \/ Update/).closest('button')).not.toBeDisabled();
+  });
+});
+
 describe('DatasetsPanel search', () => {
   function renderTwoDatasets() {
     return renderPanel({
@@ -129,6 +159,46 @@ describe('DatasetsPanel search', () => {
 
     expect(screen.getByText('Immunization')).toBeInTheDocument();
     expect(screen.queryByText('Nutrition')).not.toBeInTheDocument();
+  });
+
+  it('"Select All" only selects what the current search matches, not the full list', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    await user.type(screen.getByPlaceholderText('Search by name, code or UID…'), 'Immun');
+    await user.click(screen.getByText(/Select All/));
+
+    // Only the one matching dataset is selected — the Bulk button's own
+    // count is the simplest observable proxy for the current selection size.
+    expect(screen.getByText(/Bulk Create \/ Update \(1 selected\)/)).toBeInTheDocument();
+  });
+
+  it('a category filter chip narrows the table without touching the current selection', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    // Both datasets are "Unlinked" (no matching group) — select one by hand,
+    // then switch the category filter to something that would hide it.
+    await user.click(screen.getAllByRole('checkbox')[0]);
+    await user.click(screen.getByText(/^In sync/));
+
+    // Immunization (selected) is now hidden by the filter, but its
+    // selection — reflected in the Bulk button's count — must survive.
+    expect(screen.queryByText('Immunization')).not.toBeInTheDocument();
+    expect(screen.getByText(/Bulk Create \/ Update \(1 selected\)/)).toBeInTheDocument();
+  });
+
+  it('clearing the search restores the full list without losing the selection made while filtered', async () => {
+    const user = userEvent.setup();
+    renderTwoDatasets();
+
+    const search = screen.getByPlaceholderText('Search by name, code or UID…');
+    await user.type(search, 'Immun');
+    await user.click(screen.getAllByRole('checkbox')[0]);
+    await user.clear(search);
+
+    expect(screen.getByText('Nutrition')).toBeInTheDocument();
+    expect(screen.getByText(/Bulk Create \/ Update \(1 selected\)/)).toBeInTheDocument();
   });
 });
 

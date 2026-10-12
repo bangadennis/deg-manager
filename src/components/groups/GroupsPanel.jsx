@@ -52,14 +52,17 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
   const [sharingForId, setSharingForId] = useState(null);
   const [deletingId, setDeletingId]     = useState(null);
 
-  // Resolve each group's linked dataset and sync category once per render of
-  // the underlying data (not on every keystroke/sort/filter click) — same
-  // "evaluate once, reuse everywhere" shape as the Datasets tab.
+  // Resolve each group's linked dataset and full evalResult once per render
+  // of the underlying data (not on every keystroke/sort/filter click) — same
+  // "evaluate once, reuse everywhere" shape as the Datasets tab. Keeping the
+  // whole evalResult (not just .category) is what lets the table below show
+  // the same conflict tooltip and three-way Tag coloring the Datasets table
+  // already has, instead of a second, out-of-sync implementation of both.
   const evaluated = useMemo(
     () => groups.map((group) => {
       const linkedDataset = findDatasetForGroup(datasets, group, settings, mappings);
-      const category = linkedDataset ? evaluateDataset(linkedDataset, groups, settings, mappings).category : 'unlinked';
-      return { group, linkedDataset, category };
+      const evalResult = linkedDataset ? evaluateDataset(linkedDataset, groups, settings, mappings) : null;
+      return { group, linkedDataset, category: evalResult?.category || 'unlinked', conflict: evalResult?.conflict };
     }),
     [groups, datasets, settings, mappings]
   );
@@ -165,7 +168,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
           </DataTableRow>
         </DataTableHead>
         <DataTableBody>
-          {pagedEntries.map(({ group, linkedDataset, category }) => (
+          {pagedEntries.map(({ group, linkedDataset, category, conflict }) => (
             <DataTableRow key={group.id}>
               <DataTableCell>{group.name}</DataTableCell>
               <DataTableCell>{group.shortName || '—'}</DataTableCell>
@@ -177,9 +180,15 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
                 {linkedDataset ? linkedDataset.name : <Tag neutral>{i18n.t('Unlinked')}</Tag>}
               </DataTableCell>
               <DataTableCell>
-                <Tag positive={category === 'consistent'} negative={category !== 'consistent'}>
-                  {getCategoryLabel(category)}
-                </Tag>
+                {category === 'consistent' ? (
+                  <Tag positive>{getCategoryLabel(category)}</Tag>
+                ) : category === 'unlinked' ? (
+                  <Tag neutral>{getCategoryLabel(category)}</Tag>
+                ) : (
+                  <span title={category === 'conflict' && conflict ? i18n.t('Already used by "{{name}}" ({{id}})', { name: conflict.name, id: conflict.id }) : undefined}>
+                    <Tag negative>{getCategoryLabel(category)}</Tag>
+                  </span>
+                )}
               </DataTableCell>
               <DataTableCell>{formatDate(group.lastUpdated)}</DataTableCell>
               <DataTableCell>

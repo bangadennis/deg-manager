@@ -11,6 +11,7 @@ export const SIDEBAR_WIDTH = '16rem';
 export default function Sidebar({
   activeTab,
   matchField,
+  datasetsCount,
   needsSyncCount,
   groupsCount,
   mappingsCount,
@@ -50,7 +51,19 @@ export default function Sidebar({
             label={i18n.t('Datasets')}
             active={activeTab === 'datasets'}
             onClick={() => onSelectTab('datasets')}
-            suffix={needsSyncCount > 0 ? String(needsSyncCount) : undefined}
+            suffix={
+              needsSyncCount > 0 ? (
+                // Total count, same as Data Element Groups below, plus a
+                // bold red badge calling out how many need attention —
+                // the plain total alone would lose that signal.
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <Tag negative bold>{needsSyncCount}</Tag>
+                  <span>{datasetsCount}</span>
+                </span>
+              ) : (
+                String(datasetsCount)
+              )
+            }
           />
           <MenuItem
             label={i18n.t('Data Element Groups')}
