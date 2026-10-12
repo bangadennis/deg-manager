@@ -8,7 +8,7 @@ import i18n from '@dhis2/d2-i18n';
 // DHIS2 UI locale — the translations exist but are never loaded.
 import './locales';
 import { CircularLoader, NoticeBox } from '@dhis2/ui';
-import { DATASETS_QUERY, DEG_QUERY, ME_QUERY, evaluateDataset } from './lib/dhis2';
+import { DATASETS_QUERY, DEG_QUERY, ME_QUERY } from './lib/dhis2';
 import { MATCH_FIELDS } from './lib/settings';
 import { useDatastoreSettings } from './hooks/useDatastoreSettings';
 import { useDatastoreMappings } from './hooks/useDatastoreMappings';
@@ -60,18 +60,12 @@ export default function App() {
   const me       = meData?.me;
   const isSuperuser = !!me?.authorities?.includes('ALL');
 
-  const needsSyncCount = datasets.filter((ds) => {
-    const category = evaluateDataset(ds, groups, settings, mappings).category;
-    return category === 'unlinked' || category === 'needsUpdate' || category === 'conflict';
-  }).length;
-
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar
         activeTab={activeTab}
         matchField={settings.matchField}
         datasetsCount={datasets.length}
-        needsSyncCount={needsSyncCount}
         groupsCount={groups.length}
         mappingsCount={mappings.length}
         onSelectTab={setActiveTab}

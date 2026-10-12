@@ -127,7 +127,11 @@ export default function EditGroupModal({ group, groups, matchField, onSaved, onC
         <ButtonStrip end>
           <Button onClick={onClose} disabled={saving}>{i18n.t('Cancel')}</Button>
           <Button primary loading={saving} disabled={!canSave} onClick={handleSave}>
-            {saving ? i18n.t('Saving…') : i18n.t('Save')}
+            {saving
+              ? i18n.t('Saving…')
+              : !hasChanges && !nameError && !shortNameError
+              ? i18n.t('No Changes')
+              : i18n.t('Save')}
           </Button>
         </ButtonStrip>
       </ModalActions>

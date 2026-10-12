@@ -92,7 +92,7 @@ describe('DatasetsPanel bulk run resilience', () => {
 });
 
 describe('DatasetsPanel no-op guard', () => {
-  it('disables Bulk Create / Update when every selected dataset is already consistent', async () => {
+  it('relabels Bulk Create / Update to "Nothing to Sync" and disables it when every selected dataset is already consistent', async () => {
     const user = userEvent.setup();
     renderPanel({
       groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [] }],
@@ -100,10 +100,11 @@ describe('DatasetsPanel no-op guard', () => {
 
     await user.click(screen.getByRole('checkbox'));
 
-    expect(screen.getByText(/Bulk Create \/ Update/).closest('button')).toBeDisabled();
+    expect(screen.queryByText(/Bulk Create \/ Update/)).not.toBeInTheDocument();
+    expect(screen.getByText('Nothing to Sync').closest('button')).toBeDisabled();
   });
 
-  it('enables Bulk Create / Update once at least one selected dataset actually needs a sync', async () => {
+  it('reverts to the normal label and enables Bulk Create / Update once at least one selected dataset actually needs a sync', async () => {
     const user = userEvent.setup();
     renderPanel({
       datasets: [
@@ -117,6 +118,7 @@ describe('DatasetsPanel no-op guard', () => {
     await user.click(checkboxes[0]); // ds1 — already consistent
     await user.click(checkboxes[1]); // ds2 — unlinked, actually syncable
 
+    expect(screen.queryByText('Nothing to Sync')).not.toBeInTheDocument();
     expect(screen.getByText(/Bulk Create \/ Update/).closest('button')).not.toBeDisabled();
   });
 });

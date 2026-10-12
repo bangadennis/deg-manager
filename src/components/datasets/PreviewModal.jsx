@@ -50,7 +50,7 @@ function reasonFor(evalResult) {
   }
 }
 
-export default function PreviewModal({ entries, onRunSync, onClose }) {
+export default function PreviewModal({ entries, canSync, onRunSync, onClose }) {
   const willCreate = entries.filter((e) => e.evalResult.category === 'unlinked').length;
   const willUpdate = entries.filter((e) => e.evalResult.category === 'needsUpdate').length;
   const noChange   = entries.filter((e) => e.evalResult.category === 'consistent').length;
@@ -108,7 +108,9 @@ export default function PreviewModal({ entries, onRunSync, onClose }) {
       <ModalActions>
         <ButtonStrip end>
           <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
-          <Button primary onClick={onRunSync}>{i18n.t('Run Sync Now')}</Button>
+          <Button primary disabled={!canSync} onClick={onRunSync}>
+            {canSync ? i18n.t('Run Sync Now') : i18n.t('Nothing to Sync')}
+          </Button>
         </ButtonStrip>
       </ModalActions>
     </Modal>

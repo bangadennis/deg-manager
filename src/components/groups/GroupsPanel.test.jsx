@@ -156,14 +156,14 @@ describe('GroupsPanel editing', () => {
     expect(screen.getByDisplayValue('ds2')).toBeInTheDocument();
   });
 
-  it('disables Save until something is actually changed — saving the same values back would be a no-op', async () => {
+  it('relabels Save to "No Changes" and disables it until something is actually changed — saving the same values back would be a no-op', async () => {
     const user = userEvent.setup();
     renderPanel({
       groups: [group('g1', 'Bravo Group', 'ds2', [], 'BRAVO')],
     });
 
     await openEditFor(user, 'Bravo Group');
-    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'No Changes' })).toBeDisabled();
 
     await user.type(screen.getByDisplayValue('Bravo Group'), '!');
     expect(screen.getByRole('button', { name: 'Save' })).not.toBeDisabled();

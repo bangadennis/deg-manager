@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-12T20:51:08.690Z\n"
-"PO-Revision-Date: 2026-10-12T20:51:08.691Z\n"
+"POT-Creation-Date: 2026-10-12T21:10:45.243Z\n"
+"PO-Revision-Date: 2026-10-12T21:10:45.244Z\n"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -235,11 +235,11 @@ msgstr "Clear Selection"
 msgid "Preview ({{n}})"
 msgstr "Preview ({{n}})"
 
-msgid "Everything selected is already in sync — nothing to do."
-msgstr "Everything selected is already in sync — nothing to do."
-
 msgid "Processing… ({{done}}/{{total}})"
 msgstr "Processing… ({{done}}/{{total}})"
+
+msgid "Nothing to Sync"
+msgstr "Nothing to Sync"
 
 msgid "Bulk Create / Update ({{n}} selected)"
 msgstr "Bulk Create / Update ({{n}} selected)"
@@ -451,6 +451,9 @@ msgstr "Could not save this group"
 
 msgid "Saving…"
 msgstr "Saving…"
+
+msgid "No Changes"
+msgstr "No Changes"
 
 msgid "Save"
 msgstr "Save"

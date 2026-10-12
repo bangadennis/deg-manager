@@ -426,11 +426,12 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
           <Button
             primary
             disabled={selectedCount === 0 || !hasSyncableSelection || bulkRunning}
-            title={selectedCount > 0 && !hasSyncableSelection ? i18n.t('Everything selected is already in sync — nothing to do.') : undefined}
             onClick={handleBulkProcess}
           >
             {bulkRunning
               ? i18n.t('Processing… ({{done}}/{{total}})', { done: progress.done, total: progress.total })
+              : selectedCount > 0 && !hasSyncableSelection
+              ? i18n.t('Nothing to Sync')
               : i18n.t('Bulk Create / Update ({{n}} selected)', { n: selectedCount })}
           </Button>
 
@@ -498,6 +499,7 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
       {previewing && (
         <PreviewModal
           entries={selectedEntries}
+          canSync={hasSyncableSelection}
           onClose={() => setPreviewing(false)}
           onRunSync={() => {
             setPreviewing(false);

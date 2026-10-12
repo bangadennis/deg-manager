@@ -12,7 +12,7 @@ function entryFor(dataset, groups = []) {
 describe('PreviewModal', () => {
   it('labels a dataset with no group as "Will create"', () => {
     const dataset = { id: 'ds1', name: 'Immunization', dataSetElements: [] };
-    render(<PreviewModal entries={[entryFor(dataset)]} onClose={jest.fn()} onRunSync={jest.fn()} />);
+    render(<PreviewModal entries={[entryFor(dataset)]} canSync onClose={jest.fn()} onRunSync={jest.fn()} />);
 
     expect(screen.getByText('Will create')).toBeInTheDocument();
   });
@@ -24,7 +24,7 @@ describe('PreviewModal', () => {
       dataSetElements: [{ dataElement: { id: 'de1', name: 'BCG' } }],
     };
     const groups = [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG' }] }];
-    render(<PreviewModal entries={[entryFor(dataset, groups)]} onClose={jest.fn()} onRunSync={jest.fn()} />);
+    render(<PreviewModal entries={[entryFor(dataset, groups)]} canSync={false} onClose={jest.fn()} onRunSync={jest.fn()} />);
 
     expect(screen.getByText('No change')).toBeInTheDocument();
   });
@@ -33,7 +33,7 @@ describe('PreviewModal', () => {
     const settings = { ...DEFAULT_SETTINGS, matchField: 'code' };
     const dataset = { id: 'ds1', name: 'Immunization', dataSetElements: [] };
     const entry = { dataset, evalResult: evaluateDataset(dataset, [], settings) };
-    render(<PreviewModal entries={[entry]} onClose={jest.fn()} onRunSync={jest.fn()} />);
+    render(<PreviewModal entries={[entry]} canSync onClose={jest.fn()} onRunSync={jest.fn()} />);
 
     expect(screen.getByText('Will fail')).toBeInTheDocument();
     expect(screen.getByText(/no mapping key value/i)).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('PreviewModal', () => {
     const onRunSync = jest.fn();
     const onClose = jest.fn();
     const dataset = { id: 'ds1', name: 'Immunization', dataSetElements: [] };
-    render(<PreviewModal entries={[entryFor(dataset)]} onClose={onClose} onRunSync={onRunSync} />);
+    render(<PreviewModal entries={[entryFor(dataset)]} canSync onClose={onClose} onRunSync={onRunSync} />);
 
     await user.click(screen.getByText('Cancel'));
     expect(onRunSync).not.toHaveBeenCalled();
@@ -52,5 +52,18 @@ describe('PreviewModal', () => {
 
     await user.click(screen.getByText('Run Sync Now'));
     expect(onRunSync).toHaveBeenCalledTimes(1);
+  });
+
+  it('relabels Run Sync Now to "Nothing to Sync" and disables it when every previewed dataset is already consistent', () => {
+    const dataset = {
+      id: 'ds1',
+      name: 'Immunization',
+      dataSetElements: [{ dataElement: { id: 'de1', name: 'BCG' } }],
+    };
+    const groups = [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG' }] }];
+    render(<PreviewModal entries={[entryFor(dataset, groups)]} canSync={false} onClose={jest.fn()} onRunSync={jest.fn()} />);
+
+    expect(screen.queryByText('Run Sync Now')).not.toBeInTheDocument();
+    expect(screen.getByText('Nothing to Sync').closest('button')).toBeDisabled();
   });
 });

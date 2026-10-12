@@ -244,11 +244,11 @@ msgstr "Effacer la sélection"
 msgid "Preview ({{n}})"
 msgstr "Aperçu ({{n}})"
 
-msgid "Everything selected is already in sync — nothing to do."
-msgstr "Tout ce qui est sélectionné est déjà synchronisé — rien à faire."
-
 msgid "Processing… ({{done}}/{{total}})"
 msgstr "Traitement… ({{done}}/{{total}})"
+
+msgid "Nothing to Sync"
+msgstr "Rien à synchroniser"
 
 msgid "Bulk Create / Update ({{n}} selected)"
 msgstr "Créer/mettre à jour en masse ({{n}} sélectionné(s))"
@@ -758,6 +758,9 @@ msgstr "Impossible d'enregistrer les paramètres"
 
 msgid "Saving…"
 msgstr "Enregistrement…"
+
+msgid "No Changes"
+msgstr "Aucun changement"
 
 msgid "Save"
 msgstr "Enregistrer"

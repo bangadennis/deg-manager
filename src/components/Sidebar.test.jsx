@@ -12,7 +12,6 @@ function renderSidebar(props) {
       activeTab="datasets"
       matchField={MATCH_FIELDS.UID}
       datasetsCount={0}
-      needsSyncCount={0}
       groupsCount={0}
       mappingsCount={0}
       onSelectTab={onSelectTab}
@@ -27,27 +26,14 @@ function renderSidebar(props) {
 
 describe('Sidebar dataset/group counts', () => {
   it('shows the total dataset count next to Datasets, the same way as the group count', () => {
-    renderSidebar({ datasetsCount: 12, groupsCount: 7, needsSyncCount: 0 });
+    renderSidebar({ datasetsCount: 12, groupsCount: 7 });
     expect(screen.getByText('12')).toBeInTheDocument();
     expect(screen.getByText('7')).toBeInTheDocument();
   });
 
   it('shows "0" rather than hiding the suffix when there are no datasets yet', () => {
-    renderSidebar({ datasetsCount: 0, needsSyncCount: 0 });
+    renderSidebar({ datasetsCount: 0 });
     expect(screen.getByText('Datasets').closest('a')).toHaveTextContent('0');
-  });
-
-  it('shows the needs-sync count as a badge alongside the total when some datasets need attention', () => {
-    renderSidebar({ datasetsCount: 12, needsSyncCount: 3 });
-    const datasetsItem = screen.getByText('Datasets').closest('a');
-    expect(datasetsItem).toHaveTextContent('3');
-    expect(datasetsItem).toHaveTextContent('12');
-  });
-
-  it('shows just the plain total, no badge, when nothing needs sync', () => {
-    renderSidebar({ datasetsCount: 12, needsSyncCount: 0 });
-    const datasetsItem = screen.getByText('Datasets').closest('a');
-    expect(datasetsItem).toHaveTextContent('Datasets12');
   });
 });
 
