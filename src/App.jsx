@@ -13,14 +13,14 @@ import { MATCH_FIELDS } from './lib/settings';
 import { useDatastoreSettings } from './hooks/useDatastoreSettings';
 import { useDatastoreMappings } from './hooks/useDatastoreMappings';
 import Sidebar from './components/Sidebar';
-import SettingsModal from './components/SettingsModal';
+import SettingsModal from './components/settings/SettingsModal';
 
 // Only one of these is ever visible at a time (tab switch), and GroupsPanel
 // alone pulls in SharingDialog + Pagination — a meaningful chunk of the
 // bundle that datasets-only users never need to download.
-const DatasetsPanel = lazy(() => import('./components/DatasetsPanel'));
-const GroupsPanel   = lazy(() => import('./components/GroupsPanel'));
-const MappingsPanel = lazy(() => import('./components/MappingsPanel'));
+const DatasetsPanel = lazy(() => import('./components/datasets/DatasetsPanel'));
+const GroupsPanel   = lazy(() => import('./components/groups/GroupsPanel'));
+const MappingsPanel = lazy(() => import('./components/mappings/MappingsPanel'));
 
 export default function App() {
   const { loading: dsLoading, error: dsError, data: dsData } = useDataQuery(DATASETS_QUERY);

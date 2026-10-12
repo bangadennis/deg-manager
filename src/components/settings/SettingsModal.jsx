@@ -17,9 +17,9 @@ import {
   NoticeBox,
   colors,
 } from '@dhis2/ui';
-import { MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from '../lib/settings';
-import { buildGroupName, USER_GROUPS_QUERY } from '../lib/dhis2';
-import { getErrorMessage } from '../lib/errors';
+import { MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from '../../lib/settings';
+import { buildGroupName, USER_GROUPS_QUERY } from '../../lib/dhis2';
+import { getErrorMessage } from '../../lib/errors';
 
 // Functions, not module-level constants: i18n.t() needs to run after the
 // active locale is known (and again if it changes), same reasoning as

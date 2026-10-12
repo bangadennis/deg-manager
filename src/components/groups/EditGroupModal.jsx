@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, InputField, NoticeBox } from '@dhis2/ui';
-import { UPDATE_DEG_MUTATION, findNameConflict } from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import { getErrorMessage } from '../lib/errors';
+import { UPDATE_DEG_MUTATION, findNameConflict } from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { getErrorMessage } from '../../lib/errors';
 
 // dataElementGroup.shortName is capped at 50 characters by the DHIS2
 // metadata schema — enforced here so the API 409 is caught before a round

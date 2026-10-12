@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-12T15:38:28.809Z\n"
-"PO-Revision-Date: 2026-10-12T15:38:28.809Z\n"
+"POT-Creation-Date: 2026-10-12T20:19:46.457Z\n"
+"PO-Revision-Date: 2026-10-12T20:19:46.458Z\n"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -26,14 +26,23 @@ msgstr "Data Element Groups"
 msgid "Mappings"
 msgstr "Mappings"
 
-msgid "Created {{date}} by {{user}}"
-msgstr "Created {{date}} by {{user}}"
+msgid "Dataset data elements to Data Element Groups"
+msgstr "Dataset data elements to Data Element Groups"
 
-msgid "Unknown user"
-msgstr "Unknown user"
+msgid "Manage"
+msgstr "Manage"
 
-msgid "Last updated {{date}} by {{user}}"
-msgstr "Last updated {{date}} by {{user}}"
+msgid "Only superusers can change settings"
+msgstr "Only superusers can change settings"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Superuser"
+msgstr "Superuser"
+
+msgid "Standard user"
+msgstr "Standard user"
 
 msgid "Bulk sync summary"
 msgstr "Bulk sync summary"
@@ -128,11 +137,14 @@ msgstr "Could not relink this group"
 msgid "Dataset data elements ({{n}})"
 msgstr "Dataset data elements ({{n}})"
 
+msgid "{{n}} to add"
+msgstr "{{n}} to add"
+
 msgid "This dataset has no data elements."
 msgstr "This dataset has no data elements."
 
-msgid "(missing from group)"
-msgstr "(missing from group)"
+msgid "(will be added)"
+msgstr "(will be added)"
 
 msgid "Group \"{{name}}\" ({{n}})"
 msgstr "Group \"{{name}}\" ({{n}})"
@@ -142,6 +154,9 @@ msgstr "Group"
 
 msgid "Group (target \"{{targetName}}\")"
 msgstr "Group (target \"{{targetName}}\")"
+
+msgid "{{n}} to remove"
+msgstr "{{n}} to remove"
 
 msgid "Not mapped to a group yet."
 msgstr "Not mapped to a group yet."
@@ -153,11 +168,11 @@ msgstr ""
 "No data element group exists yet for this dataset. Syncing will create one "
 "named \"{{targetName}}\"."
 
-msgid "Consistent"
-msgstr "Consistent"
+msgid "In sync"
+msgstr "In sync"
 
-msgid "Inconsistent"
-msgstr "Inconsistent"
+msgid "Out of sync"
+msgstr "Out of sync"
 
 msgid "Group name will update to \"{{targetName}}\" on next sync."
 msgstr "Group name will update to \"{{targetName}}\" on next sync."
@@ -165,8 +180,8 @@ msgstr "Group name will update to \"{{targetName}}\" on next sync."
 msgid "This group has no data elements."
 msgstr "This group has no data elements."
 
-msgid "(not in dataset)"
-msgstr "(not in dataset)"
+msgid "(will be removed)"
+msgstr "(will be removed)"
 
 msgid ""
 "This dataset has no manual mapping yet. Link it to a group in the Mappings "
@@ -287,6 +302,91 @@ msgstr "{{n}} extra"
 msgid "View details"
 msgstr "View details"
 
+msgid "Will create"
+msgstr "Will create"
+
+msgid "Will update"
+msgstr "Will update"
+
+msgid "No change"
+msgstr "No change"
+
+msgid "Will fail"
+msgstr "Will fail"
+
+msgid "Create \"{{name}}\" with {{n}} data elements."
+msgstr "Create \"{{name}}\" with {{n}} data elements."
+
+msgid "+{{n}} missing"
+msgstr "+{{n}} missing"
+
+msgid "-{{n}} extra"
+msgstr "-{{n}} extra"
+
+msgid "name change"
+msgstr "name change"
+
+msgid "Update group."
+msgstr "Update group."
+
+msgid "Already in sync."
+msgstr "Already in sync."
+
+msgid "Name/short name already used by \"{{name}}\" ({{id}})."
+msgstr "Name/short name already used by \"{{name}}\" ({{id}})."
+
+msgid "No mapping key value on this dataset."
+msgstr "No mapping key value on this dataset."
+
+msgid "Preview — {{n}} selected dataset"
+msgstr "Preview — {{n}} selected dataset"
+
+msgid "Preview — {{n}} selected datasets"
+msgstr "Preview — {{n}} selected datasets"
+
+msgid ""
+"Nothing has been changed yet. This is what running the sync now would do, "
+"based on the current settings."
+msgstr ""
+"Nothing has been changed yet. This is what running the sync now would do, "
+"based on the current settings."
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Run Sync Now"
+msgstr "Run Sync Now"
+
+msgid "Relink {{n}} conflicting group(s) to their datasets"
+msgstr "Relink {{n}} conflicting group(s) to their datasets"
+
+msgid ""
+"Nothing has been changed yet. Each existing group below will have its Code "
+"field set to the matching dataset's {{field}} — its name, short name and "
+"data elements are left untouched."
+msgstr ""
+"Nothing has been changed yet. Each existing group below will have its Code "
+"field set to the matching dataset's {{field}} — its name, short name and "
+"data elements are left untouched."
+
+msgid "Existing group"
+msgstr "Existing group"
+
+msgid "Code to write"
+msgstr "Code to write"
+
+msgid "Relink Now"
+msgstr "Relink Now"
+
 msgid "Delete \"{{name}}\"?"
 msgstr "Delete \"{{name}}\"?"
 
@@ -373,11 +473,11 @@ msgstr "Not linked to any dataset via the current mapping key ({{field}})."
 msgid "Data elements ({{n}})"
 msgstr "Data elements ({{n}})"
 
-msgid "(not in linked dataset)"
-msgstr "(not in linked dataset)"
+msgid "Missing from this group ({{n}})"
+msgstr "Missing from this group ({{n}})"
 
-msgid "Missing from this group"
-msgstr "Missing from this group"
+msgid "will be added"
+msgstr "will be added"
 
 msgid ""
 "All Data Element Groups on this instance. \"Linked dataset\" is worked out "
@@ -403,6 +503,9 @@ msgstr "View"
 
 msgid "No data element groups match the current search/filter."
 msgstr "No data element groups match the current search/filter."
+
+msgid "More actions"
+msgstr "More actions"
 
 msgid "Manual mapping isn't active"
 msgstr "Manual mapping isn't active"
@@ -483,94 +586,6 @@ msgstr "No mappings yet."
 
 msgid "No mappings match \"{{search}}\"."
 msgstr "No mappings match \"{{search}}\"."
-
-msgid "Will create"
-msgstr "Will create"
-
-msgid "Will update"
-msgstr "Will update"
-
-msgid "No change"
-msgstr "No change"
-
-msgid "Will fail"
-msgstr "Will fail"
-
-msgid "Create \"{{name}}\" with {{n}} data elements."
-msgstr "Create \"{{name}}\" with {{n}} data elements."
-
-msgid "+{{n}} missing"
-msgstr "+{{n}} missing"
-
-msgid "-{{n}} extra"
-msgstr "-{{n}} extra"
-
-msgid "name change"
-msgstr "name change"
-
-msgid "Update group."
-msgstr "Update group."
-
-msgid "Already in sync."
-msgstr "Already in sync."
-
-msgid "Name/short name already used by \"{{name}}\" ({{id}})."
-msgstr "Name/short name already used by \"{{name}}\" ({{id}})."
-
-msgid "No mapping key value on this dataset."
-msgstr "No mapping key value on this dataset."
-
-msgid "Preview — {{n}} selected dataset"
-msgstr "Preview — {{n}} selected dataset"
-
-msgid "Preview — {{n}} selected datasets"
-msgstr "Preview — {{n}} selected datasets"
-
-msgid ""
-"Nothing has been changed yet. This is what running the sync now would do, "
-"based on the current settings."
-msgstr ""
-"Nothing has been changed yet. This is what running the sync now would do, "
-"based on the current settings."
-
-msgid "Create"
-msgstr "Create"
-
-msgid "Update"
-msgstr "Update"
-
-msgid "Action"
-msgstr "Action"
-
-msgid "Details"
-msgstr "Details"
-
-msgid "Run Sync Now"
-msgstr "Run Sync Now"
-
-msgid "Relink {{n}} conflicting group(s) to their datasets"
-msgstr "Relink {{n}} conflicting group(s) to their datasets"
-
-msgid ""
-"Nothing has been changed yet. Each existing group below will have its Code "
-"field set to the matching dataset's {{field}} — its name, short name and "
-"data elements are left untouched."
-msgstr ""
-"Nothing has been changed yet. Each existing group below will have its Code "
-"field set to the matching dataset's {{field}} — its name, short name and "
-"data elements are left untouched."
-
-msgid "Existing group"
-msgstr "Existing group"
-
-msgid "Code to write"
-msgstr "Code to write"
-
-msgid "Relink Now"
-msgstr "Relink Now"
-
-msgid "More actions"
-msgstr "More actions"
 
 msgid "Manual"
 msgstr "Manual"
@@ -717,23 +732,14 @@ msgstr ""
 msgid "Could not save settings"
 msgstr "Could not save settings"
 
-msgid "Dataset data elements to Data Element Groups"
-msgstr "Dataset data elements to Data Element Groups"
+msgid "Created {{date}} by {{user}}"
+msgstr "Created {{date}} by {{user}}"
 
-msgid "Manage"
-msgstr "Manage"
+msgid "Unknown user"
+msgstr "Unknown user"
 
-msgid "Only superusers can change settings"
-msgstr "Only superusers can change settings"
-
-msgid "Settings"
-msgstr "Settings"
-
-msgid "Superuser"
-msgstr "Superuser"
-
-msgid "Standard user"
-msgstr "Standard user"
+msgid "Last updated {{date}} by {{user}}"
+msgstr "Last updated {{date}} by {{user}}"
 
 msgid "Unmapped"
 msgstr "Unmapped"
@@ -741,17 +747,14 @@ msgstr "Unmapped"
 msgid "Name conflict"
 msgstr "Name conflict"
 
-msgid "Needs update"
-msgstr "Needs update"
-
 msgid "All"
 msgstr "All"
 
 msgid "Pending"
 msgstr "Pending"
 
-msgid "Processing…"
-msgstr "Processing…"
+msgid "Syncing…"
+msgstr "Syncing…"
 
 msgid "Created ✓"
 msgstr "Created ✓"
@@ -759,11 +762,11 @@ msgstr "Created ✓"
 msgid "Updated ✓"
 msgstr "Updated ✓"
 
-msgid "Up to date ✓"
-msgstr "Up to date ✓"
+msgid "No change ✓"
+msgstr "No change ✓"
 
-msgid "Error ✗"
-msgstr "Error ✗"
+msgid "Failed ✗"
+msgstr "Failed ✗"
 
 msgid "Skipped"
 msgstr "Skipped"

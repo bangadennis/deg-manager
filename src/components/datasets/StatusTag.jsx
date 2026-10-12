@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag } from '@dhis2/ui';
-import { getStatusConfig } from '../lib/dhis2';
+import { getStatusConfig } from '../../lib/dhis2';
 
 export default function StatusTag({ status, errorMsg }) {
   const cfg = getStatusConfig(status);

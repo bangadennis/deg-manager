@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CustomDataProvider } from '@dhis2/app-runtime';
 import DatasetsPanel from './DatasetsPanel';
-import { DEFAULT_SETTINGS, MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from '../lib/settings';
+import { DEFAULT_SETTINGS, MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from '../../lib/settings';
 
 function renderPanel(props, customData = {}) {
   const refetchDEG = jest.fn().mockResolvedValue(undefined);

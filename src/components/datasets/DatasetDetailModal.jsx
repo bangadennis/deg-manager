@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Tag, Button, NoticeBox, colors } from '@dhis2/ui';
-import { evaluateDataset, isOrphanedConflict, UPDATE_DEG_MUTATION } from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import { getErrorMessage } from '../lib/errors';
-import DetailsPanel from './DetailsPanel';
-import AuditMeta from './AuditMeta';
-import DataElementListItem from './DataElementListItem';
+import { evaluateDataset, isOrphanedConflict, UPDATE_DEG_MUTATION } from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { getErrorMessage } from '../../lib/errors';
+import DetailsPanel from '../shared/DetailsPanel';
+import AuditMeta from '../shared/AuditMeta';
+import DataElementList from '../shared/DataElementList';
 
 export default function DatasetDetailModal({ dataset, datasets, groups, settings, mappings, onClose, onRelinked }) {
   // useDataMutation's mutate() never rejects on failure (see DatasetsPanel) —
@@ -96,20 +96,22 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
         </div>
       )}
 
-      <h4 style={{ marginBottom: '0.25rem' }}>{i18n.t('Dataset data elements ({{n}})', { n: dsDEs.length })}</h4>
+      <h4 style={{ marginBottom: '0.25rem' }}>
+        {i18n.t('Dataset data elements ({{n}})', { n: dsDEs.length })}
+        {missing.length > 0 && (
+          <span style={{ color: colors.green600, fontWeight: 'normal', fontSize: '0.85rem' }}>
+            {' · '}{i18n.t('{{n}} to add', { n: missing.length })}
+          </span>
+        )}
+      </h4>
       {dsDEs.length === 0 ? (
         <p style={{ color: colors.grey700 }}>{i18n.t('This dataset has no data elements.')}</p>
       ) : (
-        <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
-          {dsDEs.map((de) => (
-            <DataElementListItem
-              key={de.id}
-              name={de.name}
-              status={missingIds.has(de.id) ? 'missing' : undefined}
-              suffix={i18n.t('(missing from group)')}
-            />
-          ))}
-        </ul>
+        <DataElementList
+          items={dsDEs}
+          statusFor={(de) => (missingIds.has(de.id) ? 'missing' : undefined)}
+          suffixFor={() => i18n.t('(will be added)')}
+        />
       )}
 
       <h4 style={{ marginBottom: '0.25rem', marginTop: '1.5rem' }}>
@@ -118,6 +120,11 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
           : isManual
           ? i18n.t('Group')
           : i18n.t('Group (target "{{targetName}}")', { targetName })}
+        {extra.length > 0 && (
+          <span style={{ color: colors.yellow800, fontWeight: 'normal', fontSize: '0.85rem' }}>
+            {' · '}{i18n.t('{{n}} to remove', { n: extra.length })}
+          </span>
+        )}
       </h4>
 
       {!group ? (
@@ -129,7 +136,7 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
       ) : (
         <>
           <p>
-            {isConsistent ? <Tag positive>{i18n.t('Consistent')}</Tag> : <Tag negative>{i18n.t('Inconsistent')}</Tag>}
+            {isConsistent ? <Tag positive>{i18n.t('In sync')}</Tag> : <Tag negative>{i18n.t('Out of sync')}</Tag>}
             {nameMismatch && (
               <span style={{ marginLeft: '0.5rem', color: colors.grey700 }}>
                 {i18n.t('Group name will update to "{{targetName}}" on next sync.', { targetName })}
@@ -139,16 +146,11 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
           {groupDEs.length === 0 ? (
             <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
           ) : (
-            <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
-              {groupDEs.map((de) => (
-                <DataElementListItem
-                  key={de.id}
-                  name={de.name}
-                  status={extraIds.has(de.id) ? 'extra' : undefined}
-                  suffix={i18n.t('(not in dataset)')}
-                />
-              ))}
-            </ul>
+            <DataElementList
+              items={groupDEs}
+              statusFor={(de) => (extraIds.has(de.id) ? 'extra' : undefined)}
+              suffixFor={() => i18n.t('(will be removed)')}
+            />
           )}
         </>
       )}

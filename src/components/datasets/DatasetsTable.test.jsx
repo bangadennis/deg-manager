@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { colors } from '@dhis2/ui';
 import DatasetsTable from './DatasetsTable';
-import { DEFAULT_SETTINGS } from '../lib/settings';
+import { DEFAULT_SETTINGS } from '../../lib/settings';
 
 const dataset = (overrides) => ({
   id: 'ds1',
@@ -68,11 +69,11 @@ describe('DatasetsTable category display', () => {
     expect(screen.getByText('Unlinked')).toBeInTheDocument();
   });
 
-  it('shows "Consistent" once a matching group has the same data elements and name', () => {
+  it('shows "In sync" once a matching group has the same data elements and name', () => {
     renderTable({
       groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', shortName: 'Immun', dataElements: [{ id: 'de1', name: 'BCG doses' }] }],
     });
-    expect(screen.getByText('Consistent')).toBeInTheDocument();
+    expect(screen.getByText('In sync')).toBeInTheDocument();
   });
 });
 
@@ -86,6 +87,29 @@ describe('DatasetsTable short name column', () => {
     renderTable({ datasets: [dataset({ shortName: '' })] });
     const row = screen.getAllByRole('row')[1];
     expect(within(row).getAllByRole('cell')[2].textContent).toBe('—');
+  });
+});
+
+describe('DatasetsTable data element counts cell', () => {
+  it('shows a missing count in green with an add-circle icon', () => {
+    renderTable({
+      datasets: [dataset({ dataSetElements: [{ dataElement: { id: 'de1', name: 'BCG doses' } }, { dataElement: { id: 'de2', name: 'Measles dose 1' } }] })],
+      groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG doses' }] }],
+    });
+
+    const missingSpan = screen.getByText(/1 missing/).closest('span');
+    expect(missingSpan).toHaveStyle({ color: colors.green600 });
+    expect(missingSpan.querySelector('svg')).not.toBeNull();
+  });
+
+  it('shows an extra count in yellow/orange with a subtract-circle icon', () => {
+    renderTable({
+      groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG doses' }, { id: 'de3', name: 'Old vaccine X' }] }],
+    });
+
+    const extraSpan = screen.getByText(/1 extra/).closest('span');
+    expect(extraSpan).toHaveStyle({ color: colors.yellow800 });
+    expect(extraSpan.querySelector('svg')).not.toBeNull();
   });
 });
 

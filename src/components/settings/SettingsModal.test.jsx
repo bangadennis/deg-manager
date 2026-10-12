@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CustomDataProvider } from '@dhis2/app-runtime';
 import SettingsModal from './SettingsModal';
-import { DEFAULT_SETTINGS } from '../lib/settings';
+import { DEFAULT_SETTINGS } from '../../lib/settings';
 
 function renderSettingsModal(props, userGroups = []) {
   const onSave = jest.fn();

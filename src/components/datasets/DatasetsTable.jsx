@@ -12,10 +12,10 @@ import {
   Button,
   colors,
 } from '@dhis2/ui';
-import { IconView16 } from '@dhis2/ui-icons';
-import { evaluateDataset, getCategoryLabel, formatDate, isOrphanedConflict } from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import { columnSortProps } from '../lib/sorting';
+import { IconView16, IconAddCircle16, IconSubtractCircle16 } from '@dhis2/ui-icons';
+import { evaluateDataset, getCategoryLabel, formatDate, isOrphanedConflict } from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { columnSortProps } from '../../lib/sorting';
 import StatusTag from './StatusTag';
 import DatasetDetailModal from './DatasetDetailModal';
 
@@ -113,12 +113,14 @@ export default function DatasetsTable({
                 <DataTableCell onClick={(e) => { e.stopPropagation(); setDetailsForId(dataset.id); }} style={{ cursor: 'pointer' }}>
                   <span style={{ color: colors.grey700, fontSize: '0.85rem' }}>{i18n.t('{{n}} total', { n: dsDEs.length })}</span>
                   {missing.length > 0 && (
-                    <span style={{ color: colors.red600, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
+                    <span style={{ color: colors.green600, fontSize: '0.85rem', marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.15rem' }}>
+                      <IconAddCircle16 aria-hidden="true" />
                       {i18n.t('{{n}} missing', { n: missing.length })}
                     </span>
                   )}
                   {extra.length > 0 && (
-                    <span style={{ color: colors.yellow800, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
+                    <span style={{ color: colors.yellow800, fontSize: '0.85rem', marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.15rem' }}>
+                      <IconSubtractCircle16 aria-hidden="true" />
                       {i18n.t('{{n}} extra', { n: extra.length })}
                     </span>
                   )}

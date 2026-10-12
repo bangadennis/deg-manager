@@ -17,9 +17,9 @@ import {
   colors,
 } from '@dhis2/ui';
 import { IconView16, IconEdit16, IconShare16, IconDelete16 } from '@dhis2/ui-icons';
-import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters, formatDate } from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import { columnSortProps, sortRows } from '../lib/sorting';
+import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters, formatDate } from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { columnSortProps, sortRows } from '../../lib/sorting';
 import GroupDetailModal from './GroupDetailModal';
 import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';

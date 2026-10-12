@@ -271,8 +271,8 @@ export function getCategoryLabel(category) {
     unmappable:  i18n.t('Unmapped'),
     conflict:    i18n.t('Name conflict'),
     unlinked:    i18n.t('Unlinked'),
-    needsUpdate: i18n.t('Needs update'),
-    consistent:  i18n.t('Consistent'),
+    needsUpdate: i18n.t('Out of sync'),
+    consistent:  i18n.t('In sync'),
   };
   return labels[category] || category;
 }
@@ -332,11 +332,11 @@ export function getRelinkCandidates(datasets, groups, settings, mappings) {
 export function getStatusConfig(status) {
   const config = {
     pending:     { label: i18n.t('Pending'),        color: 'default'  },
-    processing:  { label: i18n.t('Processing…'),    color: 'default'  },
+    processing:  { label: i18n.t('Syncing…'),       color: 'default'  },
     created:     { label: i18n.t('Created ✓'),      color: 'positive' },
     updated:     { label: i18n.t('Updated ✓'),      color: 'positive' },
-    consistent:  { label: i18n.t('Up to date ✓'),   color: 'positive' },
-    error:       { label: i18n.t('Error ✗'),        color: 'negative' },
+    consistent:  { label: i18n.t('No change ✓'),    color: 'positive' },
+    error:       { label: i18n.t('Failed ✗'),       color: 'negative' },
     skipped:     { label: i18n.t('Skipped'),        color: 'neutral'  },
   };
   return config[status] || config.pending;

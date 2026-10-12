@@ -15,9 +15,9 @@ import {
   Pagination,
   colors,
 } from '@dhis2/ui';
-import { MATCH_FIELDS } from '../lib/settings';
-import { getErrorMessage } from '../lib/errors';
-import { columnSortProps, sortRows } from '../lib/sorting';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { getErrorMessage } from '../../lib/errors';
+import { columnSortProps, sortRows } from '../../lib/sorting';
 
 const PAGE_SIZES = ['10', '25', '50', '100'];
 

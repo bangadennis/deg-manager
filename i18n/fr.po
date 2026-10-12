@@ -147,8 +147,11 @@ msgstr "Éléments de données de l'ensemble de données ({{n}})"
 msgid "This dataset has no data elements."
 msgstr "Cet ensemble de données ne contient aucun élément de données."
 
-msgid "(missing from group)"
-msgstr "(absent du groupe)"
+msgid "{{n}} to add"
+msgstr "{{n}} à ajouter"
+
+msgid "(will be added)"
+msgstr "(sera ajouté)"
 
 msgid "Group"
 msgstr "Groupe"
@@ -169,11 +172,11 @@ msgstr ""
 "Aucun groupe d'éléments de données n'existe encore pour cet ensemble de "
 "données. La synchronisation en créera un nommé « {{targetName}} »."
 
-msgid "Consistent"
-msgstr "Cohérent"
+msgid "In sync"
+msgstr "Synchronisé"
 
-msgid "Inconsistent"
-msgstr "Incohérent"
+msgid "Out of sync"
+msgstr "Désynchronisé"
 
 msgid "Group name will update to \"{{targetName}}\" on next sync."
 msgstr ""
@@ -183,8 +186,11 @@ msgstr ""
 msgid "This group has no data elements."
 msgstr "Ce groupe ne contient aucun élément de données."
 
-msgid "(not in dataset)"
-msgstr "(absent de l'ensemble de données)"
+msgid "{{n}} to remove"
+msgstr "{{n}} à retirer"
+
+msgid "(will be removed)"
+msgstr "(sera retiré)"
 
 msgid ""
 "This dataset has no manual mapping yet. Link it to a group in the Mappings "
@@ -385,11 +391,11 @@ msgstr ""
 msgid "Data elements ({{n}})"
 msgstr "Éléments de données ({{n}})"
 
-msgid "(not in linked dataset)"
-msgstr "(absent de l'ensemble de données associé)"
+msgid "Missing from this group ({{n}})"
+msgstr "Absent de ce groupe ({{n}})"
 
-msgid "Missing from this group"
-msgstr "Absent de ce groupe"
+msgid "will be added"
+msgstr "sera ajouté"
 
 msgid ""
 "All Data Element Groups on this instance. \"Linked dataset\" is worked out "
@@ -759,17 +765,14 @@ msgstr "Non mappé"
 msgid "Name conflict"
 msgstr "Conflit de nom"
 
-msgid "Needs update"
-msgstr "Mise à jour nécessaire"
-
 msgid "All"
 msgstr "Tous"
 
 msgid "Pending"
 msgstr "En attente"
 
-msgid "Processing…"
-msgstr "Traitement…"
+msgid "Syncing…"
+msgstr "Synchronisation…"
 
 msgid "Created ✓"
 msgstr "Créé ✓"
@@ -777,11 +780,11 @@ msgstr "Créé ✓"
 msgid "Updated ✓"
 msgstr "Mis à jour ✓"
 
-msgid "Up to date ✓"
-msgstr "À jour ✓"
+msgid "No change ✓"
+msgstr "Aucun changement ✓"
 
-msgid "Error ✗"
-msgstr "Erreur ✗"
+msgid "Failed ✗"
+msgstr "Échoué ✗"
 
 msgid "Skipped"
 msgstr "Ignoré"

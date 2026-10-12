@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PreviewModal from './PreviewModal';
-import { evaluateDataset } from '../lib/dhis2';
-import { DEFAULT_SETTINGS } from '../lib/settings';
+import { evaluateDataset } from '../../lib/dhis2';
+import { DEFAULT_SETTINGS } from '../../lib/settings';
 
 function entryFor(dataset, groups = []) {
   return { dataset, evalResult: evaluateDataset(dataset, groups, DEFAULT_SETTINGS) };

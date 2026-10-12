@@ -10,10 +10,10 @@ import {
   getCategoryLabel,
   getCategoryFilters,
   getRelinkCandidates,
-} from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import { getErrorMessage } from '../lib/errors';
-import { sortRows } from '../lib/sorting';
+} from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import { getErrorMessage } from '../../lib/errors';
+import { sortRows } from '../../lib/sorting';
 import DatasetsTable from './DatasetsTable';
 import BulkSummaryModal from './BulkSummaryModal';
 import PreviewModal from './PreviewModal';

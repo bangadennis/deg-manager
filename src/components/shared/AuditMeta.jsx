@@ -1,7 +1,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-import { formatDate } from '../lib/dhis2';
+import { formatDate } from '../../lib/dhis2';
 
 // createdBy/lastUpdatedBy can come back null from the API (e.g. objects
 // created by an import job with no user context), so this always falls back

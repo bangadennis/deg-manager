@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
-import { DELETE_DEG_MUTATION } from '../lib/dhis2';
-import { getErrorMessage } from '../lib/errors';
+import { DELETE_DEG_MUTATION } from '../../lib/dhis2';
+import { getErrorMessage } from '../../lib/errors';
 
 export default function DeleteGroupModal({ group, onDeleted, onClose }) {
   // useDataMutation's mutate() never rejects on failure (it hangs forever

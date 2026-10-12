@@ -3,7 +3,7 @@ import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CustomDataProvider } from '@dhis2/app-runtime';
 import GroupsPanel from './GroupsPanel';
-import { DEFAULT_SETTINGS } from '../lib/settings';
+import { DEFAULT_SETTINGS } from '../../lib/settings';
 
 const dataset = (id, name) => ({ id, name, dataSetElements: [] });
 const group = (id, name, code, dataElements = [], shortName) => ({ id, name, code, dataElements, shortName });

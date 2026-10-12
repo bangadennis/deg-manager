@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Tag, SharingDialog, colors } from '@dhis2/ui';
-import { findDatasetForGroup, compareDataElements, getDatasetDEs } from '../lib/dhis2';
-import { MATCH_FIELDS } from '../lib/settings';
-import DetailsPanel from './DetailsPanel';
-import AuditMeta from './AuditMeta';
-import DataElementListItem from './DataElementListItem';
+import { findDatasetForGroup, compareDataElements, getDatasetDEs } from '../../lib/dhis2';
+import { MATCH_FIELDS } from '../../lib/settings';
+import DetailsPanel from '../shared/DetailsPanel';
+import AuditMeta from '../shared/AuditMeta';
+import DataElementList from '../shared/DataElementList';
 import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';
 
@@ -49,9 +49,9 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
           <>
             {i18n.t('Linked dataset')}: <strong>{linkedDataset.name}</strong>{' '}
             {extraIds.size === 0 && missingIds.size === 0 ? (
-              <Tag positive>{i18n.t('Consistent')}</Tag>
+              <Tag positive>{i18n.t('In sync')}</Tag>
             ) : (
-              <Tag negative>{i18n.t('Inconsistent')}</Tag>
+              <Tag negative>{i18n.t('Out of sync')}</Tag>
             )}
           </>
         ) : (
@@ -65,33 +65,36 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
         )}
       </p>
 
-      <h4 style={{ marginBottom: '0.25rem' }}>{i18n.t('Data elements ({{n}})', { n: groupDEs.length })}</h4>
+      <h4 style={{ marginBottom: '0.25rem' }}>
+        {i18n.t('Data elements ({{n}})', { n: groupDEs.length })}
+        {extraIds.size > 0 && (
+          <span style={{ color: colors.yellow800, fontWeight: 'normal', fontSize: '0.85rem' }}>
+            {' · '}{i18n.t('{{n}} to remove', { n: extraIds.size })}
+          </span>
+        )}
+      </h4>
       {groupDEs.length === 0 ? (
         <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
       ) : (
-        <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
-          {groupDEs.map((de) => (
-            <DataElementListItem
-              key={de.id}
-              name={de.name}
-              status={extraIds.has(de.id) ? 'extra' : undefined}
-              suffix={i18n.t('(not in linked dataset)')}
-            />
-          ))}
-        </ul>
+        <DataElementList
+          items={groupDEs}
+          statusFor={(de) => (extraIds.has(de.id) ? 'extra' : undefined)}
+          suffixFor={() => i18n.t('(will be removed)')}
+        />
       )}
 
       {missingIds.size > 0 && (
         <>
-          <h4 style={{ marginBottom: '0.25rem', marginTop: '1rem' }}>{i18n.t('Missing from this group')}</h4>
-          <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
-            {linkedDataset &&
-              getDatasetDEs(linkedDataset)
-                .filter((de) => missingIds.has(de.id))
-                .map((de) => (
-                  <DataElementListItem key={de.id} name={de.name} status="missing" />
-                ))}
-          </ul>
+          <h4 style={{ marginBottom: '0.25rem', marginTop: '1rem' }}>
+            {i18n.t('Missing from this group ({{n}})', { n: missingIds.size })}
+            <span style={{ color: colors.green600, fontWeight: 'normal', fontSize: '0.85rem' }}>
+              {' · '}{i18n.t('will be added')}
+            </span>
+          </h4>
+          <DataElementList
+            items={linkedDataset ? getDatasetDEs(linkedDataset).filter((de) => missingIds.has(de.id)) : []}
+            statusFor={() => 'missing'}
+          />
         </>
       )}
 

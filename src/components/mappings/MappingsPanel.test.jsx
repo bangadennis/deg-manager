@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MappingsPanel from './MappingsPanel';
-import { DEFAULT_SETTINGS, MATCH_FIELDS } from '../lib/settings';
+import { DEFAULT_SETTINGS, MATCH_FIELDS } from '../../lib/settings';
 
 const dataset = (id, name) => ({ id, name });
 const group   = (id, name) => ({ id, name });
