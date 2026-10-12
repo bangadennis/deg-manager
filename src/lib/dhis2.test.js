@@ -13,6 +13,8 @@ import {
   isOrphanedConflict,
   getRelinkCandidates,
   formatDate,
+  getCategoryLabel,
+  getCategoryFilters,
 } from './dhis2';
 import { DEFAULT_SETTINGS, MATCH_FIELDS, PUBLIC_ACCESS, SHARING_SOURCE } from './settings';
 
@@ -299,6 +301,24 @@ describe('getRelinkCandidates', () => {
     const datasets = [{ id: 'ds1', name: 'Mortality < 5 years', dataSetElements: [] }];
     const groups = [{ id: 'g1', code: '', name: 'Mortality < 5 years', dataElements: [] }];
     expect(getRelinkCandidates(datasets, groups, manualSettings, [])).toEqual([]);
+  });
+});
+
+describe('getCategoryLabel', () => {
+  it('labels the unmappable category "Unmapped"', () => {
+    expect(getCategoryLabel('unmappable')).toBe('Unmapped');
+  });
+});
+
+describe('getCategoryFilters', () => {
+  it('omits the Unmapped chip outside Manual mode', () => {
+    const keys = getCategoryFilters(false).map((f) => f.key);
+    expect(keys).not.toContain('unmappable');
+  });
+
+  it('includes the Unmapped chip in Manual mode', () => {
+    const keys = getCategoryFilters(true).map((f) => f.key);
+    expect(keys).toContain('unmappable');
   });
 });
 

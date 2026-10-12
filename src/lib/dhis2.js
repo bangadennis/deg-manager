@@ -268,7 +268,7 @@ export function evaluateDataset(dataset, groups, settings, mappings = []) {
 // active the moment this file was first imported.
 export function getCategoryLabel(category) {
   const labels = {
-    unmappable:  i18n.t('Unmappable'),
+    unmappable:  i18n.t('Unmapped'),
     conflict:    i18n.t('Name conflict'),
     unlinked:    i18n.t('Unlinked'),
     needsUpdate: i18n.t('Needs update'),
@@ -279,16 +279,23 @@ export function getCategoryLabel(category) {
 
 // Shared filter-chip definitions for both the Datasets and Data Element
 // Groups tabs, so "All / Unlinked / Needs update / ..." stays identical
-// wherever a category filter is offered.
-export function getCategoryFilters() {
-  return [
+// wherever a category filter is offered. The "Unmapped" chip only makes
+// sense in Manual mode — in UID/code mode a dataset essentially always has
+// a mapping key (every dataset has a UID; a missing code is already called
+// out directly in the Target Group column), so it's omitted there rather
+// than cluttering the filter row with a chip that's near-permanently empty.
+export function getCategoryFilters(isManual) {
+  const filters = [
     { key: 'all',         label: i18n.t('All') },
     { key: 'unlinked',    label: getCategoryLabel('unlinked') },
     { key: 'needsUpdate', label: getCategoryLabel('needsUpdate') },
     { key: 'consistent',  label: getCategoryLabel('consistent') },
     { key: 'conflict',    label: getCategoryLabel('conflict') },
-    { key: 'unmappable',  label: getCategoryLabel('unmappable') },
   ];
+  if (isManual) {
+    filters.push({ key: 'unmappable', label: getCategoryLabel('unmappable') });
+  }
+  return filters;
 }
 
 // Reverse lookup used by the Groups tab: which dataset (if any) does this

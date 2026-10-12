@@ -753,8 +753,8 @@ msgstr "Enregistrement…"
 msgid "Save"
 msgstr "Enregistrer"
 
-msgid "Unmappable"
-msgstr "Non associable"
+msgid "Unmapped"
+msgstr "Non mappé"
 
 msgid "Name conflict"
 msgstr "Conflit de nom"

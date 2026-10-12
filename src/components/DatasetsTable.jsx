@@ -36,6 +36,7 @@ export default function DatasetsTable({
           <DataTableRow>
             <DataTableColumnHeader></DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('name', i18n.t('Dataset Name'))}>{i18n.t('Dataset Name')}</DataTableColumnHeader>
+            <DataTableColumnHeader {...sortProps('shortName', i18n.t('Short Name'))}>{i18n.t('Short Name')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('targetGroup', i18n.t('Target Group'))}>{i18n.t('Target Group')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('status', i18n.t('Sync Status'))}>{i18n.t('Sync Status')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('elements', i18n.t('Data Elements'))}>{i18n.t('Data Elements')}</DataTableColumnHeader>
@@ -70,6 +71,8 @@ export default function DatasetsTable({
                 </DataTableCell>
 
                 <DataTableCell>{dataset.name}</DataTableCell>
+
+                <DataTableCell>{dataset.shortName || '—'}</DataTableCell>
 
                 <DataTableCell>
                   {isManual ? (

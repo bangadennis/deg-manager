@@ -76,6 +76,19 @@ describe('DatasetsTable category display', () => {
   });
 });
 
+describe('DatasetsTable short name column', () => {
+  it('shows the dataset short name', () => {
+    renderTable({ datasets: [dataset({ shortName: 'Immun' })] });
+    expect(screen.getByText('Immun')).toBeInTheDocument();
+  });
+
+  it('falls back to an em dash when short name is missing', () => {
+    renderTable({ datasets: [dataset({ shortName: '' })] });
+    const row = screen.getAllByRole('row')[1];
+    expect(within(row).getAllByRole('cell')[2].textContent).toBe('—');
+  });
+});
+
 describe('DatasetsTable relinkable badge', () => {
   // Dataset's expected group name ("Immunization", from buildGroupName with
   // no prefix/suffix) collides with a different, codeless group — a
@@ -107,11 +120,11 @@ describe('DatasetsTable relinkable badge', () => {
 });
 
 describe('DatasetsTable last updated column', () => {
-  // Column order: checkbox, name, target group, sync status, data elements,
-  // last updated, bulk run status, view-details action.
+  // Column order: checkbox, name, short name, target group, sync status,
+  // data elements, last updated, bulk run status, view-details action.
   function lastUpdatedCellText() {
     const row = screen.getAllByRole('row')[1]; // row 0 is the header
-    return within(row).getAllByRole('cell')[5].textContent;
+    return within(row).getAllByRole('cell')[6].textContent;
   }
 
   it('shows the formatted lastUpdated date', () => {

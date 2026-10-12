@@ -18,6 +18,7 @@ import {
 } from '@dhis2/ui';
 import { IconView16, IconEdit16, IconShare16, IconDelete16 } from '@dhis2/ui-icons';
 import { findDatasetForGroup, evaluateDataset, getCategoryLabel, getCategoryFilters, formatDate } from '../lib/dhis2';
+import { MATCH_FIELDS } from '../lib/settings';
 import { columnSortProps, sortRows } from '../lib/sorting';
 import GroupDetailModal from './GroupDetailModal';
 import EditGroupModal from './EditGroupModal';
@@ -80,7 +81,10 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
     return c;
   }, [searchedEntries]);
 
-  const categoryFilters = useMemo(() => getCategoryFilters(), []);
+  const categoryFilters = useMemo(
+    () => getCategoryFilters(settings.matchField === MATCH_FIELDS.MANUAL),
+    [settings.matchField]
+  );
   const filteredEntries = filter === 'all' ? searchedEntries : searchedEntries.filter((e) => e.category === filter);
 
   const comparators = useMemo(() => getComparators(), []);

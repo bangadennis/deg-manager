@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-12T15:09:43.045Z\n"
-"PO-Revision-Date: 2026-10-12T15:09:43.045Z\n"
+"POT-Creation-Date: 2026-10-12T15:38:28.809Z\n"
+"PO-Revision-Date: 2026-10-12T15:38:28.809Z\n"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -235,6 +235,9 @@ msgstr "No datasets match the current search/filter."
 msgid "Dataset Name"
 msgstr "Dataset Name"
 
+msgid "Short Name"
+msgstr "Short Name"
+
 msgid "Target Group"
 msgstr "Target Group"
 
@@ -385,9 +388,6 @@ msgstr ""
 
 msgid "Filter groups"
 msgstr "Filter groups"
-
-msgid "Short Name"
-msgstr "Short Name"
 
 msgid "# Data Elements"
 msgstr "# Data Elements"
@@ -735,8 +735,8 @@ msgstr "Superuser"
 msgid "Standard user"
 msgstr "Standard user"
 
-msgid "Unmappable"
-msgstr "Unmappable"
+msgid "Unmapped"
+msgstr "Unmapped"
 
 msgid "Name conflict"
 msgstr "Name conflict"

@@ -34,6 +34,7 @@ function targetGroupSortValue(entry, settings) {
 function makeComparators(settings) {
   return {
     name:        (a, b) => a.dataset.name.localeCompare(b.dataset.name),
+    shortName:   (a, b) => (a.dataset.shortName || '').localeCompare(b.dataset.shortName || ''),
     targetGroup: (a, b) => targetGroupSortValue(a, settings).localeCompare(targetGroupSortValue(b, settings)),
     status:      (a, b) => getCategoryLabel(a.evalResult.category).localeCompare(getCategoryLabel(b.evalResult.category)),
     elements:    (a, b) => a.evalResult.dsDEs.length - b.evalResult.dsDEs.length,
@@ -94,7 +95,10 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
     [datasets, groups, settings, mappings]
   );
 
-  const categoryFilters = useMemo(() => getCategoryFilters(), []);
+  const categoryFilters = useMemo(
+    () => getCategoryFilters(settings.matchField === MATCH_FIELDS.MANUAL),
+    [settings.matchField]
+  );
   const filteredEntries = filter === 'all' ? searchedEntries : searchedEntries.filter((e) => e.evalResult.category === filter);
 
   const comparators = useMemo(() => makeComparators(settings), [settings]);
