@@ -16,6 +16,7 @@ import {
   DataTableBody,
   colors,
 } from '@dhis2/ui';
+import { IconCheckmarkCircle16 } from '@dhis2/ui-icons';
 
 function getActionByCategory(category) {
   const actions = {
@@ -108,7 +109,12 @@ export default function PreviewModal({ entries, canSync, onRunSync, onClose }) {
       <ModalActions>
         <ButtonStrip end>
           <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
-          <Button primary disabled={!canSync} onClick={onRunSync}>
+          <Button
+            primary={canSync}
+            icon={!canSync ? <IconCheckmarkCircle16 /> : undefined}
+            disabled={!canSync}
+            onClick={onRunSync}
+          >
             {canSync ? i18n.t('Run Sync Now') : i18n.t('Nothing to Sync')}
           </Button>
         </ButtonStrip>

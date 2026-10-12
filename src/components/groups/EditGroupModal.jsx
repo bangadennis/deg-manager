@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button, InputField, NoticeBox } from '@dhis2/ui';
+import { IconCheckmarkCircle16 } from '@dhis2/ui-icons';
 import { UPDATE_DEG_MUTATION, findNameConflict } from '../../lib/dhis2';
 import { MATCH_FIELDS } from '../../lib/settings';
 import { getErrorMessage } from '../../lib/errors';
@@ -40,6 +41,7 @@ export default function EditGroupModal({ group, groups, matchField, onSaved, onC
     || code.trim() !== (group.code || '');
 
   const canSave = !nameError && !shortNameError && !saving && hasChanges;
+  const isNoOp = !hasChanges && !nameError && !shortNameError && !saving;
 
   // Changing the code (or, in UID mode, effectively swapping which dataset
   // it points at) doesn't just relabel the group — it's also the join key
@@ -126,10 +128,16 @@ export default function EditGroupModal({ group, groups, matchField, onSaved, onC
       <ModalActions>
         <ButtonStrip end>
           <Button onClick={onClose} disabled={saving}>{i18n.t('Cancel')}</Button>
-          <Button primary loading={saving} disabled={!canSave} onClick={handleSave}>
+          <Button
+            primary={!isNoOp}
+            icon={isNoOp ? <IconCheckmarkCircle16 /> : undefined}
+            loading={saving}
+            disabled={!canSave}
+            onClick={handleSave}
+          >
             {saving
               ? i18n.t('Saving…')
-              : !hasChanges && !nameError && !shortNameError
+              : isNoOp
               ? i18n.t('No Changes')
               : i18n.t('Save')}
           </Button>

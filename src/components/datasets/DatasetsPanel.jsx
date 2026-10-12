@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, LinearLoader, InputField, Chip, Pagination, colors } from '@dhis2/ui';
+import { IconCheckmarkCircle16 } from '@dhis2/ui-icons';
 import {
   CREATE_DEG_MUTATION,
   UPDATE_DEG_MUTATION,
@@ -424,7 +425,8 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
           </Button>
 
           <Button
-            primary
+            primary={!(selectedCount > 0 && !hasSyncableSelection)}
+            icon={selectedCount > 0 && !hasSyncableSelection ? <IconCheckmarkCircle16 /> : undefined}
             disabled={selectedCount === 0 || !hasSyncableSelection || bulkRunning}
             onClick={handleBulkProcess}
           >
