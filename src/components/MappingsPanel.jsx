@@ -204,10 +204,10 @@ export default function MappingsPanel({ datasets, groups, settings, mappings, sa
           {pagedRows.map((r) => (
             <DataTableRow key={r.datasetId}>
               <DataTableCell>
-                {r.dataset ? r.dataset.name : <span style={{ color: colors.red060 }}>{i18n.t('Unknown dataset ({{id}})', { id: r.datasetId })}</span>}
+                {r.dataset ? r.dataset.name : <span style={{ color: colors.red600 }}>{i18n.t('Unknown dataset ({{id}})', { id: r.datasetId })}</span>}
               </DataTableCell>
               <DataTableCell>
-                {r.group ? r.group.name : <span style={{ color: colors.red060 }}>{i18n.t('Unknown group ({{id}})', { id: r.groupId })}</span>}
+                {r.group ? r.group.name : <span style={{ color: colors.red600 }}>{i18n.t('Unknown group ({{id}})', { id: r.groupId })}</span>}
               </DataTableCell>
               <DataTableCell>
                 <Button small destructive secondary disabled={saving} onClick={() => handleUnlink(r.datasetId)}>

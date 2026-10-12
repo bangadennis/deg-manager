@@ -34,10 +34,10 @@ export default function BulkSummaryModal({ summary, onRetryFailed, onClose }) {
       <ModalTitle>{i18n.t('Bulk sync summary')}</ModalTitle>
       <ModalContent>
         <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <StatTile label={i18n.t('Created')}    value={created}          tone={colors.green060} />
-          <StatTile label={i18n.t('Updated')}    value={updated}          tone={colors.blue060} />
+          <StatTile label={i18n.t('Created')}    value={created}          tone={colors.green600} />
+          <StatTile label={i18n.t('Updated')}    value={updated}          tone={colors.blue600} />
           <StatTile label={i18n.t('Up to date')} value={consistent}       tone={colors.grey700} />
-          <StatTile label={i18n.t('Errors')}     value={failures.length}  tone={failures.length > 0 ? colors.red060 : colors.grey700} />
+          <StatTile label={i18n.t('Errors')}     value={failures.length}  tone={failures.length > 0 ? colors.red600 : colors.grey700} />
         </div>
 
         {failures.length > 0 && (
@@ -55,7 +55,7 @@ export default function BulkSummaryModal({ summary, onRetryFailed, onClose }) {
                   <DataTableRow key={f.id}>
                     <DataTableCell>{f.name}</DataTableCell>
                     <DataTableCell>
-                      <span style={{ color: colors.red060 }}>{f.message}</span>
+                      <span style={{ color: colors.red600 }}>{f.message}</span>
                     </DataTableCell>
                   </DataTableRow>
                 ))}

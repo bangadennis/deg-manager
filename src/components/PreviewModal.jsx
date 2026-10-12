@@ -72,7 +72,7 @@ export default function PreviewModal({ entries, onRunSync, onClose }) {
           <span>{i18n.t('Create')}: <strong>{willCreate}</strong></span>
           <span>{i18n.t('Update')}: <strong>{willUpdate}</strong></span>
           <span>{i18n.t('No change')}: <strong>{noChange}</strong></span>
-          <span style={{ color: willFail > 0 ? colors.red060 : undefined }}>{i18n.t('Will fail')}: <strong>{willFail}</strong></span>
+          <span style={{ color: willFail > 0 ? colors.red600 : undefined }}>{i18n.t('Will fail')}: <strong>{willFail}</strong></span>
         </div>
 
         <DataTable>
@@ -95,7 +95,7 @@ export default function PreviewModal({ entries, onRunSync, onClose }) {
                     </Tag>
                   </DataTableCell>
                   <DataTableCell>
-                    <span style={{ fontSize: '0.85rem', color: action.tone === 'negative' ? colors.red060 : colors.grey700 }}>
+                    <span style={{ fontSize: '0.85rem', color: action.tone === 'negative' ? colors.red600 : colors.grey700 }}>
                       {reasonFor(evalResult)}
                     </span>
                   </DataTableCell>

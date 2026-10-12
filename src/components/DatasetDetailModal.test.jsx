@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CustomDataProvider } from '@dhis2/app-runtime';
+import { colors } from '@dhis2/ui';
 import DatasetDetailModal from './DatasetDetailModal';
 import { DEFAULT_SETTINGS } from '../lib/settings';
 
@@ -76,5 +77,42 @@ describe('DatasetDetailModal relink action', () => {
 
     await waitFor(() => expect(screen.getByText('Could not relink this group')).toBeInTheDocument());
     expect(onClose).not.toHaveBeenCalled();
+  });
+});
+
+describe('DatasetDetailModal data element diff', () => {
+  it('colors a missing data element green and an extra one yellow/orange', () => {
+    renderModal({
+      dataset: {
+        id: 'ds1',
+        name: 'DS1',
+        dataSetElements: [
+          { dataElement: { id: 'de1', name: 'BCG doses' } },
+          { dataElement: { id: 'de2', name: 'Measles dose 1' } },
+        ],
+      },
+      groups: [
+        {
+          id: 'g1',
+          code: 'ds1',
+          name: 'DS1',
+          dataElements: [{ id: 'de1', name: 'BCG doses' }, { id: 'de3', name: 'Old vaccine X' }],
+        },
+      ],
+    });
+
+    const missingItem = screen.getByText(/Measles dose 1/).closest('li');
+    expect(missingItem).toHaveStyle({ color: colors.green600 });
+    expect(missingItem.querySelector('svg')).not.toBeNull();
+
+    const extraItem = screen.getByText(/Old vaccine X/).closest('li');
+    expect(extraItem).toHaveStyle({ color: colors.yellow800 });
+    expect(extraItem.querySelector('svg')).not.toBeNull();
+
+    // A consistent data element (present on both sides, so it appears in
+    // both lists) gets no color/icon either time.
+    const consistentItems = screen.getAllByText('BCG doses');
+    expect(consistentItems).toHaveLength(2);
+    consistentItems.forEach((el) => expect(el.closest('li').querySelector('svg')).toBeNull());
   });
 });

@@ -79,12 +79,12 @@ export default function DatasetsTable({
                     hasMappingKey ? (
                       <span>{group.name}</span>
                     ) : (
-                      <span style={{ color: colors.red060 }}>{i18n.t('No manual mapping')}</span>
+                      <span style={{ color: colors.red600 }}>{i18n.t('No manual mapping')}</span>
                     )
                   ) : hasMappingKey ? (
                     <code>{dataset[settings.matchField]}</code>
                   ) : (
-                    <span style={{ color: colors.red060 }}>
+                    <span style={{ color: colors.red600 }}>
                       {settings.matchField === 'code' ? i18n.t('No code available') : i18n.t('No UID available')}
                     </span>
                   )}
@@ -113,12 +113,12 @@ export default function DatasetsTable({
                 <DataTableCell onClick={(e) => { e.stopPropagation(); setDetailsForId(dataset.id); }} style={{ cursor: 'pointer' }}>
                   <span style={{ color: colors.grey700, fontSize: '0.85rem' }}>{i18n.t('{{n}} total', { n: dsDEs.length })}</span>
                   {missing.length > 0 && (
-                    <span style={{ color: colors.red060, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
+                    <span style={{ color: colors.red600, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
                       {i18n.t('{{n}} missing', { n: missing.length })}
                     </span>
                   )}
                   {extra.length > 0 && (
-                    <span style={{ color: colors.orange060, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
+                    <span style={{ color: colors.yellow800, fontSize: '0.85rem', marginLeft: '0.5rem' }}>
                       {i18n.t('{{n}} extra', { n: extra.length })}
                     </span>
                   )}

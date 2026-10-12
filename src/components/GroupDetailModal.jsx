@@ -5,6 +5,7 @@ import { findDatasetForGroup, compareDataElements, getDatasetDEs } from '../lib/
 import { MATCH_FIELDS } from '../lib/settings';
 import DetailsPanel from './DetailsPanel';
 import AuditMeta from './AuditMeta';
+import DataElementListItem from './DataElementListItem';
 import EditGroupModal from './EditGroupModal';
 import DeleteGroupModal from './DeleteGroupModal';
 
@@ -68,12 +69,14 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
       {groupDEs.length === 0 ? (
         <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
       ) : (
-        <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
+        <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
           {groupDEs.map((de) => (
-            <li key={de.id} style={{ color: extraIds.has(de.id) ? colors.orange060 : undefined }}>
-              {de.name}
-              {extraIds.has(de.id) && ` ${i18n.t('(not in linked dataset)')}`}
-            </li>
+            <DataElementListItem
+              key={de.id}
+              name={de.name}
+              status={extraIds.has(de.id) ? 'extra' : undefined}
+              suffix={i18n.t('(not in linked dataset)')}
+            />
           ))}
         </ul>
       )}
@@ -81,14 +84,12 @@ export default function GroupDetailModal({ group, groups, datasets, settings, ma
       {missingIds.size > 0 && (
         <>
           <h4 style={{ marginBottom: '0.25rem', marginTop: '1rem' }}>{i18n.t('Missing from this group')}</h4>
-          <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
+          <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
             {linkedDataset &&
               getDatasetDEs(linkedDataset)
                 .filter((de) => missingIds.has(de.id))
                 .map((de) => (
-                  <li key={de.id} style={{ color: colors.red060 }}>
-                    {de.name}
-                  </li>
+                  <DataElementListItem key={de.id} name={de.name} status="missing" />
                 ))}
           </ul>
         </>

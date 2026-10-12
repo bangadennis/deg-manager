@@ -7,6 +7,7 @@ import { MATCH_FIELDS } from '../lib/settings';
 import { getErrorMessage } from '../lib/errors';
 import DetailsPanel from './DetailsPanel';
 import AuditMeta from './AuditMeta';
+import DataElementListItem from './DataElementListItem';
 
 export default function DatasetDetailModal({ dataset, datasets, groups, settings, mappings, onClose, onRelinked }) {
   // useDataMutation's mutate() never rejects on failure (see DatasetsPanel) —
@@ -61,14 +62,14 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
         lastUpdatedBy={dataset.lastUpdatedBy}
       />
       {!hasMappingKey && (
-        <p style={{ color: colors.red060 }}>
+        <p style={{ color: colors.red600 }}>
           {isManual
             ? i18n.t('This dataset has no manual mapping yet. Open the Mappings view to link it to an existing group.')
             : i18n.t('Switch the mapping key in Settings, or assign this dataset a code, before syncing it.')}
         </p>
       )}
       {conflict && (
-        <p style={{ color: colors.red060 }}>
+        <p style={{ color: colors.red600 }}>
           {i18n.t('Cannot sync — the name/short name "{{targetName}}" is already used by a different group, {{conflictName}} ({{conflictId}}). Adjust the name prefix/suffix in Settings, or resolve the conflict manually.', {
             targetName,
             conflictName: conflict.name,
@@ -99,12 +100,14 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
       {dsDEs.length === 0 ? (
         <p style={{ color: colors.grey700 }}>{i18n.t('This dataset has no data elements.')}</p>
       ) : (
-        <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
+        <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
           {dsDEs.map((de) => (
-            <li key={de.id} style={{ color: missingIds.has(de.id) ? colors.red060 : undefined }}>
-              {de.name}
-              {missingIds.has(de.id) && ` ${i18n.t('(missing from group)')}`}
-            </li>
+            <DataElementListItem
+              key={de.id}
+              name={de.name}
+              status={missingIds.has(de.id) ? 'missing' : undefined}
+              suffix={i18n.t('(missing from group)')}
+            />
           ))}
         </ul>
       )}
@@ -136,12 +139,14 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
           {groupDEs.length === 0 ? (
             <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
           ) : (
-            <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
+            <ul style={{ paddingLeft: '1.25rem', margin: 0, listStyle: 'none' }}>
               {groupDEs.map((de) => (
-                <li key={de.id} style={{ color: extraIds.has(de.id) ? colors.orange060 : undefined }}>
-                  {de.name}
-                  {extraIds.has(de.id) && ` ${i18n.t('(not in dataset)')}`}
-                </li>
+                <DataElementListItem
+                  key={de.id}
+                  name={de.name}
+                  status={extraIds.has(de.id) ? 'extra' : undefined}
+                  suffix={i18n.t('(not in dataset)')}
+                />
               ))}
             </ul>
           )}
