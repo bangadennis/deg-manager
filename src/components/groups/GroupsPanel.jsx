@@ -120,7 +120,7 @@ export default function GroupsPanel({ groups, datasets, settings, mappings, refe
   return (
     <div>
       <p style={{ color: colors.grey700 }}>
-        {i18n.t('All Data Element Groups on this instance. "Linked dataset" is worked out from the current mapping key setting, not stored on the group itself.')}
+        {i18n.t('All Data Element Groups on this instance. "Linked dataset" is worked out from the current mapping key setting.')}
       </p>
 
       <div

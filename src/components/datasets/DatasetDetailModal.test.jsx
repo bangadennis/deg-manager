@@ -31,17 +31,17 @@ describe('DatasetDetailModal relink action', () => {
 
   it('is hidden when there is no conflict', () => {
     renderModal();
-    expect(screen.queryByText('Relink to this group')).not.toBeInTheDocument();
+    expect(screen.queryByText('Relink to this data element group')).not.toBeInTheDocument();
   });
 
   it('is hidden when the conflicting group is not an orphan (already has a code)', () => {
     renderModal({ groups: [{ ...orphanGroup, code: 'already-set' }] });
-    expect(screen.queryByText('Relink to this group')).not.toBeInTheDocument();
+    expect(screen.queryByText('Relink to this data element group')).not.toBeInTheDocument();
   });
 
   it('is shown for an eligible orphaned conflict', () => {
     renderModal({ groups: [orphanGroup] });
-    expect(screen.getByText('Relink to this group')).toBeInTheDocument();
+    expect(screen.getByText('Relink to this data element group')).toBeInTheDocument();
   });
 
   it('relinks on click: writes the dataset UID into the group\'s code and calls onRelinked + onClose', async () => {
@@ -49,7 +49,7 @@ describe('DatasetDetailModal relink action', () => {
     const mutate = jest.fn().mockResolvedValue({ status: 'OK' });
     const { onRelinked, onClose } = renderModal({ groups: [orphanGroup] }, { dataElementGroups: mutate });
 
-    await user.click(screen.getByText('Relink to this group'));
+    await user.click(screen.getByText('Relink to this data element group'));
 
     await waitFor(() => expect(onRelinked).toHaveBeenCalled());
     expect(onClose).toHaveBeenCalled();
@@ -73,9 +73,9 @@ describe('DatasetDetailModal relink action', () => {
       }
     );
 
-    await user.click(screen.getByText('Relink to this group'));
+    await user.click(screen.getByText('Relink to this data element group'));
 
-    await waitFor(() => expect(screen.getByText('Could not relink this group')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('Could not relink this data element group')).toBeInTheDocument());
     expect(onClose).not.toHaveBeenCalled();
   });
 });

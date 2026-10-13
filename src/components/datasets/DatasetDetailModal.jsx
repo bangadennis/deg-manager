@@ -64,13 +64,13 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
       {!hasMappingKey && (
         <p style={{ color: colors.red600 }}>
           {isManual
-            ? i18n.t('This dataset has no manual mapping yet. Open the Mappings view to link it to an existing group.')
+            ? i18n.t('This dataset has no manual mapping yet. Open the Mappings view to link it to an existing data element group.')
             : i18n.t('Switch the mapping key in Settings, or assign this dataset a code, before syncing it.')}
         </p>
       )}
       {conflict && (
         <p style={{ color: colors.red600 }}>
-          {i18n.t('Cannot sync — the name/short name "{{targetName}}" is already used by a different group, {{conflictName}} ({{conflictId}}). Adjust the name prefix/suffix in Settings, or resolve the conflict manually.', {
+          {i18n.t('Cannot sync — the name/short name "{{targetName}}" is already used by a different data element group, {{conflictName}} ({{conflictId}}). Adjust the name prefix/suffix in Settings, or resolve the conflict manually.', {
             targetName,
             conflictName: conflict.name,
             conflictId: conflict.id,
@@ -81,14 +81,14 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
       {canRelink && (
         <div style={{ marginBottom: '1rem' }}>
           <p style={{ color: colors.grey700 }}>
-            {i18n.t('This looks like a pre-existing group with no dataset linked to it yet — relink it to this dataset instead of staying blocked?')}
+            {i18n.t('This looks like a pre-existing data element group with no dataset linked to it yet — relink it to this dataset instead of staying blocked?')}
           </p>
           <Button small primary loading={relinking} disabled={relinking} onClick={handleRelink}>
-            {relinking ? i18n.t('Relinking…') : i18n.t('Relink to this group')}
+            {relinking ? i18n.t('Relinking…') : i18n.t('Relink to this data element group')}
           </Button>
           {relinkError && (
             <div style={{ marginTop: '0.5rem' }}>
-              <NoticeBox error title={i18n.t('Could not relink this group')}>
+              <NoticeBox error title={i18n.t('Could not relink this data element group')}>
                 {relinkError}
               </NoticeBox>
             </div>
@@ -116,10 +116,10 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
 
       <h4 style={{ marginBottom: '0.25rem', marginTop: '1.5rem' }}>
         {group
-          ? i18n.t('Group "{{name}}" ({{n}})', { name: group.name, n: groupDEs.length })
+          ? i18n.t('Data Element Group "{{name}}" ({{n}})', { name: group.name, n: groupDEs.length })
           : isManual
-          ? i18n.t('Group')
-          : i18n.t('Group (target "{{targetName}}")', { targetName })}
+          ? i18n.t('Data Element Group')
+          : i18n.t('Data Element Group (target "{{targetName}}")', { targetName })}
         {extra.length > 0 && (
           <span style={{ color: colors.yellow800, fontWeight: 'normal', fontSize: '0.85rem' }}>
             {' · '}{i18n.t('{{n}} to remove', { n: extra.length })}
@@ -130,7 +130,7 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
       {!group ? (
         <p style={{ color: colors.grey700 }}>
           {isManual
-            ? i18n.t('Not mapped to a group yet.')
+            ? i18n.t('Not mapped to a data element group yet.')
             : i18n.t('No data element group exists yet for this dataset. Syncing will create one named "{{targetName}}".', { targetName })}
         </p>
       ) : (
@@ -139,12 +139,12 @@ export default function DatasetDetailModal({ dataset, datasets, groups, settings
             {isConsistent ? <Tag positive>{i18n.t('In sync')}</Tag> : <Tag negative>{i18n.t('Out of sync')}</Tag>}
             {nameMismatch && (
               <span style={{ marginLeft: '0.5rem', color: colors.grey700 }}>
-                {i18n.t('Group name will update to "{{targetName}}" on next sync.', { targetName })}
+                {i18n.t('Data element group name will update to "{{targetName}}" on next sync.', { targetName })}
               </span>
             )}
           </p>
           {groupDEs.length === 0 ? (
-            <p style={{ color: colors.grey700 }}>{i18n.t('This group has no data elements.')}</p>
+            <p style={{ color: colors.grey700 }}>{i18n.t('This data element group has no data elements.')}</p>
           ) : (
             <DataElementList
               items={groupDEs}

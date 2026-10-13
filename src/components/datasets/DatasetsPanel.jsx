@@ -23,7 +23,7 @@ import RelinkPreviewModal from './RelinkPreviewModal';
 const PAGE_SIZES = ['10', '25', '50', '100'];
 
 // Ascending comparators; sortRows reverses the result for 'desc'. targetGroup
-// compares whatever the "Target Group" column actually displays (the manual
+// compares whatever the "Target Data Element Group" column actually displays (the manual
 // mode's linked group name, or the raw UID/code otherwise) so sort order
 // always matches what's visible on screen.
 function targetGroupSortValue(entry, settings) {
@@ -362,6 +362,10 @@ export default function DatasetsPanel({ datasets, groups, settings, mappings, re
 
   return (
     <div>
+      <p style={{ color: colors.grey700 }}>
+        {i18n.t('All Datasets on this instance. "Target Data Element Group" and "Sync Status" are worked out from the current mapping key setting.')}
+      </p>
+
       {bulkRunning && (
         <div style={{ margin: '0 0 1rem' }}>
           <p style={{ margin: '0 0 0.25rem' }}>

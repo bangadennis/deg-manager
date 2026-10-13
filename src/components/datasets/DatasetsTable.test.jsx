@@ -91,23 +91,25 @@ describe('DatasetsTable short name column', () => {
 });
 
 describe('DatasetsTable data element counts cell', () => {
-  it('shows a missing count in green with an add-circle icon', () => {
+  it('shows a missing count in green with an add-circle icon, with the full wording in a tooltip', () => {
     renderTable({
       datasets: [dataset({ dataSetElements: [{ dataElement: { id: 'de1', name: 'BCG doses' } }, { dataElement: { id: 'de2', name: 'Measles dose 1' } }] })],
       groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG doses' }] }],
     });
 
-    const missingSpan = screen.getByText(/1 missing/).closest('span');
+    const missingSpan = screen.getByTitle('1 missing');
+    expect(missingSpan.textContent).toBe('1');
     expect(missingSpan).toHaveStyle({ color: colors.green600 });
     expect(missingSpan.querySelector('svg')).not.toBeNull();
   });
 
-  it('shows an extra count in yellow/orange with a subtract-circle icon', () => {
+  it('shows an extra count in yellow/orange with a subtract-circle icon, with the full wording in a tooltip', () => {
     renderTable({
       groups: [{ id: 'g1', code: 'ds1', name: 'Immunization', dataElements: [{ id: 'de1', name: 'BCG doses' }, { id: 'de3', name: 'Old vaccine X' }] }],
     });
 
-    const extraSpan = screen.getByText(/1 extra/).closest('span');
+    const extraSpan = screen.getByTitle('1 extra');
+    expect(extraSpan.textContent).toBe('1');
     expect(extraSpan).toHaveStyle({ color: colors.yellow800 });
     expect(extraSpan.querySelector('svg')).not.toBeNull();
   });

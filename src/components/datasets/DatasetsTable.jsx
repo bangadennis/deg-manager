@@ -37,7 +37,7 @@ export default function DatasetsTable({
             <DataTableColumnHeader></DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('name', i18n.t('Dataset Name'))}>{i18n.t('Dataset Name')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('shortName', i18n.t('Short Name'))}>{i18n.t('Short Name')}</DataTableColumnHeader>
-            <DataTableColumnHeader {...sortProps('targetGroup', i18n.t('Target Group'))}>{i18n.t('Target Group')}</DataTableColumnHeader>
+            <DataTableColumnHeader {...sortProps('targetGroup', i18n.t('Target Data Element Group'))}>{i18n.t('Target Data Element Group')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('status', i18n.t('Sync Status'))}>{i18n.t('Sync Status')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('elements', i18n.t('Data Elements'))}>{i18n.t('Data Elements')}</DataTableColumnHeader>
             <DataTableColumnHeader {...sortProps('lastUpdated', i18n.t('Last Updated'))}>{i18n.t('Last Updated')}</DataTableColumnHeader>
@@ -109,21 +109,34 @@ export default function DatasetsTable({
 
                 {/* Compact at-a-glance counts instead of full comma-separated
                     lists, which got unreadable once a dataset had more than a
-                    handful of elements — full detail is one click away. */}
+                    handful of elements — full detail is one click away. The
+                    "missing"/"extra" words are dropped in favor of the
+                    icon + number alone (full wording lives in the title
+                    tooltip) so this cell doesn't force the column wider. */}
                 <DataTableCell onClick={(e) => { e.stopPropagation(); setDetailsForId(dataset.id); }} style={{ cursor: 'pointer' }}>
-                  <span style={{ color: colors.grey700, fontSize: '0.85rem' }}>{i18n.t('{{n}} total', { n: dsDEs.length })}</span>
-                  {missing.length > 0 && (
-                    <span style={{ color: colors.green600, fontSize: '0.85rem', marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.15rem' }}>
-                      <IconAddCircle16 aria-hidden="true" />
-                      {i18n.t('{{n}} missing', { n: missing.length })}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ color: colors.grey700, fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                      {i18n.t('{{n}} total', { n: dsDEs.length })}
                     </span>
-                  )}
-                  {extra.length > 0 && (
-                    <span style={{ color: colors.yellow800, fontSize: '0.85rem', marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.15rem' }}>
-                      <IconSubtractCircle16 aria-hidden="true" />
-                      {i18n.t('{{n}} extra', { n: extra.length })}
-                    </span>
-                  )}
+                    {missing.length > 0 && (
+                      <span
+                        title={i18n.t('{{n}} missing', { n: missing.length })}
+                        style={{ color: colors.green600, fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '0.1rem', whiteSpace: 'nowrap' }}
+                      >
+                        <IconAddCircle16 aria-hidden="true" />
+                        {missing.length}
+                      </span>
+                    )}
+                    {extra.length > 0 && (
+                      <span
+                        title={i18n.t('{{n}} extra', { n: extra.length })}
+                        style={{ color: colors.yellow800, fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '0.1rem', whiteSpace: 'nowrap' }}
+                      >
+                        <IconSubtractCircle16 aria-hidden="true" />
+                        {extra.length}
+                      </span>
+                    )}
+                  </div>
                 </DataTableCell>
 
                 <DataTableCell>{formatDate(dataset.lastUpdated)}</DataTableCell>
